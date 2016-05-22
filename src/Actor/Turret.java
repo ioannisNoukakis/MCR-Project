@@ -16,7 +16,7 @@
  */
 package Actor;
 
-import java.awt.Graphics2D;
+import java.util.LinkedList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -32,11 +32,15 @@ public class Turret extends Actor {
     private double angleCannon;
     private final int longueurCannon = 25;
     private Color baseColor, turretColor;
-
-    public Turret(String name, Point2D location, float speed, int height, int width, Color baseColor, Color turretColor) {
+    private LinkedList<Projectile> listOfProjectiles;
+    private int firingRate;
+    
+    public Turret(String name, Point2D location, float speed, int height, int width, Color baseColor, Color turretColor, int firingRate) {
         super(name, location, speed, Direction.noWhere, height, width);
         this.baseColor = baseColor;
         this.turretColor = turretColor;
+        listOfProjectiles = new LinkedList<Projectile>();
+        this.firingRate = firingRate;
     }
 
     @Override
@@ -69,6 +73,11 @@ public class Turret extends Actor {
             case left:
                 angleCannon = (angleCannon - super.getSpeed()*(float)delta/(float)20.0)%360;
                 break;
+        }
+        
+        for(int i = 0; i < firingRate; i++)
+        {
+            
         }
     }
 }
