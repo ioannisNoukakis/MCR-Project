@@ -18,6 +18,7 @@ package tronlikegame;
 
 import Actor.Actor;
 import Actor.Moto;
+import Actor.Turret;
 import camera.CameraManager;
 import java.util.LinkedList;
 import org.newdawn.slick.AppGameContainer;
@@ -30,7 +31,6 @@ import org.newdawn.slick.tiled.TiledMap;
 import playerManager.Player;
 import playerManager.InputManager;
 import mediator.Mediator;
-import rules.ClassicRules;
 import world.Point2D;
 
 /**
@@ -45,7 +45,7 @@ public class WindowGame extends BasicGame {
     private LinkedList<Player> listPlayer;
     private LinkedList<Actor> listActor;
     private InputManager inputManager;
-    Mediator motoMediator;
+    Mediator mediator;
 
     private static final String GAME_VERSION = "1.0";
 
@@ -65,7 +65,7 @@ public class WindowGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-        this.map = new TiledMap("/home/durza9390/Documents/dev/MCR-Project/ressources/map/theGrid.tmx");
+        this.map = new TiledMap("ressources/map/theGrid.tmx");
         camera = new CameraManager(0, 0, 10,
                 map.getWidth() * map.getTileWidth() - container.getWidth(),
                 map.getHeight() * map.getTileHeight() - container.getHeight(),
@@ -74,15 +74,16 @@ public class WindowGame extends BasicGame {
         listPlayer = new LinkedList<>();
         listActor = new LinkedList<>();
         
-        motoMediator = new Mediator(listActor, new ClassicRules());
+        mediator = new Mediator(listActor);
         
         // mise en place des acteurs
-        listActor.add(new Moto(motoMediator, "mustang 1", new Point2D(50, 50), (float)0.5, 30, 30, Color.red, 100));
-        listActor.add(new Moto(motoMediator, "narval 500", new Point2D(100, 100), (float)0.5, 30, 30, Color.blue, 100));
+        listActor.add(new Moto(mediator, "mustang 1", new Point2D(50, 50), (float)5, 30, 30, Color.red, 100));
+        listActor.add(new Moto(mediator, "narval 500", new Point2D(100, 100), (float)5, 30, 30, Color.blue, 100));
+        listActor.add(new Turret("turret 1", new Point2D(200, 200), 5, 60, 60, Color.black, Color.magenta));
         
         //mise en place des joueurs
         listPlayer.add(new Player(listActor.get(0), "Player 1", 'w', 'd', 's', 'a'));
-        listPlayer.add(new Player(listActor.get(1), "Player 2", 'i', 'l', 'k', 'j'));
+        listPlayer.add(new Player(listActor.get(2), "Player 2", 'i', 'l', 'k', 'j'));
         inputManager = new InputManager(listPlayer);
     }
 
@@ -104,7 +105,7 @@ public class WindowGame extends BasicGame {
         
         for(Actor a : listActor)
         {
-            a.move(container, delta);
+            a.onUpdate(container, delta);
         }
     }
 

@@ -33,17 +33,20 @@ public class Moto extends Actor {
     private LinkedList<Point2D> tail;
     private int tailSize;
     private Mediator motoMediator;
+    private Color color;
         
     public Moto(Mediator motoMediator, String name, Point2D location, float speed, int height, int width, Color color, int tailSize) {
-        super(name, location, speed, Direction.noWhere, height, width, color);
+        super(name, location, speed, Direction.noWhere, height, width);
         this.tailSize = tailSize;
         tail = new LinkedList<>();
         this.motoMediator = motoMediator;
+        this.color = color;
     }
 
     @Override
     public void onRender(GameContainer container, Graphics g) {
-        g.setColor(super.getColor());
+        g.setColor(color);
+        g.setLineWidth(1);
         g.fillRect(super.getLocation().getX(), super.getLocation().getY(), super.getHeight(), super.getWidth());
         
         for(int i = 0; i < tail.size()-1; i++)
@@ -53,7 +56,7 @@ public class Moto extends Actor {
     }
     
     @Override
-    public void move(GameContainer container, int delta) {
+    public void onUpdate(GameContainer container, int delta) {
         
         if(super.getSpeed() == 0)
             return;
@@ -65,34 +68,34 @@ public class Moto extends Actor {
         
         switch (super.getDirection()) {
             case right:
-                super.setLocation(new Point2D(super.getLocation().getX()+super.getSpeed()*(float)delta,
+                super.setLocation(new Point2D(super.getLocation().getX()+super.getSpeed()*(float)delta/(float)10.0,
                         super.getLocation().getY()));
                 break;
             case left:
-                super.setLocation(new Point2D(super.getLocation().getX()-super.getSpeed()*(float)delta,
+                super.setLocation(new Point2D(super.getLocation().getX()-super.getSpeed()*(float)delta/(float)10.0,
                         super.getLocation().getY()));
                 break;
             case up:
                 super.setLocation(new Point2D(super.getLocation().getX(),
-                        super.getLocation().getY()-super.getSpeed()*(float)delta));
+                        super.getLocation().getY()-super.getSpeed()*(float)delta/(float)10.0));
                 break;
             case down:
                 super.setLocation(new Point2D(super.getLocation().getX(),
-                        super.getLocation().getY()+super.getSpeed()*(float)delta));
+                        super.getLocation().getY()+super.getSpeed()*(float)delta/(float)10.0));
                 break;
         }
         
         motoMediator.verifyMove(this);
     }
 
-    @Override
-    public void onDeath() {
-        setColor(Color.gray);
-        setSpeed(0);
-        tail.clear();
-        tailSize = 0;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
+    public void setTailSize(int tailSize) {
+        this.tailSize = tailSize;
+    }
+    
     public LinkedList<Point2D> getTail() {
         return tail;
     }

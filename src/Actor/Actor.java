@@ -33,23 +33,19 @@ public abstract class Actor {
     private Direction direction;
     private int height;
     private int width;
-    private Color color;
 
-    public Actor(String name, Point2D location, float speed, Direction direction, int height, int width, Color color) {
+    public Actor(String name, Point2D location, float speed, Direction direction, int height, int width) {
         this.name = name;
         this.location = location;
         this.speed = speed;
         this.direction = direction;
         this.height = height;
         this.width = width;
-        this.color = color;
     }
     
-    public abstract void move(GameContainer container, int delta);
+    public abstract void onUpdate(GameContainer container, int delta);
     
     public abstract void onRender(GameContainer container, Graphics g);
-    
-    public abstract void onDeath();
             
     public void setName(String name) {
         this.name = name;
@@ -89,13 +85,5 @@ public abstract class Actor {
 
     public int getWidth() {
         return width;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }

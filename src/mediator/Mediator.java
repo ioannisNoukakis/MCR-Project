@@ -19,7 +19,7 @@ package mediator;
 import Actor.Actor;
 import Actor.Moto;
 import java.util.LinkedList;
-import rules.Rule;
+import org.newdawn.slick.Color;
 
 /**
  *
@@ -28,35 +28,44 @@ import rules.Rule;
 public class Mediator {
 
     private LinkedList<Actor> listActor;
-    private Rule rule;
 
-    public Mediator(LinkedList<Actor> listActor, Rule rule) {
+    public Mediator(LinkedList<Actor> listActor) {
         this.listActor = listActor;
-        this.rule = rule;
     }
 
     //TODO IMPROVE THIS (O(n^2))
     public void verifyMove(Actor a) {
         for (Actor b : listActor) {
             if (a != b) {
-                Moto m1 = (Moto) a;
-
-                for (int i = 0; i < m1.getTail().size() - 1; i++) {
-                    double distance = 0, epaisseur = 0;
-
-                    if (m1.getTail().get(i + 1).getX() == m1.getTail().get(i).getX()) {
-                        distance = Math.abs(m1.getTail().get(i + 1).getY() - m1.getTail().get(i).getY());
-                    } else {
-                        epaisseur = Math.abs(m1.getTail().get(i + 1).getX() - m1.getTail().get(i).getX());
-                    }
-
-                    if (b.getLocation().getX() < m1.getTail().get(i).getX() + distance
-                            && b.getLocation().getX() + b.getWidth() > m1.getTail().get(i).getX()
-                            && b.getLocation().getY() < m1.getTail().get(i).getY() + epaisseur
-                            && b.getLocation().getY() + b.getHeight() > m1.getTail().get(i).getY()) {
-                        rule.onCollision(a, b);
-                    }
+                if(a.getClass() == Moto.class && b.getClass() == Moto.class)
+                {
+                    motoToMotoCollision((Moto)a, (Moto) b);
                 }
+            }
+        }
+    }
+
+    private void motoToMotoCollision(Moto a, Moto b) {
+
+        Moto m1 = (Moto) a;
+
+        for (int i = 0; i < m1.getTail().size() - 1; i++) {
+            double distance = 0, epaisseur = 0;
+
+            if (m1.getTail().get(i + 1).getX() == m1.getTail().get(i).getX()) {
+                distance = Math.abs(m1.getTail().get(i + 1).getY() - m1.getTail().get(i).getY());
+            } else {
+                epaisseur = Math.abs(m1.getTail().get(i + 1).getX() - m1.getTail().get(i).getX());
+            }
+
+            if (b.getLocation().getX() < m1.getTail().get(i).getX() + distance
+                    && b.getLocation().getX() + b.getWidth() > m1.getTail().get(i).getX()
+                    && b.getLocation().getY() < m1.getTail().get(i).getY() + epaisseur
+                    && b.getLocation().getY() + b.getHeight() > m1.getTail().get(i).getY()) {
+                b.setColor(Color.gray);
+                b.setSpeed(0);
+                b.getTail().clear();
+                b.setTailSize(0);
             }
         }
     }
