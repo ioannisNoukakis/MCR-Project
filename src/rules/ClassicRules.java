@@ -14,21 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package world;
+package rules;
 
 import Actor.Actor;
-import java.util.LinkedList;
 
 /**
  *
  * @author durza9390
  */
-public class collisionMediator {
-    private LinkedList<Actor> listActor;
+public class ClassicRules implements Rule {
 
-    public collisionMediator(LinkedList<Actor> listActor) {
-        this.listActor = listActor;
+    @Override
+    public void onCollision(Actor a, Actor b) {
+        b.onDeath();
     }
-    
-    
 }

@@ -21,6 +21,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import world.Direction;
+import mediator.Mediator;
 import world.Point2D;
 
 /**
@@ -29,23 +30,21 @@ import world.Point2D;
  */
 public class Moto extends Actor {
 
-    private Color color;
     private LinkedList<Point2D> tail;
     private int tailSize;
-    private int diametre;
+    private Mediator motoMediator;
         
-    public Moto(String name, Point2D location, float speed, int tailSize, Color color, int diametre) {
-        super(name, location, speed, Direction.noWhere);
-        this.color = color;
+    public Moto(Mediator motoMediator, String name, Point2D location, float speed, int height, int width, Color color, int tailSize) {
+        super(name, location, speed, Direction.noWhere, height, width, color);
         this.tailSize = tailSize;
         tail = new LinkedList<>();
-        this.diametre = diametre;
+        this.motoMediator = motoMediator;
     }
 
     @Override
     public void onRender(GameContainer container, Graphics g) {
-        g.setColor(color);
-        g.fillOval(super.getLocation().getX(), super.getLocation().getY(), diametre, diametre);
+        g.setColor(super.getColor());
+        g.fillRect(super.getLocation().getX(), super.getLocation().getY(), super.getHeight(), super.getWidth());
         
         for(int i = 0; i < tail.size()-1; i++)
         {
@@ -54,12 +53,15 @@ public class Moto extends Actor {
     }
     
     @Override
-    public void onUpdate(GameContainer container, int delta) {
+    public void move(GameContainer container, int delta) {
+        
+        if(super.getSpeed() == 0)
+            return;
         
         if(tail.size() > tailSize)
             tail.removeFirst();
         
-        tail.add(new Point2D(super.getLocation().getX()+diametre/2, super.getLocation().getY()+diametre/2));
+        tail.add(new Point2D(super.getLocation().getX()+super.getWidth()/2, super.getLocation().getY()+super.getHeight()/2));
         
         switch (super.getDirection()) {
             case right:
@@ -79,5 +81,19 @@ public class Moto extends Actor {
                         super.getLocation().getY()+super.getSpeed()*(float)delta));
                 break;
         }
+        
+        motoMediator.verifyMove(this);
+    }
+
+    @Override
+    public void onDeath() {
+        setColor(Color.gray);
+        setSpeed(0);
+        tail.clear();
+        tailSize = 0;
+    }
+
+    public LinkedList<Point2D> getTail() {
+        return tail;
     }
 }

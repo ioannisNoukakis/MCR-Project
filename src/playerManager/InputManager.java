@@ -12,10 +12,10 @@ import world.Direction;
  *
  * @author durza9390
  */
-public class inputMediator {
+public class InputManager {
     List<Player> playerList;
 
-    public inputMediator(List<Player> playerList) {
+    public InputManager(List<Player> playerList) {
         this.playerList = playerList;
     }
     

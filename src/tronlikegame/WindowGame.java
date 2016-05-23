@@ -28,7 +28,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import playerManager.Player;
-import playerManager.inputMediator;
+import playerManager.InputManager;
+import mediator.Mediator;
+import rules.ClassicRules;
 import world.Point2D;
 
 /**
@@ -42,9 +44,10 @@ public class WindowGame extends BasicGame {
     private CameraManager camera;
     private LinkedList<Player> listPlayer;
     private LinkedList<Actor> listActor;
-    private inputMediator inputMediator;
+    private InputManager inputManager;
+    Mediator motoMediator;
 
-    private static final String GAME_VERSION = "1.0";   
+    private static final String GAME_VERSION = "1.0";
 
     
     public WindowGame() {
@@ -62,7 +65,7 @@ public class WindowGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-        this.map = new TiledMap("D:\\dev\\MCR-Project\\ressources\\map\\theGrid.tmx");
+        this.map = new TiledMap("/home/durza9390/Documents/dev/MCR-Project/ressources/map/theGrid.tmx");
         camera = new CameraManager(0, 0, 10,
                 map.getWidth() * map.getTileWidth() - container.getWidth(),
                 map.getHeight() * map.getTileHeight() - container.getHeight(),
@@ -71,14 +74,16 @@ public class WindowGame extends BasicGame {
         listPlayer = new LinkedList<>();
         listActor = new LinkedList<>();
         
+        motoMediator = new Mediator(listActor, new ClassicRules());
+        
         // mise en place des acteurs
-        listActor.add(new Moto("mustang 1", new Point2D(50, 50), (float)0.5, 100, Color.red, 30));
-        listActor.add(new Moto("narval 500", new Point2D(100, 100), (float)0.5, 100, Color.blue, 30));
+        listActor.add(new Moto(motoMediator, "mustang 1", new Point2D(50, 50), (float)0.5, 30, 30, Color.red, 100));
+        listActor.add(new Moto(motoMediator, "narval 500", new Point2D(100, 100), (float)0.5, 30, 30, Color.blue, 100));
         
         //mise en place des joueurs
         listPlayer.add(new Player(listActor.get(0), "Player 1", 'w', 'd', 's', 'a'));
         listPlayer.add(new Player(listActor.get(1), "Player 2", 'i', 'l', 'k', 'j'));
-        inputMediator = new inputMediator(listPlayer);
+        inputManager = new InputManager(listPlayer);
     }
 
     @Override
@@ -99,13 +104,13 @@ public class WindowGame extends BasicGame {
         
         for(Actor a : listActor)
         {
-            a.onUpdate(container, delta);
+            a.move(container, delta);
         }
     }
 
     @Override
     public void keyPressed(int key, char c) {
-       inputMediator.onInput(c);
+       inputManager.onInput(c);
     }
 
     @Override

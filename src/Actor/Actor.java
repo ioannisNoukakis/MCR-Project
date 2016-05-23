@@ -16,6 +16,7 @@
  */
 package Actor;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import world.Direction;
@@ -30,17 +31,25 @@ public abstract class Actor {
     private Point2D location;
     private float speed;
     private Direction direction;
+    private int height;
+    private int width;
+    private Color color;
 
-    public Actor(String name, Point2D location, float speed, Direction direction) {
+    public Actor(String name, Point2D location, float speed, Direction direction, int height, int width, Color color) {
         this.name = name;
         this.location = location;
         this.speed = speed;
         this.direction = direction;
+        this.height = height;
+        this.width = width;
+        this.color = color;
     }
     
-    public abstract void onUpdate(GameContainer container, int delta);
+    public abstract void move(GameContainer container, int delta);
     
     public abstract void onRender(GameContainer container, Graphics g);
+    
+    public abstract void onDeath();
             
     public void setName(String name) {
         this.name = name;
@@ -72,5 +81,21 @@ public abstract class Actor {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
