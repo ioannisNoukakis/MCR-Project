@@ -1,3 +1,7 @@
-/TronLikeGame/nbproject/private/
-/build/
-/dist/
+/TronTronServer/nbproject/private/
+/TronTronShared/nbproject/private/
+/TronTronServer/build/
+/TronTronShared/build/
+/TronTronShared/dist/
+/TronTronServer/dist/
+/TronTronShared/JavaApplication47/nbproject/private/
