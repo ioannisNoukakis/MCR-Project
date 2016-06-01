@@ -7,10 +7,10 @@ package player;
 
 import ActorManager.ActorManager;
 import UDP.Sender;
+
 import java.io.ObjectOutputStream;
 
 /**
- *
  * @author durza9390
  */
 public class Player {

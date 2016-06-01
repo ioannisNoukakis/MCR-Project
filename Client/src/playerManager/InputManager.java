@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package playerManager;
 
 import Models.Protocol.Sync.ClientUpdate;
 import Models.world.Direction;
+
 import java.util.List;
+
 import snycServer.SyncServer;
 
 /**
- *
  * @author durza9390
  */
 public class InputManager {

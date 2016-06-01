@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package playerManager;
 
 import Models.Actor.Actor;
 import Models.world.Direction;
+
 /**
- *
  * @author durza9390
  */
 public class Player {
@@ -35,42 +30,36 @@ public class Player {
     public Actor getActor() {
         return actor;
     }
-   
+
     public int getId() {
         return id;
     }
-    
+
     public void setActor(Actor actor) {
         this.actor = actor;
     }
-    
-    public Direction getActorDirection()
-    {
+
+    public Direction getActorDirection() {
         return actor.getDirection();
     }
-    
-    public void setActorDirection(Direction d)
-    {
+
+    public void setActorDirection(Direction d) {
         actor.setDirection(d);
     }
-    
-    public boolean isItRightKey(char c)
-    {
+
+    public boolean isItRightKey(char c) {
         return c == rightKey;
     }
-    
-    public boolean isItLeftKey(char c)
-    {
+
+    public boolean isItLeftKey(char c) {
         return c == leftKey;
     }
-    
-    public boolean isItUpKey(char c)
-    {
+
+    public boolean isItUpKey(char c) {
         return c == upKey;
     }
-    
-    public boolean isItDownKey(char c)
-    {
+
+    public boolean isItDownKey(char c) {
         return c == downKey;
     }
 }

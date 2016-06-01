@@ -17,58 +17,59 @@
 package ActorManager;
 
 import Models.Actor.*;
+
 import static Models.world.Direction.down;
 import static Models.world.Direction.left;
 import static Models.world.Direction.right;
 import static Models.world.Direction.up;
+
 import Models.world.Point2D;
 import Models.world.Rectangle2D;
 import mediator.Mediator;
 import player.Player;
 
 /**
- *
  * @author durza9390
  */
 public class MotoManager extends ActorManager {
-    
+
     private Moto moto;
 
     public MotoManager(Moto moto, Mediator mediator) {
         super(mediator);
         this.moto = moto;
     }
-    
+
     @Override
     public void onUpdate(int delta) {
-        
-        if(moto.getSpeed() == 0)
+
+        if (moto.getSpeed() == 0)
             return;
-        
-        if(moto.getTail().size() > moto.getTailSize())
+
+        if (moto.getTail().size() > moto.getTailSize())
             moto.getTail().removeFirst();
-        
-        moto.getTail().add(new Point2D(moto.getLocation().getX()+moto.getWidth()/2, moto.getLocation().getY()+moto.getHeight()/2));
-        
+
+        moto.getTail().add(new Point2D(moto.getLocation().getX() + moto.getWidth() / 2, moto.getLocation().getY() + moto.getHeight() / 2));
+
         switch (moto.getDirection()) {
             case right:
-                moto.setLocation(new Point2D(moto.getLocation().getX()+moto.getSpeed()*(float)delta/(float)10.0,
+                moto.setLocation(new Point2D(moto.getLocation().getX() + moto.getSpeed() * (float) delta / (float) 10.0,
                         moto.getLocation().getY()));
                 break;
             case left:
-                moto.setLocation(new Point2D(moto.getLocation().getX()-moto.getSpeed()*(float)delta/(float)10.0,
+                moto.setLocation(new Point2D(moto.getLocation().getX() - moto.getSpeed() * (float) delta / (float) 10.0,
                         moto.getLocation().getY()));
                 break;
             case up:
                 moto.setLocation(new Point2D(moto.getLocation().getX(),
-                        moto.getLocation().getY()-moto.getSpeed()*(float)delta/(float)10.0));
+                        moto.getLocation().getY() - moto.getSpeed() * (float) delta / (float) 10.0));
                 break;
             case down:
                 moto.setLocation(new Point2D(moto.getLocation().getX(),
-                        moto.getLocation().getY()+moto.getSpeed()*(float)delta/(float)10.0));
+                        moto.getLocation().getY() + moto.getSpeed() * (float) delta / (float) 10.0));
                 break;
         }
-        
+
         super.getMediator().verifyMove(this);
     }
 
@@ -83,13 +84,12 @@ public class MotoManager extends ActorManager {
         hitbox[0] = new Rectangle2D(moto.getLocation(), moto.getWidth(), moto.getHeight());
         return hitbox;
     }
-    
+
     @Override
     public Rectangle2D[] getKillingHitbox() {
         Rectangle2D[] hitbox = new Rectangle2D[moto.getTail().size()];
-        
-        for(int i = 0; i < moto.getTail().size()-1; i++)
-        {
+
+        for (int i = 0; i < moto.getTail().size() - 1; i++) {
             double distance = 0, epaisseur = 0;
 
             if (moto.getTail().get(i + 1).getX() == moto.getTail().get(i).getX()) {

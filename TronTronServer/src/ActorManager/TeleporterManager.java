@@ -10,13 +10,12 @@ import Models.world.Rectangle2D;
 import mediator.Mediator;
 
 /**
- *
  * @author durza9390
  */
-public class TeleporterManager extends ActorManager{
+public class TeleporterManager extends ActorManager {
 
     private Rectangle2D warpingZone;
-    
+
     public TeleporterManager(Mediator mediator, Rectangle2D warpingZone) {
         super(mediator);
         this.warpingZone = warpingZone;
