@@ -1,7 +1,7 @@
-/TronTronServer/nbproject/private/
-/TronTronShared/nbproject/private/
-/TronTronServer/build/
-/TronTronShared/build/
-/TronTronShared/dist/
-/TronTronServer/dist/
-/TronTronShared/JavaApplication47/nbproject/private/
+private/
+build/
+dist/
+out
+
+*~
+.DS_Store
