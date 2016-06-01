@@ -109,7 +109,7 @@ public class WindowGame extends BasicGame {
                     throw new RuntimeException("Bad class recived. Aborting...");
                 }
                 
-                listActorManager = new LinkedList<ActorManager>();
+                listActorManager = new LinkedList<>();
                 GetWorldContents getWorldContents = (GetWorldContents) o;
                 
                 for (Actor a : getWorldContents.getActorList()) {
@@ -152,8 +152,12 @@ public class WindowGame extends BasicGame {
     }
     
     public static void main(String[] args) throws SlickException {
-        try {
+        host = "localhost";
+        if (args.length > 0) {
             host = args[0];
+        }
+
+        try {
             int miniLogicSleep = 5;
             int maxLogicSleep = 20;
             WindowGame game = new WindowGame();

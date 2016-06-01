@@ -10,5 +10,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module" module-name="slick" />
     <orderEntry type="library" name="TronTronShared" level="project" />
+    <orderEntry type="library" name="slick" level="project" />
   </component>
 </module>
