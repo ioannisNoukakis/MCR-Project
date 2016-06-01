@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TronTronShared">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../TronTronShared/out/artifacts/TronTronShared_jar/TronTronShared.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

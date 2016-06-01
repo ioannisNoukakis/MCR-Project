@@ -26,7 +26,6 @@ import player.Player;
  * @author durza9390
  */
 public abstract class ActorManager {
-     
     private Mediator mediator;
     private Player player;
     private boolean isAlive;

@@ -34,7 +34,6 @@ import playerManager.Player;
 import playerManager.InputManager;
 import snycServer.SyncServer;
 import Models.Protocol.Sync.GetWorldContents;
-import UDP.Reciever;
 import org.newdawn.slick.Color;
 
 /**
