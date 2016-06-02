@@ -154,7 +154,7 @@ public class WindowGame extends BasicGame {
     
     public static void main(String[] args) throws SlickException {
         try {
-            host = args[0];
+            host = "10.192.92.12";
             int miniLogicSleep = 5;
             int maxLogicSleep = 20;
             WindowGame game = new WindowGame();
