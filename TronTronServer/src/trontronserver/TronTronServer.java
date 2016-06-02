@@ -1,9 +1,3 @@
-/*
- * HEIG-VD / MCR 
- * Ioannis Noukakis && Djomo Patrick Deslé
- * Laboratoire N°01
- * File : TronTronServer.java
- */
 package trontronserver;
 
 import Thread.ClientThread;
@@ -22,9 +16,15 @@ public class TronTronServer {
      */
     public static void main(String[] args) {
         HyperMediator mediator = new HyperMediator();
+
+        int port = 8000;
+        if (args.length > 0) {
+            port = Integer.parseInt(args[0]);
+        }
+
         try {
-            ServerSocket serverSocker = new ServerSocket(Integer.parseInt(args[0]));
-            System.out.println("Server started on " + Integer.parseInt(args[0]));
+            ServerSocket serverSocker = new ServerSocket(port);
+            System.out.println("Server started on port " + port);
             
             while (true) {
                 Socket socket = serverSocker.accept();

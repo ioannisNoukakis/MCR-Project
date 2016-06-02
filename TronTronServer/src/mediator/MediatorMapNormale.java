@@ -19,25 +19,21 @@ package mediator;
 import ActorManager.ActorManager;
 
 /**
- *
  * @author durza9390
  */
 public class MediatorMapNormale extends Mediator {
-    
+
     public void verifyMove(ActorManager a) {
-        for (ActorManager b : super.getListActorManager()) {
-            if(checkCollision(a.getlethalHitbox(), b.getKillingHitbox()))
-            {
-                //envoyer au client qu'il est mort
-                System.out.println(a.getPlayer().getName() + " IS DEAD");
-            }
-        }
+        // Envoyer au client qu'il est mort
+        super.getListActorManager().stream().filter(b -> checkCollision(a.getlethalHitbox(), b.getKillingHitbox())).forEach(b -> {
+            // Envoyer au client qu'il est mort
+            System.out.println(a.getPlayer().getName() + " IS DEAD");
+        });
     }
 
     @Override
     public synchronized void run() {
-        for(ActorManager actorManager : super.getListActorManager())
-        {
+        for (ActorManager actorManager : super.getListActorManager()) {
             actorManager.onUpdate(0);
         }
     }

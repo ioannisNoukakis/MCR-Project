@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mediator;
 
 import ActorManager.ActorManager;
 import Models.Actor.Actor;
 import Models.Protocol.Sync.GetWorldContents;
+
 import java.util.LinkedList;
 
 /**
- *
  * @author durza9390
  */
 public class MediatorLobby extends Mediator {
@@ -40,7 +35,7 @@ public class MediatorLobby extends Mediator {
                 }
 
                 for (ActorManager actorManager : listActorManager) {
-                    GetWorldContents get = new GetWorldContents(listActor, 
+                    GetWorldContents get = new GetWorldContents(listActor,
                             "ressources/map/theGrid.tmx");
                     actorManager.getPlayer().getUDPsender().sendTo(get);
                 }

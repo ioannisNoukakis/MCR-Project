@@ -1,23 +1,24 @@
 package Thread;
 
 import UDP.Sender;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
 import mediator.HyperMediator;
 
 /**
- *
  * @author durza9390
  */
-public class ClientThread extends Thread{
+public class ClientThread extends Thread {
     private HyperMediator hyperMediator;
     private Socket socket;
     private boolean running = true;
 
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    
+
     public ClientThread(HyperMediator hyperMediator, Socket socket) throws Exception {
         this.hyperMediator = hyperMediator;
         this.socket = socket;
@@ -27,13 +28,10 @@ public class ClientThread extends Thread{
 
     @Override
     public void run() {
-        while(running)
-        {
-            try{
+        while (running) {
+            try {
                 hyperMediator.parseClientInput(new Sender(socket.getInetAddress().getCanonicalHostName(), 8001), out, in.readObject());
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
                 running = false;
             }

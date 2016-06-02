@@ -22,11 +22,9 @@ import mediator.Mediator;
 import player.Player;
 
 /**
- *
  * @author durza9390
  */
 public abstract class ActorManager {
-     
     private Mediator mediator;
     private Player player;
     private boolean isAlive;
@@ -47,15 +45,15 @@ public abstract class ActorManager {
     public void setPlayer(Player player) {
         this.player = player;
     }
-  
+
     public abstract void onUpdate(int delta);
-    
+
     public abstract Actor getActor();
 
     public abstract Rectangle2D[] getKillingHitbox();
-    
+
     public abstract Rectangle2D[] getlethalHitbox();
-    
+
     public abstract ActorManager getInstance();
 
     public Player getPlayer() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mediator;
 
 import ActorManager.MotoManager;
@@ -12,7 +7,6 @@ import Models.world.Point2D;
 import player.Player;
 import Models.Protocol.Connection.JoinGameFrame;
 import Models.Protocol.Sync.ClientUpdate;
-import Models.Protocol.Sync.GetWorldContents;
 import UDP.Sender;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
@@ -32,7 +26,7 @@ public class HyperMediator {
     }
 
     public synchronized void parseClientInput(Sender UDPsender, ObjectOutputStream out, Object o) throws Exception {
-        //connection
+        // Connection
         if (o.getClass() == JoinGameFrame.class) {
             JoinGameFrame joinGameFrame = (JoinGameFrame) o;
             MotoManager motoManager = new MotoManager(new Moto(playerList.size(), "", new Point2D(lobby.getMaxX() / 2, lobby.getMaxY() / 2), (float) 5, 30, 30, 100), lobby);
@@ -48,7 +42,7 @@ public class HyperMediator {
             out.writeObject(new GetIdentity(playerList.size() - 1));
             out.flush();
         } else if (o.getClass() == ClientUpdate.class) {
-            //update de la logique du jeu sous modification du client
+            // Update de la logique du jeu sous modification du client
             ClientUpdate clientUpdate = (ClientUpdate) o;
             playerList.get(clientUpdate.getWhoami()).getActorManager().getActor().setDirection(clientUpdate.getDir());
         }
