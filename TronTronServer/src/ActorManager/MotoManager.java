@@ -17,6 +17,7 @@
 package ActorManager;
 
 import Models.Actor.*;
+import Models.world.Direction;
 
 import static Models.world.Direction.down;
 import static Models.world.Direction.left;
@@ -104,5 +105,6 @@ public class MotoManager extends ActorManager {
     @Override
     public void reset() {
         moto.getTail().clear();
+        moto.setDirection(Direction.noWhere);
     }
 }

@@ -17,24 +17,30 @@
 package mediator;
 
 import ActorManager.ActorManager;
+import Models.world.Direction;
 
 /**
  * @author durza9390
  */
 public class MediatorMapNormale extends MediatorMap {
 
-    public MediatorMapNormale(String mapName) {
-        super(mapName);
+    private MediatorLobby lobby;
+
+    public MediatorMapNormale(String mapName, int maxX, int maxY, MediatorLobby lobby) {
+        super(mapName, maxX, maxY);
+        this.lobby = lobby;
     }
-    
+    // Envoyer au client qu'il est mort
+
+    @Override
     public void verifyMove(ActorManager a) {
-        // Envoyer au client qu'il est mort
-        super.getListActorManager().stream().filter(b -> checkCollision(a.getlethalHitbox(), b.getKillingHitbox())).forEach(b -> {
-            if(a!=b)
-            {
-                a.getActor().kill();
-                b.getActor().setSpeed(b.getActor().getSpeed()+2);
+        for (ActorManager b : super.getListActorManager()) {
+            if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
+                if (a != b) {
+                    super.ChangeActorMap(a, lobby);
+                    b.getActor().setSpeed(b.getActor().getSpeed() + 2);
+                }
             }
-        });
+        }
     }
 }

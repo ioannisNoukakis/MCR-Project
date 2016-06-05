@@ -11,8 +11,10 @@ import Models.Protocol.Connection.JoinGameFrame;
 import Models.Protocol.Sync.ClientUpdate;
 import Models.world.Direction;
 import UDP.Sender;
+import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
+import java.util.Properties;
 
 /**
  *
@@ -21,13 +23,23 @@ import java.util.LinkedList;
 public class HyperMediator {
 
     private LinkedList<Player> playerList;
-    private MediatorLobby lobby = new MediatorLobby("theLobby.tmx");
-    private MediatorMapNormale mainMap = new MediatorMapNormale("theMap.tmx");
+    private MediatorLobby lobby;
+    private MediatorMapNormale mainMap;
 
-    public HyperMediator() {
+    public HyperMediator() throws Exception{
         playerList = new LinkedList<>();
+        
+        //load maps propreties
+        Properties prop = new Properties();
+        
+        prop.load(new FileInputStream("lobby.properties"));
+        lobby = new MediatorLobby(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")));
+        
+        prop.load(new FileInputStream("normalMap.properties"));
+        mainMap = new MediatorMapNormale(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")), lobby);
+        
         lobby.addActorManager(new TeleporterManager(new Teleporter(-1, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40),
-        mainMap, lobby));
+            mainMap, lobby));
         lobby.start();
         mainMap.start();
     }
