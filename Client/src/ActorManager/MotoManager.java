@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
 
 /**
  * @author durza9390
@@ -23,14 +24,21 @@ public class MotoManager extends ActorManager {
     }
 
     @Override
-    public void onRender(GameContainer container, Graphics g) {
-        g.setColor(color);
-        g.setLineWidth(4);
-        g.fillRect(moto.getLocation().getX(), moto.getLocation().getY(), moto.getHeight(), moto.getWidth());
+    public void onRender(GameContainer container, Graphics g, TrueTypeFont font) {
+        if(moto.isAlive())
+        {
+            g.setColor(color);
+            g.setLineWidth(4);
 
-        LinkedList<Point2D> tail = moto.getTail();
-        for (int i = 0; i < tail.size() - 1; ++i) {
-            g.drawLine(tail.get(i).getX(), tail.get(i).getY(), tail.get(i + 1).getX(), tail.get(i + 1).getY());
+            LinkedList<Point2D> tail = moto.getTail();
+            for (int i = 0; i < tail.size() - 1; ++i) {
+                g.drawLine(tail.get(i).getX(), tail.get(i).getY(), tail.get(i + 1).getX(), tail.get(i + 1).getY());
+            }
         }
+        else
+            g.setColor(Color.gray);
+        
+        font.drawString(moto.getLocation().getX(), moto.getLocation().getY()-50, moto.getName(), color);
+        g.fillRect(moto.getLocation().getX(), moto.getLocation().getY(), moto.getHeight(), moto.getWidth());
     }
 }

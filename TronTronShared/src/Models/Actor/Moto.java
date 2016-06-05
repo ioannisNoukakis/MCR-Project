@@ -47,9 +47,4 @@ public class Moto extends Actor implements Serializable {
     public int getTailSize() {
         return tailSize;
     }
-
-    @Override
-    public Moto getInstance() {
-        return this;
-    }
 }

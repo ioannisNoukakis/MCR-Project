@@ -2,8 +2,10 @@ package tronlikegame;
 
 import ActorManager.ActorManager;
 import ActorManager.MotoManager;
+import ActorManager.TeleporterManager;
 import Models.Actor.Actor;
 import Models.Actor.Moto;
+import Models.Actor.Teleporter;
 import Models.Protocol.Connection.GetIdentity;
 import Models.Protocol.Connection.JoinGameFrame;
 import camera.CameraManager;
@@ -20,7 +22,9 @@ import playerManager.Player;
 import playerManager.InputManager;
 import snycServer.SyncServer;
 import Models.Protocol.Sync.GetWorldContents;
+import java.awt.Font;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 /**
  * @author durza9390
@@ -35,6 +39,8 @@ public class WindowGame extends BasicGame {
     private InputManager inputManager;
     private SyncServer syncServer;
     private static String host;
+    private String mapName;
+    private TrueTypeFont font;
 
     private static final String GAME_VERSION = "1.0";
 
@@ -52,13 +58,15 @@ public class WindowGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-        this.map = new TiledMap("ressources/map/theGrid.tmx");
-        camera = new CameraManager(0, 0, 10,
-                map.getWidth() * map.getTileWidth() - container.getWidth(),
-                map.getHeight() * map.getTileHeight() - container.getHeight(),
-                container.getWidth(), container.getHeight());
 
+        font = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), true);
         listActorManager = new LinkedList<>();
+        mapName = "";
+        camera = new CameraManager(0, 0, 10,
+                container.getWidth(),
+                container.getHeight(),
+                container.getWidth(),
+                container.getHeight());
 
         try {
             syncServer = new SyncServer(host, 8000);
@@ -81,45 +89,66 @@ public class WindowGame extends BasicGame {
         }
     }
 
+    /*
+     
+     */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
-        camera.onRender(g);
-        this.map.render(0, 0);
-
         try {
             Object o = syncServer.getInObject();
+            camera.onRender(g);
+
+            if (map != null)
+                this.map.render(0, 0);
+            
 
             if (o != null) {
-                if (o.getClass() != GetWorldContents.class) {
-                    throw new RuntimeException("Bad class recived. Aborting...");
-                }
+                if (o.getClass() == GetWorldContents.class) {
 
-                listActorManager = new LinkedList<>();
-                GetWorldContents getWorldContents = (GetWorldContents) o;
+                    listActorManager = new LinkedList<>();
+                    GetWorldContents getWorldContents = (GetWorldContents) o;
 
-                for (Actor a : getWorldContents.getActorList()) {
-                    if (a.getClass() == Moto.class) {
-                        listActorManager.add(new MotoManager((Moto) a, Color.green));
-                        if (a.getId() == player.getId()) {
-                            player.setActor(a);
+                    for (Actor a : getWorldContents.getActorList()) {
+                        //System.out.println(a.getLocation().getX() + " : " + a.getLocation().getY());
+                        if (a.getClass() == Moto.class) {
+                            listActorManager.add(new MotoManager((Moto) a, Color.green));
+                            if (a.getId() == player.getId()) {
+                                player.setActor(a);
+                            }
+                        }
+                        if(a.getClass() == Teleporter.class)
+                        {
+                            listActorManager.add(new TeleporterManager((Teleporter) a, Color.yellow));
                         }
                     }
+
+                    //changement de map si nécessaire
+                    if (!mapName.equals(getWorldContents.getMapName())) {
+                        this.map = new TiledMap("ressources/map/" + getWorldContents.getMapName());
+                        camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
+                        camera.setWorldBoundariesY(map.getHeight() - container.getHeight());
+                        mapName = getWorldContents.getMapName();
+                    }
+
+                    camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
+                    camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
+                } else {
+                    throw new RuntimeException("Bad class recived. Aborting...");
                 }
-                camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
-                camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            this.app.destroy();
         }
 
         for (ActorManager am : listActorManager) {
-            am.onRender(container, g);
+            am.onRender(container, g, font);
         }
+
     }
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-
     }
 
     @Override
@@ -151,7 +180,7 @@ public class WindowGame extends BasicGame {
 
             //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
             app.setDisplayMode(800, 600, false);
-            app.setVSync(true);
+            app.setVSync(false);
             app.setTargetFrameRate(60);
             app.setMinimumLogicUpdateInterval(miniLogicSleep);
             app.setMinimumLogicUpdateInterval(maxLogicSleep);

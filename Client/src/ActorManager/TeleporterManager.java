@@ -1,7 +1,10 @@
 package ActorManager;
 
+import Models.Actor.Teleporter;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
 
 /**
  *
@@ -9,8 +12,18 @@ import org.newdawn.slick.Graphics;
  */
 public class TeleporterManager extends ActorManager{
 
+    private Teleporter teleporter;
+    private Color color;
+
+    public TeleporterManager(Teleporter teleporter, Color color) {
+        this.teleporter = teleporter;
+        this.color = color;
+    }
+    
     @Override
-    public void onRender(GameContainer container, Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void onRender(GameContainer container, Graphics g, TrueTypeFont font) {
+        g.setColor(color);
+        font.drawString(teleporter.getLocation().getX()-50, teleporter.getLocation().getY()-50, teleporter.getName(), color);
+        g.fillRect(teleporter.getLocation().getX(), teleporter.getLocation().getY(), teleporter.getWidth(), teleporter.getHeight());
     }
 }

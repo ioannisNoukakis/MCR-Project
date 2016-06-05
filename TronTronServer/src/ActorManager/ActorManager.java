@@ -18,27 +18,17 @@ package ActorManager;
 
 import Models.Actor.Actor;
 import Models.world.Rectangle2D;
-import mediator.Mediator;
+import mediator.MediatorMap;
 import player.Player;
 
 /**
  * @author durza9390
  */
 public abstract class ActorManager {
-    private Mediator mediator;
+    private MediatorMap mediator;
     private Player player;
-    private boolean isAlive;
 
-    public boolean isIsAlive() {
-        return isAlive;
-    }
-
-    public void setIsAlive(boolean isAlive) {
-        this.isAlive = isAlive;
-        isAlive = true;
-    }
-
-    public ActorManager(Mediator mediator) {
+    public ActorManager(MediatorMap mediator) {
         this.mediator = mediator;
     }
 
@@ -50,17 +40,31 @@ public abstract class ActorManager {
 
     public abstract Actor getActor();
 
+    /**
+     * Retourne la hitbox qui tue les autres acteur
+     * 
+     * @return 
+     */
     public abstract Rectangle2D[] getKillingHitbox();
 
+    /**
+     * Retourne la hitbox qui tue cet acteur.
+     * 
+     * @return 
+     */
     public abstract Rectangle2D[] getlethalHitbox();
-
-    public abstract ActorManager getInstance();
+    
+    public abstract void reset();
 
     public Player getPlayer() {
         return player;
     }
 
-    public Mediator getMediator() {
+    public MediatorMap getMediator() {
         return mediator;
+    }
+
+    public void setMediator(MediatorMap mediator) {
+        this.mediator = mediator;
     }
 }

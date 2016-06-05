@@ -1,47 +1,27 @@
 package mediator;
 
 import ActorManager.ActorManager;
-import Models.Actor.Actor;
-import Models.Protocol.Sync.GetWorldContents;
-
-import java.util.LinkedList;
+import ActorManager.MotoManager;
+import ActorManager.TeleporterManager;
 
 /**
  * @author durza9390
  */
-public class MediatorLobby extends Mediator {
+public class MediatorLobby extends MediatorMap {
 
-    public synchronized void verifyMove(ActorManager a) {
+    public MediatorLobby(String mapName) {
+        super(mapName);
+    }
+    
+    @Override
+    public void verifyMove(ActorManager a) {
         for (ActorManager b : super.getListActorManager()) {
             if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                a.setIsAlive(false);
-            }
-        }
-    }
-
-    @Override
-    public void run() {
-        long time;
-        try {
-            while (true) {
-                time = System.currentTimeMillis();
-
-                Thread.sleep(10);
-
-                LinkedList<Actor> listActor = new LinkedList<>();
-                for (ActorManager actorManager : listActorManager) {
-                    actorManager.onUpdate((int) (System.currentTimeMillis() - time));
-                    listActor.add(actorManager.getActor());
-                }
-
-                for (ActorManager actorManager : listActorManager) {
-                    GetWorldContents get = new GetWorldContents(listActor,
-                            "ressources/map/theGrid.tmx");
-                    actorManager.getPlayer().getUDPsender().sendTo(get);
+                if(a.getClass() == MotoManager.class && b.getClass() == TeleporterManager.class)
+                {
+                    super.ChangeActorMap(a, ((TeleporterManager)b).getMediatorDeDestination());
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

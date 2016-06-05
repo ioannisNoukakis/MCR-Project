@@ -25,8 +25,7 @@ import static Models.world.Direction.up;
 
 import Models.world.Point2D;
 import Models.world.Rectangle2D;
-import mediator.Mediator;
-import player.Player;
+import mediator.MediatorMap;
 
 /**
  * @author durza9390
@@ -35,7 +34,7 @@ public class MotoManager extends ActorManager {
 
     private Moto moto;
 
-    public MotoManager(Moto moto, Mediator mediator) {
+    public MotoManager(Moto moto, MediatorMap mediator) {
         super(mediator);
         this.moto = moto;
     }
@@ -69,7 +68,7 @@ public class MotoManager extends ActorManager {
                         moto.getLocation().getY() + moto.getSpeed() * (float) delta / (float) 10.0));
                 break;
         }
-
+        
         super.getMediator().verifyMove(this);
     }
 
@@ -103,7 +102,7 @@ public class MotoManager extends ActorManager {
     }
 
     @Override
-    public MotoManager getInstance() {
-        return this;
+    public void reset() {
+        moto.getTail().clear();
     }
 }

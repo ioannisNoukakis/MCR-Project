@@ -18,6 +18,7 @@ public class Player {
     private int id;
     private String name;
     private Sender UDPsender;
+    private int nbKills;
 
     public Player(ActorManager a, int id, String name, Sender UDPsender) {
         this.a = a;
@@ -26,6 +27,13 @@ public class Player {
         this.UDPsender = UDPsender;
     }
 
+    public void addKill() {
+        nbKills++;
+    }
+
+    public int getNbKills() {
+        return nbKills;
+    }
     public Sender getUDPsender() {
         return UDPsender;
     }

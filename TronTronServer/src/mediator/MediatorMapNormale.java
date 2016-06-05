@@ -21,20 +21,20 @@ import ActorManager.ActorManager;
 /**
  * @author durza9390
  */
-public class MediatorMapNormale extends Mediator {
+public class MediatorMapNormale extends MediatorMap {
 
+    public MediatorMapNormale(String mapName) {
+        super(mapName);
+    }
+    
     public void verifyMove(ActorManager a) {
         // Envoyer au client qu'il est mort
         super.getListActorManager().stream().filter(b -> checkCollision(a.getlethalHitbox(), b.getKillingHitbox())).forEach(b -> {
-            // Envoyer au client qu'il est mort
-            System.out.println(a.getPlayer().getName() + " IS DEAD");
+            if(a!=b)
+            {
+                a.getActor().kill();
+                b.getActor().setSpeed(b.getActor().getSpeed()+2);
+            }
         });
-    }
-
-    @Override
-    public synchronized void run() {
-        for (ActorManager actorManager : super.getListActorManager()) {
-            actorManager.onUpdate(0);
-        }
     }
 }

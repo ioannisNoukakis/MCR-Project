@@ -1,12 +1,15 @@
 package mediator;
 
 import ActorManager.MotoManager;
+import ActorManager.TeleporterManager;
 import Models.Actor.Moto;
+import Models.Actor.Teleporter;
 import Models.Protocol.Connection.GetIdentity;
 import Models.world.Point2D;
 import player.Player;
 import Models.Protocol.Connection.JoinGameFrame;
 import Models.Protocol.Sync.ClientUpdate;
+import Models.world.Direction;
 import UDP.Sender;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
@@ -18,18 +21,22 @@ import java.util.LinkedList;
 public class HyperMediator {
 
     private LinkedList<Player> playerList;
-    private MediatorLobby lobby = new MediatorLobby();
+    private MediatorLobby lobby = new MediatorLobby("theLobby.tmx");
+    private MediatorMapNormale mainMap = new MediatorMapNormale("theMap.tmx");
 
     public HyperMediator() {
         playerList = new LinkedList<>();
+        lobby.addActorManager(new TeleporterManager(new Teleporter(-1, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40),
+        mainMap, lobby));
         lobby.start();
+        mainMap.start();
     }
 
     public synchronized void parseClientInput(Sender UDPsender, ObjectOutputStream out, Object o) throws Exception {
         // Connection
         if (o.getClass() == JoinGameFrame.class) {
             JoinGameFrame joinGameFrame = (JoinGameFrame) o;
-            MotoManager motoManager = new MotoManager(new Moto(playerList.size(), "", new Point2D(lobby.getMaxX() / 2, lobby.getMaxY() / 2), (float) 5, 30, 30, 100), lobby);
+            MotoManager motoManager = new MotoManager(new Moto(playerList.size(), "", new Point2D(60, 60), (float) 5, 30, 30, 200), lobby);
             playerList.add(new Player(
                     motoManager,
                     playerList.size(),

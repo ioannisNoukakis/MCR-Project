@@ -6,43 +6,52 @@
 package ActorManager;
 
 import Models.Actor.Actor;
+import Models.Actor.Teleporter;
 import Models.world.Rectangle2D;
-import mediator.Mediator;
+import mediator.MediatorMap;
 
 /**
  * @author durza9390
  */
 public class TeleporterManager extends ActorManager {
 
-    private Rectangle2D warpingZone;
+    private Teleporter teleporter;
+    private MediatorMap mediatorDeDestination;
 
-    public TeleporterManager(Mediator mediator, Rectangle2D warpingZone) {
+    public TeleporterManager(Teleporter teleporter, MediatorMap mediatorDeDestination, MediatorMap mediator) {
         super(mediator);
-        this.warpingZone = warpingZone;
+        this.teleporter = teleporter;
+        this.mediatorDeDestination = mediatorDeDestination;
     }
 
     @Override
     public Actor getActor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Rectangle2D[] getKillingHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ActorManager getInstance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return teleporter;
     }
 
     @Override
     public Rectangle2D[] getlethalHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Rectangle2D[1];
+    }
+
+    @Override
+    public Rectangle2D[] getKillingHitbox()  {
+        Rectangle2D[] rect = new Rectangle2D[1];
+        rect[0] = new Rectangle2D(teleporter.getLocation(), teleporter.getWidth(), teleporter.getHeight());
+        return rect; 
+    }
+
+    public MediatorMap getMediatorDeDestination() {
+        return mediatorDeDestination;
     }
 
     @Override
     public void onUpdate(int delta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //y'a rien à mettre à jour c'est un téléporteur
+    }
+
+    @Override
+    public void reset() {
+        
     }
 }
