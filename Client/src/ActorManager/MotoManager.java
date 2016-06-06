@@ -4,6 +4,7 @@ import Models.Actor.*;
 import Models.world.Point2D;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -30,7 +31,7 @@ public class MotoManager extends ActorManager {
             g.setColor(color);
             g.setLineWidth(4);
 
-            LinkedList<Point2D> tail = moto.getTail();
+            List<Point2D> tail = moto.getTail();
             for (int i = 0; i < tail.size() - 1; ++i) {
                 g.drawLine(tail.get(i).getX(), tail.get(i).getY(), tail.get(i + 1).getX(), tail.get(i + 1).getY());
             }

@@ -150,7 +150,7 @@ public class WindowGame extends BasicGame {
                     camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
                     camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
                     
-                    System.out.println(player.getActor().getLocation().getX() + " : " + player.getActor().getLocation().getY());
+                    //System.out.println(player.getActor().getLocation().getX() + " : " + player.getActor().getLocation().getY());
                 } else {
                     throw new RuntimeException("Bad class recived. Aborting...");
                 }

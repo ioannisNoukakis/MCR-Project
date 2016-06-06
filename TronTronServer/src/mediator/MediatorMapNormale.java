@@ -17,7 +17,6 @@
 package mediator;
 
 import ActorManager.ActorManager;
-import Models.world.Direction;
 
 /**
  * @author durza9390
@@ -38,7 +37,6 @@ public class MediatorMapNormale extends MediatorMap {
             if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
                 if (a != b) {
                     super.ChangeActorMap(a, lobby);
-                    b.getActor().setSpeed(b.getActor().getSpeed() + 2);
                 }
             }
         }

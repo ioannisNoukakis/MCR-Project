@@ -11,20 +11,22 @@ import Models.world.Point2D;
 import Models.world.Rectangle2D;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author durza9390
  */
 public abstract class MediatorMap extends Thread {
 
-    protected LinkedList<ActorManager> listActorManager;
+    protected List<ActorManager> listActorManager;
     private String mapName;
     private int maxX;
     private int maxY;
     private RandomUniformGenerator RUG;
     
     public MediatorMap(String mapName, int maxX, int maxY) {
-        this.listActorManager = new LinkedList<>();
+        this.listActorManager = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
         this.maxX = maxX;
         this.maxY = maxY;
@@ -58,7 +60,7 @@ public abstract class MediatorMap extends Thread {
         return false;
     }
 
-    public synchronized LinkedList<ActorManager> getListActorManager() {
+    public synchronized List<ActorManager> getListActorManager() {
         return listActorManager;
     }
 
@@ -84,11 +86,10 @@ public abstract class MediatorMap extends Thread {
         long time;
         try {
             while (true) {
-
                 time = System.currentTimeMillis();
                 Thread.sleep(10);
                 LinkedList<Actor> listActor = new LinkedList<>();
-
+                
                 for (ActorManager actorManager : listActorManager) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
                     listActor.add(actorManager.getActor());

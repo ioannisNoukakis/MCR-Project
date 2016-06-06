@@ -46,7 +46,7 @@ public class MotoManager extends ActorManager {
         if (moto.getSpeed() == 0)
             return;
 
-        if (moto.getTail().size() > moto.getTailSize())
+        if (moto.getTail().size() > moto.getMaxTailSize())
             moto.getTail().removeFirst();
 
         moto.getTail().add(new Point2D(moto.getLocation().getX() + moto.getWidth() / 2, moto.getLocation().getY() + moto.getHeight() / 2));
@@ -69,7 +69,6 @@ public class MotoManager extends ActorManager {
                         moto.getLocation().getY() + moto.getSpeed() * (float) delta / (float) 10.0));
                 break;
         }
-        
         super.getMediator().verifyMove(this);
     }
 

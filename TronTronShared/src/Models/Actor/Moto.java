@@ -20,6 +20,8 @@ import java.util.LinkedList;
 import Models.world.Direction;
 import Models.world.Point2D;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,23 +30,32 @@ import java.io.Serializable;
 public class Moto extends Actor implements Serializable {
 
     private LinkedList<Point2D> tail;
-    private int tailSize;
+    private float maxTailSize;
+    private float tailSize;
         
     public Moto(int id, String name, Point2D location, float speed, int height, int width, int tailSize) {
         super(id, name, location, speed, Direction.noWhere, height, width);
-        this.tailSize = tailSize;
+        this.maxTailSize = tailSize;
         tail = new LinkedList<>();
-    }
-
-    public void setTailSize(int tailSize) {
-        this.tailSize = tailSize;
     }
     
     public LinkedList<Point2D> getTail() {
         return tail;
     }
 
-    public int getTailSize() {
+    public float getTailSize() {
         return tailSize;
+    }
+
+    public void setTailSize(int tailSize) {
+        this.tailSize = tailSize;
+    }
+
+    public void setMaxTailSize(int maxTailSize) {
+        this.maxTailSize = maxTailSize;
+    }
+
+    public float getMaxTailSize() {
+        return maxTailSize;
     }
 }
