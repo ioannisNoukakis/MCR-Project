@@ -38,14 +38,32 @@ public class WindowGame extends BasicGame {
     private LinkedList<ActorManager> listActorManager;
     private InputManager inputManager;
     private SyncServer syncServer;
-    private static String host;
+    private String host;
+    private int port; 
+    private String playerName;
     private String mapName;
     private TrueTypeFont font;
 
     private static final String GAME_VERSION = "1.0";
 
-    public WindowGame() {
+    public WindowGame(String playerName, String hostname, int port) throws Exception {
         super("MCR projet - prototype");
+        this.playerName = playerName;
+        this.host = hostname;
+        this.port = port;
+        syncServer = new SyncServer(host, 8000);
+        
+        int miniLogicSleep = 5;
+        int maxLogicSleep = 20;
+        AppGameContainer app = new AppGameContainer(this);
+
+        //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
+        app.setDisplayMode(800, 600, false);
+        app.setVSync(false);
+        app.setTargetFrameRate(60);
+        app.setMinimumLogicUpdateInterval(miniLogicSleep);
+        app.setMinimumLogicUpdateInterval(maxLogicSleep);
+        app.start();
     }
 
     public void setAppContainer(AppGameContainer app) {
@@ -69,8 +87,7 @@ public class WindowGame extends BasicGame {
                 container.getHeight());
 
         try {
-            syncServer = new SyncServer(host, 8000);
-            syncServer.getOut().writeObject(new JoinGameFrame("inserer nom ici"));
+            syncServer.getOut().writeObject(new JoinGameFrame(playerName));
             syncServer.start();
 
             player = (new Player("", 'w', 'd', 's', 'a'));
@@ -165,30 +182,5 @@ public class WindowGame extends BasicGame {
     @Override
     public void keyReleased(int key, char c) {
 
-    }
-
-    public static void main(String[] args) throws SlickException {
-        host = "localhost";
-        if (args.length > 0) {
-            host = args[0];
-        }
-
-        try {
-            int miniLogicSleep = 5;
-            int maxLogicSleep = 20;
-            WindowGame game = new WindowGame();
-            AppGameContainer app = new AppGameContainer(game);
-            game.setAppContainer(app);
-
-            //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
-            app.setDisplayMode(800, 600, false);
-            app.setVSync(false);
-            app.setTargetFrameRate(60);
-            app.setMinimumLogicUpdateInterval(miniLogicSleep);
-            app.setMinimumLogicUpdateInterval(maxLogicSleep);
-            app.start();
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
     }
 }

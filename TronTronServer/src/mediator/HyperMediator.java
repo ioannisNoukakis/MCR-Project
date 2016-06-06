@@ -48,7 +48,7 @@ public class HyperMediator {
         // Connection
         if (o.getClass() == JoinGameFrame.class) {
             JoinGameFrame joinGameFrame = (JoinGameFrame) o;
-            MotoManager motoManager = new MotoManager(new Moto(playerList.size(), "", new Point2D(60, 60), (float) 5, 30, 30, 200), lobby);
+            MotoManager motoManager = new MotoManager(new Moto(playerList.size(), joinGameFrame.getName(), new Point2D(60, 60), (float) 5, 30, 30, 200), lobby);
             playerList.add(new Player(
                     motoManager,
                     playerList.size(),
