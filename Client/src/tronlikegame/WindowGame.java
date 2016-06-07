@@ -38,8 +38,6 @@ public class WindowGame extends BasicGame {
     private LinkedList<ActorManager> listActorManager;
     private InputManager inputManager;
     private SyncServer syncServer;
-    private String host;
-    private int port; 
     private String playerName;
     private String mapName;
     private TrueTypeFont font;
@@ -49,10 +47,8 @@ public class WindowGame extends BasicGame {
     public WindowGame(String playerName, String hostname, int port) throws Exception {
         super("MCR projet - prototype");
         this.playerName = playerName;
-        this.host = hostname;
-        this.port = port;
-        syncServer = new SyncServer(host, 8000);
-        
+        syncServer = new SyncServer(hostname, port);
+
         int miniLogicSleep = 5;
         int maxLogicSleep = 20;
         AppGameContainer app = new AppGameContainer(this);
@@ -117,7 +113,7 @@ public class WindowGame extends BasicGame {
 
             if (map != null)
                 this.map.render(0, 0);
-            
+
 
             if (o != null) {
                 if (o.getClass() == GetWorldContents.class) {
@@ -139,7 +135,7 @@ public class WindowGame extends BasicGame {
                         }
                     }
 
-                    //changement de map si nécessaire
+                    // Map switch if needed
                     if (!mapName.equals(getWorldContents.getMapName())) {
                         this.map = new TiledMap("ressources/map/" + getWorldContents.getMapName());
                         camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
@@ -149,10 +145,10 @@ public class WindowGame extends BasicGame {
 
                     camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
                     camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
-                    
+
                     //System.out.println(player.getActor().getLocation().getX() + " : " + player.getActor().getLocation().getY());
                 } else {
-                    throw new RuntimeException("Bad class recived. Aborting...");
+                    throw new RuntimeException("Bad class received. Aborting...");
                 }
             }
         } catch (Exception e) {

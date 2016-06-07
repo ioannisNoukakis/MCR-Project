@@ -10,9 +10,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author durza9390
- */
 public class Launcher extends JFrame {
 
     private JTextField hostname;
@@ -29,6 +26,8 @@ public class Launcher extends JFrame {
      * Creates new form Launcher
      */
     public Launcher() {
+        super("TRONTRON");
+
         initComponents();
         launchBtn.addActionListener((ActionEvent e) -> {
             try {
@@ -41,6 +40,13 @@ public class Launcher extends JFrame {
         });
     }
 
+    /**
+     * Get a random line from a text file
+     *
+     * @param filename Filename path
+     * @return A random string from the given text file
+     * @throws IOException
+     */
     private String getRandomLine(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         ArrayList<String> lines = new ArrayList<>();
@@ -54,6 +60,9 @@ public class Launcher extends JFrame {
         return lines.get(new Random().nextInt(lines.size()));
     }
 
+    /**
+     * Initalize the components for the launcher
+     */
     private void initComponents() {
         String localPlayerName = DEFAULT_PLAYERNAME;
 
@@ -78,27 +87,27 @@ public class Launcher extends JFrame {
         panelLogo.setPreferredSize(new Dimension(300, 160));
         panelLogo.setBackground(Color.BLACK);
 
-        playerName = new JTextField();
-        hostname = new JTextField();
-        port = new JTextField();
-        status = new JLabel();
-        launchBtn = new JButton();
+        playerName = new JTextField(localPlayerName);
+        playerName.addActionListener(evt -> playerNameActionPerformed(evt));
+
+        hostname = new JTextField("localhost");
+        port = new JTextField("8000");
+        status = new JLabel("not connected");
+        status.setForeground(Color.WHITE);
+        status.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        launchBtn = new JButton("Launch");
+        launchBtn.setPreferredSize(new Dimension(200, 52));
+        launchBtn.setBackground(Color.BLACK);
+        launchBtn.setFont(new Font("Sans", Font.PLAIN, 14));
+        launchBtn.setForeground(Color.WHITE);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        playerName.setText(localPlayerName);
-        playerName.addActionListener(evt -> playerNameActionPerformed(evt));
-        hostname.setText("localhost");
-        port.setText("8000");
-        status.setText("not connected");
-
-        launchBtn.setText("Launch");
-        launchBtn.setPreferredSize(new Dimension(200, 50));
-        launchBtn.setBackground(Color.DARK_GRAY);
-
         JPanel mainForm = new JPanel();
 
-        String[] labels = {"Player name: ", "Hostname: ", "Port: ", "Status"};
+        // Pair of labels-inputs
+        String[] labels = {"Player name: ", "Hostname: ", "Port: ", "Status: "};
         JComponent[] inputs = {playerName, hostname, port, status};
 
         int numPairs = Math.min(labels.length, inputs.length);
@@ -106,24 +115,25 @@ public class Launcher extends JFrame {
         JPanel p = new JPanel(new SpringLayout());
         for (int i = 0; i < numPairs; ++i) {
             JLabel l = new JLabel(labels[i], JLabel.TRAILING);
+            l.setFont(new Font("Sans", Font.PLAIN, 14));
+            l.setForeground(Color.WHITE);
 
             p.add(l);
             p.add(inputs[i]);
         }
 
-        // Lay out the panel.
+        // Lay out the panel
         SpringUtilities.makeCompactGrid(p,
                 numPairs, 2, //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
 
-        p.setBackground(Color.DARK_GRAY);
+        p.setBackground(Color.BLACK);
 
-        p.setPreferredSize(new Dimension(320, 180));
+        p.setPreferredSize(new Dimension(320, 160));
 
         mainForm.setBackground(Color.BLACK);
         mainForm.add(p);
-        p.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         Container pane = getContentPane();
         pane.setBackground(Color.BLACK);
@@ -133,7 +143,8 @@ public class Launcher extends JFrame {
 
         pack();
 
-        setSize(600, 480);
+        setResizable(false);
+        setSize(600, 460);
         setLocationRelativeTo(null); // Center the launcher
     }
 
@@ -142,6 +153,8 @@ public class Launcher extends JFrame {
     }
 
     /**
+     * The main for the client application
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
