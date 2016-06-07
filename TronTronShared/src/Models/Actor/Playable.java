@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package Models.Actor;
 
-import java.util.LinkedList;
 import Models.world.Direction;
 import Models.world.Point2D;
 import java.io.Serializable;
@@ -25,35 +25,27 @@ import java.io.Serializable;
  *
  * @author durza9390
  */
-public class Moto extends Playable implements Serializable {
+public class Playable extends Actor implements Serializable{
+    private boolean isAlive;
 
-    private LinkedList<Point2D> tail;
-    private float maxTailSize;
-    private float tailSize;
-        
-    public Moto(int id, String name, Point2D location, float speed, int height, int width, int tailSize) {
-        super(id, name, location, speed, Direction.noWhere, height, width);
-        this.maxTailSize = tailSize;
-        tail = new LinkedList<>();
+    public Playable(int id, String name, Point2D location, float speed, Direction direction, int height, int width) {
+        super(id, name, location, speed, direction, height, width);
+        isAlive = true;
     }
     
-    public LinkedList<Point2D> getTail() {
-        return tail;
+    public void kill()
+    {
+        super.setSpeed(0);
+        isAlive = false;
+    }
+    
+    public void hallelujah()
+    {
+        super.setSpeed(super.getBaseSpeed());
+        isAlive = true;
     }
 
-    public float getTailSize() {
-        return tailSize;
-    }
-
-    public void setTailSize(int tailSize) {
-        this.tailSize = tailSize;
-    }
-
-    public void setMaxTailSize(int maxTailSize) {
-        this.maxTailSize = maxTailSize;
-    }
-
-    public float getMaxTailSize() {
-        return maxTailSize;
+    public boolean isAlive() {
+        return isAlive;
     }
 }

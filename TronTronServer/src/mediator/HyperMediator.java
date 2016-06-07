@@ -38,7 +38,7 @@ public class HyperMediator {
         prop.load(new FileInputStream("normalMap.properties"));
         mainMap = new MediatorMapNormale(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")), lobby);
         
-        lobby.addActorManager(new TeleporterManager(new Teleporter(-1, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40),
+        lobby.addTeleporterManager(new TeleporterManager(new Teleporter(-1, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40),
             mainMap, lobby));
         lobby.start();
         mainMap.start();
@@ -55,7 +55,7 @@ public class HyperMediator {
                     joinGameFrame.getName(),
                     UDPsender));
             motoManager.setPlayer(playerList.getLast());
-            lobby.addActorManager(motoManager);
+            lobby.addMotoManager(motoManager);
             System.out.println("A new client has connected: " + (playerList.size() - 1));
             out.reset();
             out.writeObject(new GetIdentity(playerList.size() - 1));

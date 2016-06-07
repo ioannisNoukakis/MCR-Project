@@ -1,6 +1,8 @@
 package mediator;
 
 import ActorManager.ActorManager;
+import ActorManager.MotoManager;
+import ActorManager.TeleporterManager;
 import ActorManager.WorldManager;
 import MAth.RandomUniformGenerator;
 import Models.Actor.Actor;
@@ -19,26 +21,38 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class MediatorMap extends Thread {
 
-    protected List<ActorManager> listActorManager;
+    protected List<MotoManager> listMotoManager;
+    protected List<TeleporterManager> listeTeleporterManager;
+    protected List<WorldManager> listeWorld;
     private String mapName;
     private int maxX;
     private int maxY;
     private RandomUniformGenerator RUG;
     
     public MediatorMap(String mapName, int maxX, int maxY) {
-        this.listActorManager = new CopyOnWriteArrayList<>();
+        listMotoManager = new CopyOnWriteArrayList<>();
+        listeTeleporterManager = new CopyOnWriteArrayList<>();
+        listeWorld = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
         this.maxX = maxX;
         this.maxY = maxY;
-        listActorManager.add(new WorldManager(new World(-2, mapName, new Point2D(0, 0),0, Direction.noWhere, maxX, maxY), this));
+        listeWorld.add(new WorldManager(new World(-2, mapName, new Point2D(0, 0),0, Direction.noWhere, maxX, maxY), this));
         RUG = new RandomUniformGenerator(System.currentTimeMillis());
     }
 
-    public synchronized void addActorManager(ActorManager a) {
-        listActorManager.add(a);
+    public synchronized void addMotoManager(MotoManager a) {
+        listMotoManager.add(a);
+    }
+    
+    public synchronized void addTeleporterManager(TeleporterManager a) {
+        listeTeleporterManager.add(a);
+    }
+    
+    public synchronized void addWorldElement(WorldManager a) {
+        listeWorld.add(a);
     }
 
-    public abstract void verifyMove(ActorManager a);
+    public abstract void verifyMove(MotoManager a);
 
     public synchronized boolean checkCollision(Rectangle2D[] a, Rectangle2D[] b) {
 
@@ -60,10 +74,6 @@ public abstract class MediatorMap extends Thread {
         return false;
     }
 
-    public synchronized List<ActorManager> getListActorManager() {
-        return listActorManager;
-    }
-
     public int getMaxX() {
         return maxX;
     }
@@ -72,13 +82,13 @@ public abstract class MediatorMap extends Thread {
         return maxY;
     }
 
-    public synchronized void ChangeActorMap(ActorManager am, MediatorMap m) {
-        listActorManager.remove(am);
-        am.setMediator(m);
-        m.addActorManager(am);
-        am.reset();
-        am.getActor().getLocation().setX((float)RUG.U(am.getActor().getWidth(), m.getMaxX()-am.getActor().getWidth()));
-        am.getActor().getLocation().setY((float)RUG.U(am.getActor().getWidth(), m.getMaxY()-am.getActor().getWidth()));
+    public synchronized void ChangeMotoMap(MotoManager moto, MediatorMap m) {
+        listMotoManager.remove(moto);
+        moto.setMediator(m);
+        m.addMotoManager(moto);
+        moto.reset();
+        moto.getActor().getLocation().setX((float)RUG.U(moto.getActor().getWidth(), m.getMaxX()-moto.getActor().getWidth()));
+        moto.getActor().getLocation().setY((float)RUG.U(moto.getActor().getWidth(), m.getMaxY()-moto.getActor().getHeight()));
     }
 
     @Override
@@ -90,12 +100,16 @@ public abstract class MediatorMap extends Thread {
                 Thread.sleep(10);
                 LinkedList<Actor> listActor = new LinkedList<>();
                 
-                for (ActorManager actorManager : listActorManager) {
+                for (ActorManager actorManager : listMotoManager) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
                     listActor.add(actorManager.getActor());
                 }
+                
+                for (ActorManager actorManager : listeTeleporterManager) {
+                    listActor.add(actorManager.getActor());
+                }
 
-                for (ActorManager actorManager : listActorManager) {
+                for (ActorManager actorManager : listMotoManager) {
                     if (actorManager.getPlayer() != null) {
                         GetWorldContents get = new GetWorldContents(listActor, mapName);
                         actorManager.getPlayer().getUDPsender().sendTo(get);

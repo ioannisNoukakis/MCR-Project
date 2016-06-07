@@ -16,18 +16,19 @@ public class MediatorLobby extends MediatorMap {
     }
     
     @Override
-    public void verifyMove(ActorManager a) {
-        for (ActorManager b : super.getListActorManager()) {
-            if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                if(a.getClass() == MotoManager.class && b.getClass() == TeleporterManager.class)
-                {
-                    super.ChangeActorMap(a, ((TeleporterManager)b).getMediatorDeDestination());
-                }
-                if(a.getClass() == MotoManager.class && b.getClass() == WorldManager.class)
-                {
-                    a.getActor().setLocation(new Point2D(getMaxX()/2, getMaxY()/2));
-                    a.reset();
-                }
+    public void verifyMove(MotoManager a) {
+        for (TeleporterManager b : listeTeleporterManager) {
+            if (checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
+                System.out.println(b.getMediatorDeDestination().getClass().getName());
+                super.ChangeMotoMap(a, b.getMediatorDeDestination());
+            }
+        }
+        
+        for(WorldManager b : listeWorld)
+        {
+            if (checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
+                a.getActor().setLocation(new Point2D(getMaxX()/2, getMaxY()/2));
+                a.reset();
             }
         }
     }

@@ -33,7 +33,6 @@ public abstract class Actor implements Serializable{
     private Direction direction;
     private int height;
     private int width;
-    private boolean isAlive;
 
     public Actor(int id, String name, Point2D location, float speed, Direction direction, int height, int width) {
         this.id = id;
@@ -43,24 +42,7 @@ public abstract class Actor implements Serializable{
         this.direction = direction;
         this.height = height;
         this.width = width;
-        isAlive = true;
         BaseSpeed = speed;
-    }
-
-    public void kill()
-    {
-        speed = 0;
-        isAlive = false;
-    }
-    
-    public void hallelujah()
-    {
-        speed = BaseSpeed;
-        isAlive = true;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
     }
     
     public int getId() {
@@ -105,5 +87,9 @@ public abstract class Actor implements Serializable{
 
     public int getWidth() {
         return width;
+    }
+
+    public float getBaseSpeed() {
+        return BaseSpeed;
     }
 }

@@ -17,6 +17,10 @@
 package mediator;
 
 import ActorManager.ActorManager;
+import ActorManager.MotoManager;
+import ActorManager.TeleporterManager;
+import ActorManager.WorldManager;
+import Models.world.Point2D;
 
 /**
  * @author durza9390
@@ -29,16 +33,20 @@ public class MediatorMapNormale extends MediatorMap {
         super(mapName, maxX, maxY);
         this.lobby = lobby;
     }
-    // Envoyer au client qu'il est mort
 
     @Override
-    public void verifyMove(ActorManager a) {
-        for (ActorManager b : super.getListActorManager()) {
+    public void verifyMove(MotoManager a) {
+        
+        for (MotoManager b : listMotoManager) {
             if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                if (a != b) {
-                    super.ChangeActorMap(a, lobby);
-                }
+                super.ChangeMotoMap(a, lobby);
             }
+        }
+        
+        for(WorldManager b : listeWorld)
+        {
+            if(checkCollision(a.getlethalHitbox(), b.getKillingHitbox()))
+                super.ChangeMotoMap(a, lobby);
         }
     }
 }
