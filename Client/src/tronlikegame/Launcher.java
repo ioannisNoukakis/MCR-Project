@@ -1,6 +1,8 @@
 package tronlikegame;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
@@ -14,10 +16,6 @@ import java.util.logging.Logger;
 public class Launcher extends JFrame {
 
     private JTextField hostname;
-    private JLabel labelStatus;
-    private JLabel labelPlayerName;
-    private JLabel labelHostname;
-    private JLabel labelPort;
     private JButton launchBtn;
     private JTextField playerName;
     private JTextField port;
@@ -25,6 +23,7 @@ public class Launcher extends JFrame {
 
     private final String DEFAULT_PLAYERNAME = "Player 1";
     private final String RESSOURCES_CHARACTERS = "ressources/characters.dat";
+    private final String RESSOURCES_LOGO = "ressources/logo.png";
 
     /**
      * Creates new form Launcher
@@ -69,94 +68,73 @@ public class Launcher extends JFrame {
             }
         }
 
-        labelPlayerName = new JLabel();
-        labelHostname = new JLabel();
+        ImageIcon icon = new ImageIcon(RESSOURCES_LOGO);
+        JLabel labelLogo = new JLabel();
+        labelLogo.setBackground(new Color(0, 0, 0, 0));
+        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+        labelLogo.setIcon(icon);
+
+        ImagePanel panelLogo = new ImagePanel(RESSOURCES_LOGO);
+        panelLogo.setPreferredSize(new Dimension(300, 160));
+        panelLogo.setBackground(Color.BLACK);
+
         playerName = new JTextField();
         hostname = new JTextField();
-        labelPort = new JLabel();
         port = new JTextField();
-        labelStatus = new JLabel();
         status = new JLabel();
         launchBtn = new JButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        labelPlayerName.setText("Player name");
-
-        labelHostname.setText("Hostname");
 
         playerName.setText(localPlayerName);
         playerName.addActionListener(evt -> playerNameActionPerformed(evt));
-
         hostname.setText("localhost");
-
-        labelPort.setText("Port");
-
         port.setText("8000");
-
-        labelStatus.setText("Status");
-
         status.setText("not connected");
 
         launchBtn.setText("Launch");
+        launchBtn.setPreferredSize(new Dimension(200, 50));
+        launchBtn.setBackground(Color.DARK_GRAY);
 
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelPlayerName)
-                                .addGap(12, 12, 12)
-                                .addComponent(playerName, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelHostname)
-                                .addGap(28, 28, 28)
-                                .addComponent(hostname, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelPort)
-                                .addGap(70, 70, 70)
-                                .addComponent(port, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelStatus)
-                                .addGap(53, 53, 53)
-                                .addComponent(status, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(157, 157, 157)
-                                .addComponent(launchBtn))
-        );
+        JPanel mainForm = new JPanel();
 
-        layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(labelPlayerName))
-                                        .addComponent(playerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(labelHostname))
-                                        .addComponent(hostname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(labelPort)
-                                        .addComponent(port, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(labelStatus)
-                                        .addComponent(status))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(launchBtn)
-                                .addContainerGap())
-        );
+        String[] labels = {"Player name: ", "Hostname: ", "Port: ", "Status"};
+        JComponent[] inputs = {playerName, hostname, port, status};
+
+        int numPairs = Math.min(labels.length, inputs.length);
+
+        JPanel p = new JPanel(new SpringLayout());
+        for (int i = 0; i < numPairs; ++i) {
+            JLabel l = new JLabel(labels[i], JLabel.TRAILING);
+
+            p.add(l);
+            p.add(inputs[i]);
+        }
+
+        // Lay out the panel.
+        SpringUtilities.makeCompactGrid(p,
+                numPairs, 2, //rows, cols
+                6, 6,        //initX, initY
+                6, 6);       //xPad, yPad
+
+        p.setBackground(Color.DARK_GRAY);
+
+        p.setPreferredSize(new Dimension(320, 180));
+
+        mainForm.setBackground(Color.BLACK);
+        mainForm.add(p);
+        p.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        Container pane = getContentPane();
+        pane.setBackground(Color.BLACK);
+        pane.add(mainForm, BorderLayout.CENTER);
+        pane.add(launchBtn, BorderLayout.PAGE_END);
+        pane.add(panelLogo, BorderLayout.NORTH);
 
         pack();
 
         setSize(600, 480);
+        setLocationRelativeTo(null); // Center the launcher
     }
 
     private void playerNameActionPerformed(ActionEvent evt) {
