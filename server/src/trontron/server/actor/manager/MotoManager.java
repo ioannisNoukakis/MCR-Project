@@ -22,7 +22,12 @@ import trontron.model.world.Direction;
 
 import trontron.model.world.Point2D;
 import trontron.model.world.Rectangle2D;
+import trontron.server.comportement.Comportement;
 import trontron.server.mediator.MediatorMap;
+import trontron.server.comportement.ICollision;
+import trontron.server.player.Player;
+
+import java.util.LinkedList;
 
 /**
  * @author durza9390
@@ -31,8 +36,8 @@ public class MotoManager extends PlayableManager {
 
     private Moto moto;
 
-    public MotoManager(Moto moto, MediatorMap mediator) {
-        super(mediator);
+    public MotoManager(MediatorMap mediator, LinkedList<Comportement> listComportement, Moto moto) {
+        super(mediator, listComportement);
         this.moto = moto;
     }
 
@@ -102,15 +107,4 @@ public class MotoManager extends PlayableManager {
         moto.getTail().clear();
         moto.setDirection(Direction.noWhere);
     }
-
-    @Override
-    public void handleCollision(NonPlayableManager b) {
-
-    }
-
-    @Override
-    public void handleCollision(PlayableManager b) {
-
-    }
-
 }

@@ -4,37 +4,40 @@ import trontron.model.actor.Actor;
 import trontron.model.world.Direction;
 import trontron.model.world.Point2D;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author durza9390
  */
-public class SlowAndSpeedBonus extends Bonus{
+public class SlowAndSpeedBonus extends Bonus implements Serializable {
     private LinkedList<Actor> list; 
     private int modifier;
 
-    public SlowAndSpeedBonus(LinkedList<Actor> list, int modifier, int timeToLive, Actor me, int id,
-                             String name, Point2D location, float speed, Direction direction, int height, int width) {
-        super(timeToLive, me, id, name, location, speed, direction, height, width);
+    public SlowAndSpeedBonus(int timeToLive, int id, String name, Point2D location, float speed, Direction direction, int height, int width, LinkedList<Actor> list, int modifier) {
+        super(timeToLive, id, name, location, speed, direction, height, width);
         this.list = list;
         this.modifier = modifier;
     }
-    
-    public void activate()
+
+    @Override
+    public void activate(Actor me)
     {
+        super.activate(me);
         for(Actor a : list)
         {
-            if(a == super.getMe())
+            if(a == me)
             {
-                a.setSpeed(a.getSpeed()-modifier);
+                a.setSpeed(a.getSpeed()+modifier);
             }
             else
-                a.setSpeed(a.getSpeed()+modifier);
+                a.setSpeed(a.getSpeed()-modifier);
         }
     }
-    
-    public void deactivate()
+
+    @Override
+    public void desactivate()
     {
         for(Actor a : list)
         {

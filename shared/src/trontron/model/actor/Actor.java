@@ -45,7 +45,15 @@ public abstract class Actor implements Serializable{
         this.width = width;
         BaseSpeed = speed;
     }
-    
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public int getId() {
         return id;
     }

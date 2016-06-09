@@ -4,6 +4,9 @@ import trontron.server.actor.manager.MotoManager;
 import trontron.server.actor.manager.NonPlayableManager;
 import trontron.server.actor.manager.PlayableManager;
 import trontron.server.actor.manager.WorldManager;
+import trontron.server.comportement.Comportement;
+
+import java.util.LinkedList;
 
 /**
  * @author durza9390
@@ -12,24 +15,24 @@ public class MediatorMapNormale extends MediatorMap {
 
     private MediatorLobby lobby;
 
-    public MediatorMapNormale(String mapName, int maxX, int maxY, MediatorLobby lobby) {
-        super(mapName, maxX, maxY);
+    public MediatorMapNormale(String mapName, int maxX, int maxY, LinkedList<Comportement> listComp, int frequecySpawn, int maxSpawn, MediatorLobby lobby) {
+        super(mapName, maxX, maxY, listComp, frequecySpawn, maxSpawn);
         this.lobby = lobby;
     }
 
     @Override
     public void verifyMove(PlayableManager a) {
         
-        for (PlayableManager b : listPlayableManager) {
+        for (PlayableManager b : getListPlayableManager()) {
             if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                //super.ChangeMotoMap(a, lobby);
+                a.handleCollision(b);
             }
         }
         
-        for(NonPlayableManager b : listNonPlayableManager)
+        for(NonPlayableManager b : getListNonPlayableManager())
         {
             if(checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                //super.ChangeMotoMap(a, lobby);
+                b.handleCollision(a);
             }
         }
     }

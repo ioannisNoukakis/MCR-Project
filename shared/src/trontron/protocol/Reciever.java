@@ -24,7 +24,6 @@ public class Reciever {
                     recvBuf.length);
             dSock.receive(packet);
             byteCount = packet.getLength();
-            System.out.println("Taille du packet: "  + byteCount);
             ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
             ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream));
             Object o = is.readObject();

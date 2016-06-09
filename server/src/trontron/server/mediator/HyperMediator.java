@@ -1,12 +1,12 @@
 package trontron.server.mediator;
 
-import trontron.server.actor.manager.MotoManager;
-import trontron.server.actor.manager.NonPlayableManager;
-import trontron.server.actor.manager.PlayableManager;
-import trontron.server.actor.manager.TeleporterManager;
+import trontron.model.actor.World;
+import trontron.server.actor.manager.*;
 import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
 import trontron.model.world.Point2D;
+import trontron.server.comportement.Comportement;
+import trontron.server.comportement.ICollision;
 import trontron.server.player.Player;
 import trontron.protocol.message.JoinGame;
 import trontron.protocol.message.ChangeDirection;
@@ -15,6 +15,7 @@ import trontron.protocol.Sender;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -51,17 +52,25 @@ public class HyperMediator {
         Properties prop = new Properties();
 
         // lobby map
-        InputStream lobbyStream = this.getClass().getClassLoader().getResourceAsStream("lobby.properties");
+        InputStream lobbyStream = this.getClass().getClassLoader().getResourceAsStream("resources/lobby.properties");
         prop.load(lobbyStream);
-        lobby = new MediatorLobby(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")));
+        lobby = new MediatorLobby(prop.getProperty("name"),
+                Integer.parseInt(prop.getProperty("maxX")),
+                Integer.parseInt(prop.getProperty("maxY")),
+                generateComportementWorld(), 0, 0);
 
         // normal map
-        InputStream mapStream = this.getClass().getClassLoader().getResourceAsStream("normalMap.properties");
+        InputStream mapStream = this.getClass().getClassLoader().getResourceAsStream("resources/normalMap.properties");
         prop.load(mapStream);
-        mainMap = new MediatorMapNormale(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")), lobby);
+        mainMap = new MediatorMapNormale(prop.getProperty("name"),
+                Integer.parseInt(prop.getProperty("maxX")),
+                Integer.parseInt(prop.getProperty("maxY")),
+                generateComportementWorld(), 10000, 10,
+                lobby);
 
         // teleporter
-        lobby.addNonPlayableManager(new TeleporterManager(new Teleporter(-2, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40), mainMap, lobby));
+        lobby.addNonPlayableManager(new TeleporterManager(lobby, generateComportementTeleporter(),
+                new Teleporter(-2, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40), mainMap));
 
         lobby.start();
         mainMap.start();
@@ -77,7 +86,8 @@ public class HyperMediator {
         int playerId = nextId++;
 
         // create new manager
-        MotoManager motoManager = new MotoManager(new Moto(playerId, joinGame.getName(), new Point2D(60, 60), (float) 5, 30, 30, 200), lobby);
+        Moto m = new Moto(playerId, joinGame.getName(), new Point2D(60, 60), (float) 5, 30, 30, 200);
+        MotoManager motoManager = new MotoManager(lobby, generateComportementMoto(), m);
 
         // create new player
         Player newPlayer = new Player(motoManager, playerId, joinGame.getName(), UDPsender);
@@ -136,5 +146,61 @@ public class HyperMediator {
             }
         }
         return player;
+    }
+
+    /**
+     * factorize comportements creation for moto actor
+     *
+     * @return
+     */
+    public LinkedList<Comportement> generateComportementMoto()
+    {
+        LinkedList<Comportement> rtn = new LinkedList<>();
+
+        rtn.add(new Comportement(new ICollision() {
+            @Override
+            public void solveCollision(ActorManager a, ActorManager b) {
+
+            }
+        }, "theLobby.tmx"));
+
+        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
+
+        return rtn;
+    }
+
+    /**
+     * factorize comportements creation for teleporter actor
+     *
+     * @return
+     */
+    public LinkedList<Comportement> generateComportementTeleporter()
+    {
+        LinkedList<Comportement> rtn = new LinkedList<>();
+
+        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theLobby.tmx"));
+        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theMap.tmx"));
+
+        return rtn;
+    }
+
+    /**
+     * factorize comportements creation for world actor
+     *
+     * @return
+     */
+    public LinkedList<Comportement> generateComportementWorld() {
+        LinkedList<Comportement> rtn = new LinkedList<>();
+
+        rtn.add(new Comportement(new ICollision() {
+            @Override
+            public void solveCollision(ActorManager a, ActorManager b) {
+                a.getActor().setLocation(new Point2D(a.getMediator().getMaxX()/2, a.getMediator().getMaxY()/2));
+                a.reset();
+            }
+        }, "theLobby.tmx"));
+        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
+
+        return rtn;
     }
 }

@@ -37,7 +37,7 @@ public class Moto extends Playable implements Serializable {
         this.maxTailSize = tailSize;
         tail = new LinkedList<>();
     }
-    
+
     public LinkedList<Point2D> getTail() {
         return tail;
     }

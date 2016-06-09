@@ -1,11 +1,13 @@
 package trontron.client.game;
 
 import trontron.client.actor.manager.ActorManager;
+import trontron.client.actor.manager.BonusManager;
 import trontron.client.actor.manager.MotoManager;
 import trontron.client.actor.manager.TeleporterManager;
 import trontron.model.actor.Actor;
 import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
+import trontron.model.actor.bonus.Bonus;
 import trontron.protocol.message.PlayerIdentity;
 import trontron.protocol.message.JoinGame;
 import trontron.client.camera.CameraManager;
@@ -54,8 +56,8 @@ public class WindowGame extends BasicGame {
         AppGameContainer app = new AppGameContainer(this);
 
         //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
-        app.setDisplayMode(800, 600, false);
-        app.setVSync(false);
+        app.setDisplayMode(1920, 1080, false);
+        app.setVSync(true);
         app.setTargetFrameRate(60);
         app.setMinimumLogicUpdateInterval(miniLogicSleep);
         app.setMinimumLogicUpdateInterval(maxLogicSleep);
@@ -114,7 +116,6 @@ public class WindowGame extends BasicGame {
             if (map != null)
                 this.map.render(0, 0);
 
-
             if (o != null) {
                 if (o.getClass() == GetWorldContents.class) {
 
@@ -122,7 +123,6 @@ public class WindowGame extends BasicGame {
                     GetWorldContents getWorldContents = (GetWorldContents) o;
 
                     for (Actor a : getWorldContents.getActorList()) {
-                        //System.out.println(a.getLocation().getX() + " : " + a.getLocation().getY());
                         if (a.getClass() == Moto.class) {
                             listActorManager.add(new MotoManager((Moto) a, Color.green));
                             if (a.getId() == player.getId()) {
@@ -133,11 +133,15 @@ public class WindowGame extends BasicGame {
                         {
                             listActorManager.add(new TeleporterManager((Teleporter) a, Color.yellow));
                         }
+                        if(a instanceof Bonus)
+                        {
+                            listActorManager.add(new BonusManager((Bonus)a, Color.pink));
+                        }
                     }
 
                     // Map switch if needed
                     if (!mapName.equals(getWorldContents.getMapName())) {
-                        String filePath = this.getClass().getClassLoader().getResource("map/" + getWorldContents.getMapName()).getPath();
+                        String filePath = this.getClass().getClassLoader().getResource("resources/map/" + getWorldContents.getMapName()).getPath();
                         this.map = new TiledMap(filePath);
                         //this.map = new TiledMap("ressources/map/" + getWorldContents.getMapName());
                         camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
@@ -147,8 +151,6 @@ public class WindowGame extends BasicGame {
 
                     camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
                     camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
-
-                    //System.out.println(player.getActor().getLocation().getX() + " : " + player.getActor().getLocation().getY());
                 } else {
                     throw new RuntimeException("Bad class received. Aborting...");
                 }

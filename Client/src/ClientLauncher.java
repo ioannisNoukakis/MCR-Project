@@ -22,8 +22,8 @@ public class ClientLauncher extends JFrame {
     private JLabel status;
 
     private final String DEFAULT_PLAYERNAME = "Player 1";
-    private final String LOGO_PATH = "logo.png";
-    private final String CHARACTERS_PATH = "characters.dat";
+    private final String LOGO_PATH = "resources/logo.png";
+    private final String CHARACTERS_PATH = "resources/characters.dat";
 
     /**
      * Creates new form ClientLauncher
@@ -59,7 +59,7 @@ public class ClientLauncher extends JFrame {
         ArrayList<String> lines = new ArrayList<>();
 
         // Add lines to ArrayList
-        String line;
+         String line;
         while ((line = reader.readLine()) != null)
             lines.add(line);
 

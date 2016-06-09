@@ -18,21 +18,37 @@ package trontron.server.actor.manager;
 
 import trontron.model.actor.Actor;
 import trontron.model.world.Rectangle2D;
+import trontron.server.comportement.Comportement;
 import trontron.server.mediator.MediatorMap;
-import trontron.server.player.Player;
+import trontron.server.comportement.ICollision;
+
+import java.util.LinkedList;
 
 /**
- * @author durza9390
+ * Classe représentant les acteurs du jeu, c'est à dire les différentes entitées qui le composent
+ * et qui peuvent intéragire entre elles.
  */
 public abstract class ActorManager {
     private MediatorMap mediator;
+    private LinkedList<Comportement> listComportement;
 
-    public ActorManager(MediatorMap mediator) {
+    public ActorManager(MediatorMap mediator, LinkedList<Comportement> listComportement) {
         this.mediator = mediator;
+        this.listComportement = listComportement;
     }
 
+    /**
+     * Calcule l'état de l'acteur après un temps detla exprimé en millisecondes.
+     *
+     * @param delta: le nombre de millisecondes qui s'est écoulé entre deux updates
+     */
     public abstract void onUpdate(int delta);
 
+    /**
+     * Retourne cet acteur.
+     *
+     * @return
+     */
     public abstract Actor getActor();
 
     /**
@@ -48,18 +64,42 @@ public abstract class ActorManager {
      * @return 
      */
     public abstract Rectangle2D[] getlethalHitbox();
-    
+
+    /**
+     * Remet à zéro les paramètres de cet acteur.
+     */
     public abstract void reset();
 
+    /**
+     * Retourne le médiateur dans le quel cet acteur se trouve.
+     *
+     * @return
+     */
     public MediatorMap getMediator() {
         return mediator;
     }
 
+    /**
+     * Change le médiateur dans le quel cet acteur se trouve.
+     *
+     * @param mediator
+     */
     public void setMediator(MediatorMap mediator) {
         this.mediator = mediator;
     }
 
-    public abstract void handleCollision(NonPlayableManager b);
-
-    public abstract void handleCollision(PlayableManager b);
+    /**
+     * Gère la collision entre deux acteurs.
+     *
+     * @param b
+     */
+    public void handleCollision(PlayableManager b) {
+        for(Comportement comp : listComportement)
+        {
+            if(comp.getMapName().equals(mediator.getMapName()))
+            {
+                comp.getComportement().solveCollision(b, this);
+            }
+        }
+    }
 }
