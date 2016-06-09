@@ -1,6 +1,8 @@
 package trontron.server.mediator;
 
 import trontron.server.actor.manager.MotoManager;
+import trontron.server.actor.manager.NonPlayableManager;
+import trontron.server.actor.manager.PlayableManager;
 import trontron.server.actor.manager.TeleporterManager;
 import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
@@ -59,7 +61,7 @@ public class HyperMediator {
         mainMap = new MediatorMapNormale(prop.getProperty("name"), Integer.parseInt(prop.getProperty("maxX")), Integer.parseInt(prop.getProperty("maxY")), lobby);
 
         // teleporter
-        lobby.addTeleporterManager(new TeleporterManager(new Teleporter(-1, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40), mainMap, lobby));
+        lobby.addNonPlayableManager(new TeleporterManager(new Teleporter(-2, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.noWhere, 40, 40), mainMap, lobby));
 
         lobby.start();
         mainMap.start();
@@ -84,7 +86,7 @@ public class HyperMediator {
         playerList.add(newPlayer);
 
         motoManager.setPlayer(newPlayer);
-        lobby.addMotoManager(motoManager);
+        lobby.addPlayableManager(motoManager);
 
         System.out.println("A new player has connected : " + newPlayer.getName() + " (" + playerId + ")");
 

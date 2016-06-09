@@ -26,14 +26,9 @@ import trontron.server.player.Player;
  */
 public abstract class ActorManager {
     private MediatorMap mediator;
-    private Player player;
 
     public ActorManager(MediatorMap mediator) {
         this.mediator = mediator;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public abstract void onUpdate(int delta);
@@ -56,10 +51,6 @@ public abstract class ActorManager {
     
     public abstract void reset();
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public MediatorMap getMediator() {
         return mediator;
     }
@@ -67,4 +58,8 @@ public abstract class ActorManager {
     public void setMediator(MediatorMap mediator) {
         this.mediator = mediator;
     }
+
+    public abstract void handleCollision(NonPlayableManager b);
+
+    public abstract void handleCollision(PlayableManager b);
 }

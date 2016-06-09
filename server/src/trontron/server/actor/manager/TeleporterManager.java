@@ -13,7 +13,7 @@ import trontron.server.mediator.MediatorMap;
 /**
  * @author durza9390
  */
-public class TeleporterManager extends ActorManager {
+public class TeleporterManager extends NonPlayableManager {
 
     private Teleporter teleporter;
     private MediatorMap mediatorDeDestination;

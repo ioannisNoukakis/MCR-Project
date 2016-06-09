@@ -1,6 +1,8 @@
 package trontron.server.mediator;
 
 import trontron.server.actor.manager.MotoManager;
+import trontron.server.actor.manager.NonPlayableManager;
+import trontron.server.actor.manager.PlayableManager;
 import trontron.server.actor.manager.WorldManager;
 
 /**
@@ -16,18 +18,19 @@ public class MediatorMapNormale extends MediatorMap {
     }
 
     @Override
-    public void verifyMove(MotoManager a) {
+    public void verifyMove(PlayableManager a) {
         
-        for (MotoManager b : listMotoManager) {
+        for (PlayableManager b : listPlayableManager) {
             if (a != b && checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                super.ChangeMotoMap(a, lobby);
+                //super.ChangeMotoMap(a, lobby);
             }
         }
         
-        for(WorldManager b : listeWorld)
+        for(NonPlayableManager b : listNonPlayableManager)
         {
-            if(checkCollision(a.getlethalHitbox(), b.getKillingHitbox()))
-                super.ChangeMotoMap(a, lobby);
+            if(checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
+                //super.ChangeMotoMap(a, lobby);
+            }
         }
     }
 }

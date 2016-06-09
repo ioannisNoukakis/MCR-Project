@@ -15,7 +15,7 @@ import trontron.server.mediator.MediatorMap;
  *
  * @author durza9390
  */
-public class WorldManager extends ActorManager{
+public class WorldManager extends NonPlayableManager{
     private World world;
 
     public WorldManager(World world, MediatorMap mediator) {

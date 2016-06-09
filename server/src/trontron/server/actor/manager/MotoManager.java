@@ -27,7 +27,7 @@ import trontron.server.mediator.MediatorMap;
 /**
  * @author durza9390
  */
-public class MotoManager extends ActorManager {
+public class MotoManager extends PlayableManager {
 
     private Moto moto;
 
@@ -102,4 +102,15 @@ public class MotoManager extends ActorManager {
         moto.getTail().clear();
         moto.setDirection(Direction.noWhere);
     }
+
+    @Override
+    public void handleCollision(NonPlayableManager b) {
+
+    }
+
+    @Override
+    public void handleCollision(PlayableManager b) {
+
+    }
+
 }

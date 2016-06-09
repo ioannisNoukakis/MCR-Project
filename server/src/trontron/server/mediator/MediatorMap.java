@@ -1,9 +1,7 @@
 package trontron.server.mediator;
 
-import trontron.server.actor.manager.ActorManager;
-import trontron.server.actor.manager.MotoManager;
-import trontron.server.actor.manager.TeleporterManager;
-import trontron.server.actor.manager.WorldManager;
+import trontron.model.actor.Playable;
+import trontron.server.actor.manager.*;
 import trontron.model.actor.Actor;
 import trontron.model.actor.World;
 import trontron.protocol.sync.GetWorldContents;
@@ -21,37 +19,31 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class MediatorMap extends Thread {
 
-    protected List<MotoManager> listMotoManager;
-    protected List<TeleporterManager> listeTeleporterManager;
-    protected List<WorldManager> listeWorld;
+    protected List<PlayableManager> listPlayableManager;
+    protected List<NonPlayableManager> listNonPlayableManager;
     private String mapName;
     private int maxX;
     private int maxY;
     private final Random random = new Random();
     
     public MediatorMap(String mapName, int maxX, int maxY) {
-        listMotoManager = new CopyOnWriteArrayList<>();
-        listeTeleporterManager = new CopyOnWriteArrayList<>();
-        listeWorld = new CopyOnWriteArrayList<>();
+        listPlayableManager = new CopyOnWriteArrayList<>();
+        listNonPlayableManager = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
         this.maxX = maxX;
         this.maxY = maxY;
-        listeWorld.add(new WorldManager(new World(-2, mapName, new Point2D(0, 0),0, Direction.noWhere, maxX, maxY), this));
+        listNonPlayableManager.add(new WorldManager(new World(-1, mapName, new Point2D(0, 0),0, Direction.noWhere, maxX, maxY), this));
     }
 
-    public synchronized void addMotoManager(MotoManager a) {
-        listMotoManager.add(a);
+    public synchronized void addPlayableManager(PlayableManager a) {
+        listPlayableManager.add(a);
     }
     
-    public synchronized void addTeleporterManager(TeleporterManager a) {
-        listeTeleporterManager.add(a);
-    }
-    
-    public synchronized void addWorldElement(WorldManager a) {
-        listeWorld.add(a);
+    public synchronized void addNonPlayableManager(NonPlayableManager a) {
+        listNonPlayableManager.add(a);
     }
 
-    public abstract void verifyMove(MotoManager a);
+    public abstract void verifyMove(PlayableManager a);
 
     public synchronized boolean checkCollision(Rectangle2D[] a, Rectangle2D[] b) {
 
@@ -85,15 +77,13 @@ public abstract class MediatorMap extends Thread {
         return (float)random.nextDouble() * (max - min) + min;
     }
 
-    public synchronized void ChangeMotoMap(MotoManager moto, MediatorMap m) {
-        listMotoManager.remove(moto);
-        moto.setMediator(m);
-        m.addMotoManager(moto);
-        moto.reset();
-        moto.getActor().getLocation().setX(getRandomValue(moto.getActor().getWidth(), m.getMaxX()-moto.getActor().getWidth()));
-        moto.getActor().getLocation().setY(getRandomValue(moto.getActor().getWidth(), m.getMaxY()-moto.getActor().getHeight()));
-        //moto.getActor().getLocation().setX((float)RUG.U(moto.getActor().getWidth(), m.getMaxX()-moto.getActor().getWidth()));
-        //moto.getActor().getLocation().setY((float)RUG.U(moto.getActor().getWidth(), m.getMaxY()-moto.getActor().getHeight()));
+    public synchronized void ChangeMotoMap(PlayableManager playable, MediatorMap m) {
+        listPlayableManager.remove(playable);
+        playable.setMediator(m);
+        m.addPlayableManager(playable);
+        playable.reset();
+        playable.getActor().getLocation().setX(getRandomValue(playable.getActor().getWidth(), m.getMaxX() - playable.getActor().getWidth()));
+        playable.getActor().getLocation().setY(getRandomValue(playable.getActor().getWidth(), m.getMaxY() - playable.getActor().getHeight()));
     }
 
     @Override
@@ -105,20 +95,18 @@ public abstract class MediatorMap extends Thread {
                 Thread.sleep(10);
                 LinkedList<Actor> listActor = new LinkedList<>();
                 
-                for (ActorManager actorManager : listMotoManager) {
+                for (ActorManager actorManager : listPlayableManager) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
                     listActor.add(actorManager.getActor());
                 }
                 
-                for (ActorManager actorManager : listeTeleporterManager) {
+                for (ActorManager actorManager : listNonPlayableManager) {
                     listActor.add(actorManager.getActor());
                 }
 
-                for (ActorManager actorManager : listMotoManager) {
-                    if (actorManager.getPlayer() != null) {
-                        GetWorldContents get = new GetWorldContents(listActor, mapName);
-                        actorManager.getPlayer().getUDPsender().sendTo(get);
-                    }
+                for (PlayableManager playableManager : listPlayableManager) {
+                    GetWorldContents get = new GetWorldContents(listActor, mapName);
+                    playableManager.getPlayer().getUDPsender().sendTo(get);
                 }
             }
         } catch (Exception e) {
