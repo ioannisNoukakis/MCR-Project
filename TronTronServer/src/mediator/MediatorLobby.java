@@ -19,7 +19,6 @@ public class MediatorLobby extends MediatorMap {
     public void verifyMove(MotoManager a) {
         for (TeleporterManager b : listeTeleporterManager) {
             if (checkCollision(a.getlethalHitbox(), b.getKillingHitbox())) {
-                System.out.println(b.getMediatorDeDestination().getClass().getName());
                 super.ChangeMotoMap(a, b.getMediatorDeDestination());
             }
         }
@@ -31,5 +30,9 @@ public class MediatorLobby extends MediatorMap {
                 a.reset();
             }
         }
+    }
+
+    public int getComportement(MotoManager moto) {
+        return 2;
     }
 }

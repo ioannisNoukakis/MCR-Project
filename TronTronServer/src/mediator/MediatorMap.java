@@ -90,6 +90,11 @@ public abstract class MediatorMap extends Thread {
         moto.getActor().getLocation().setX((float)RUG.U(moto.getActor().getWidth(), m.getMaxX()-moto.getActor().getWidth()));
         moto.getActor().getLocation().setY((float)RUG.U(moto.getActor().getWidth(), m.getMaxY()-moto.getActor().getHeight()));
     }
+    
+    public int getComportement()
+    {
+        return 1;
+    }
 
     @Override
     public void run() {
