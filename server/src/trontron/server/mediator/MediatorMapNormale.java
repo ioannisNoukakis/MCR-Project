@@ -1,10 +1,8 @@
 package trontron.server.mediator;
 
-import trontron.server.actor.manager.MotoManager;
 import trontron.server.actor.manager.NonPlayableManager;
 import trontron.server.actor.manager.PlayableManager;
-import trontron.server.actor.manager.WorldManager;
-import trontron.server.comportement.Comportement;
+import trontron.server.behaviour.Behaviour;
 
 import java.util.LinkedList;
 
@@ -15,7 +13,7 @@ public class MediatorMapNormale extends MediatorMap {
 
     private MediatorLobby lobby;
 
-    public MediatorMapNormale(String mapName, int maxX, int maxY, LinkedList<Comportement> listComp, int frequecySpawn, int maxSpawn, MediatorLobby lobby) {
+    public MediatorMapNormale(String mapName, int maxX, int maxY, LinkedList<Behaviour> listComp, int frequecySpawn, int maxSpawn, MediatorLobby lobby) {
         super(mapName, maxX, maxY, listComp, frequecySpawn, maxSpawn);
         this.lobby = lobby;
     }

@@ -12,10 +12,18 @@ public class JoinGame implements Serializable {
      */
     private String name;
 
-    public JoinGame(String name) {
-        this.name = name;
+    /**
+     * Constructor
+     * @param playerName The name of the player
+     */
+    public JoinGame(String playerName) {
+        this.name = playerName;
     }
 
+    /**
+     * Gets the name of the player
+     * @return The name
+     */
     public String getName() {
         return name;
     }

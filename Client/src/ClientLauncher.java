@@ -1,6 +1,7 @@
 import trontron.client.game.ImagePanel;
 import trontron.client.game.SpringUtilities;
 import trontron.client.game.WindowGame;
+import trontron.protocol.Common;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class ClientLauncher extends JFrame {
         initComponents();
         launchBtn.addActionListener((ActionEvent e) -> {
             try {
-                WindowGame game = new WindowGame(playerName.getText(), hostname.getText(), Integer.parseInt(port.getText()));
+                new WindowGame(playerName.getText(), hostname.getText(), Integer.parseInt(port.getText()));
                 status.setText("Connected");
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -103,7 +104,7 @@ public class ClientLauncher extends JFrame {
         playerName.addActionListener(evt -> playerNameActionPerformed(evt));
 
         hostname = new JTextField("localhost");
-        port = new JTextField("8000");
+        port = new JTextField(String.valueOf(Common.DEFAULT_SERVER_PORT));
         status = new JLabel("not connected");
         status.setForeground(Color.WHITE);
         status.setBorder(new EmptyBorder(5, 5, 5, 5));

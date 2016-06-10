@@ -4,15 +4,15 @@ import trontron.client.actor.manager.ActorManager;
 import trontron.client.actor.manager.BonusManager;
 import trontron.client.actor.manager.MotoManager;
 import trontron.client.actor.manager.TeleporterManager;
+import trontron.client.thread.ServerHandler;
 import trontron.model.actor.Actor;
 import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
 import trontron.model.actor.bonus.Bonus;
-import trontron.protocol.message.PlayerIdentity;
-import trontron.protocol.message.JoinGame;
 import trontron.client.camera.CameraManager;
-
-import java.util.LinkedList;
+import trontron.client.player.manager.Player;
+import trontron.client.player.manager.InputManager;
+import trontron.protocol.message.UpdateWorld;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -20,13 +20,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
-import trontron.client.player.manager.Player;
-import trontron.client.player.manager.InputManager;
-import trontron.client.sync.SyncServer;
-import trontron.protocol.sync.GetWorldContents;
-import java.awt.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
+
+import java.awt.Font;
+import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * @author durza9390
@@ -37,19 +37,31 @@ public class WindowGame extends BasicGame {
     private TiledMap map;
     private CameraManager camera;
     private Player player;
-    private LinkedList<ActorManager> listActorManager;
+    private List<ActorManager> listActorManager = new ArrayList();
     private InputManager inputManager;
-    private SyncServer syncServer;
-    private String playerName;
+    private ServerHandler serverHandler;
     private String mapName;
     private TrueTypeFont font;
+
+    private boolean mapHasChanged = false;
 
     private static final String GAME_VERSION = "1.0";
 
     public WindowGame(String playerName, String hostname, int port) throws Exception {
         super("MCR projet - prototype");
-        this.playerName = playerName;
-        syncServer = new SyncServer(hostname, port);
+
+        // create server handler
+        serverHandler = new ServerHandler(hostname, port, this, playerName);
+
+        // create player
+        player = new Player("", 'w', 'd', 's', 'a');
+        player.setId(serverHandler.getPlayerId());
+
+        // todo : do better
+        inputManager = new InputManager(player);
+
+        // start listening for server messages
+        serverHandler.start();
 
         int miniLogicSleep = 5;
         int maxLogicSleep = 20;
@@ -76,94 +88,78 @@ public class WindowGame extends BasicGame {
     public void init(GameContainer container) throws SlickException {
 
         font = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), true);
-        listActorManager = new LinkedList<>();
-        mapName = "";
+
         camera = new CameraManager(0, 0, 10,
                 container.getWidth(),
                 container.getHeight(),
                 container.getWidth(),
                 container.getHeight());
+    }
 
-        try {
-            syncServer.getOut().writeObject(new JoinGame(playerName));
-            syncServer.start();
+    /**
+     * Updates the content of the current displayed world
+     * @param updateWorld
+     */
+    public void updateWorldContents(UpdateWorld updateWorld) {
 
-            player = (new Player("", 'w', 'd', 's', 'a'));
-
-            Object o = syncServer.getIn().readObject();
-            if (o.getClass() == PlayerIdentity.class) {
-                PlayerIdentity identity = (PlayerIdentity) o;
-                player.setId(identity.getId());
-            } else {
-                throw new RuntimeException("Bad class recived. Aborting...");
+        // update the actors list
+        // todo : thread safe modification
+        listActorManager = new ArrayList();
+        for (Actor a : updateWorld.getActorList()) {
+            if (a.getClass() == Moto.class) {
+                listActorManager.add(new MotoManager((Moto) a, Color.green));
+                if (a.getId() == player.getId()) {
+                    player.setActor(a);
+                }
             }
+            if (a.getClass() == Teleporter.class) {
+                listActorManager.add(new TeleporterManager((Teleporter) a, Color.yellow));
+            }
+            if (a instanceof Bonus) {
+                listActorManager.add(new BonusManager((Bonus) a, Color.pink));
+            }
+        }
 
-            inputManager = new InputManager(player);
-        } catch (Exception e) {
-            e.printStackTrace();
+        // detect if map has changed
+        if (map == null || !mapName.equals(updateWorld.getMapName())) {
+            mapName = updateWorld.getMapName();
+            mapHasChanged = true;
         }
     }
 
-    /*
-     
-     */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         try {
-            Object o = syncServer.getInObject();
             camera.onRender(g);
 
+            // render current map
             if (map != null)
                 this.map.render(0, 0);
 
-            if (o != null) {
-                if (o.getClass() == GetWorldContents.class) {
+            // Map switch if needed
+            if (mapHasChanged) {
+                // load new map
+                String filePath = this.getClass().getClassLoader().getResource("resources/map/" + mapName).getPath();
+                this.map = new TiledMap(filePath);
+                mapHasChanged = false;
 
-                    listActorManager = new LinkedList<>();
-                    GetWorldContents getWorldContents = (GetWorldContents) o;
-
-                    for (Actor a : getWorldContents.getActorList()) {
-                        if (a.getClass() == Moto.class) {
-                            listActorManager.add(new MotoManager((Moto) a, Color.green));
-                            if (a.getId() == player.getId()) {
-                                player.setActor(a);
-                            }
-                        }
-                        if(a.getClass() == Teleporter.class)
-                        {
-                            listActorManager.add(new TeleporterManager((Teleporter) a, Color.yellow));
-                        }
-                        if(a instanceof Bonus)
-                        {
-                            listActorManager.add(new BonusManager((Bonus)a, Color.pink));
-                        }
-                    }
-
-                    // Map switch if needed
-                    if (!mapName.equals(getWorldContents.getMapName())) {
-                        String filePath = this.getClass().getClassLoader().getResource("resources/map/" + getWorldContents.getMapName()).getPath();
-                        this.map = new TiledMap(filePath);
-                        //this.map = new TiledMap("ressources/map/" + getWorldContents.getMapName());
-                        camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
-                        camera.setWorldBoundariesY(map.getHeight() - container.getHeight());
-                        mapName = getWorldContents.getMapName();
-                    }
-
-                    camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
-                    camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
-                } else {
-                    throw new RuntimeException("Bad class received. Aborting...");
-                }
+                camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
+                camera.setWorldBoundariesY(map.getHeight() - container.getHeight());
             }
+
+            camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
+            camera.setY(player.getActor().getLocation().getY() - container.getHeight() / 2);
+
         } catch (Exception e) {
             e.printStackTrace();
             this.app.destroy();
         }
 
+        // render actors
+        // todo : thread safe access
         for (ActorManager am : listActorManager) {
             am.onRender(container, g, font);
         }
-
     }
 
     @Override
@@ -173,7 +169,8 @@ public class WindowGame extends BasicGame {
     @Override
     public void keyPressed(int key, char c) {
         try {
-            inputManager.onInput(c, syncServer);
+            // delegate pressed key to players input handler
+            inputManager.onInput(c, serverHandler);
         } catch (Exception e) {
             e.printStackTrace();
         }

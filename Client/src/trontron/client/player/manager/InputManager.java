@@ -1,22 +1,33 @@
 package trontron.client.player.manager;
 
+import trontron.client.thread.ServerHandler;
 import trontron.protocol.message.ChangeDirection;
 import trontron.model.world.Direction;
 
-import trontron.client.sync.SyncServer;
-
 /**
- * @author durza9390
+ * Handles the user input
  */
 public class InputManager {
+    /**
+     * The handled player
+     */
+    private Player player;
 
-    Player player;
-
+    /**
+     * Constructor
+     * @param player The player handle
+     */
     public InputManager(Player player) {
         this.player = player;
     }
 
-    public void onInput(char c, SyncServer sync) throws Exception {
+    /**
+     * Handle an input
+     * @param c The pressed key
+     * @param serverHandler The server handler to notify
+     */
+    public void onInput(char c, ServerHandler serverHandler) {
+        // determine the players new direction
         if (player.isItLeftKey(c)) {
             player.setActorDirection(Direction.left);
         }
@@ -29,8 +40,8 @@ public class InputManager {
         if (player.isItDownKey(c)) {
             player.setActorDirection(Direction.down);
         }
-        sync.getOut().writeObject(new ChangeDirection(player.getActorDirection(), player.getId()));
-        sync.getOut().flush();
-    }
 
+        // send the new direction to the server
+        serverHandler.send(new ChangeDirection(player.getActorDirection(), player.getId()));
+    }
 }

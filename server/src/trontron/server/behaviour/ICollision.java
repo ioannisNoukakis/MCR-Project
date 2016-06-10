@@ -1,4 +1,4 @@
-package trontron.server.comportement;
+package trontron.server.behaviour;
 
 import trontron.server.actor.manager.ActorManager;
 

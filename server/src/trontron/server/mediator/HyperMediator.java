@@ -1,17 +1,16 @@
 package trontron.server.mediator;
 
-import trontron.model.actor.World;
 import trontron.server.actor.manager.*;
 import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
 import trontron.model.world.Point2D;
-import trontron.server.comportement.Comportement;
-import trontron.server.comportement.ICollision;
+import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.ICollision;
 import trontron.server.player.Player;
 import trontron.protocol.message.JoinGame;
 import trontron.protocol.message.ChangeDirection;
 import trontron.model.world.Direction;
-import trontron.protocol.Sender;
+import trontron.server.thread.ClientHandler;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,6 +44,10 @@ public class HyperMediator {
      */
     private MediatorMapNormale mainMap;
 
+    /**
+     * Constructor
+     * @throws Exception If the maps can not be loaded
+     */
     public HyperMediator() throws Exception{
         playerList = new ArrayList();
         
@@ -78,10 +81,10 @@ public class HyperMediator {
 
     /**
      * Adds a new player to the game
-     * @param UDPsender
+     * @param handler
      * @param joinGame
      */
-    public synchronized int addPlayer(Sender UDPsender, JoinGame joinGame) {
+    public synchronized int addPlayer(ClientHandler handler, JoinGame joinGame) {
         // get new player id
         int playerId = nextId++;
 
@@ -90,12 +93,11 @@ public class HyperMediator {
         MotoManager motoManager = new MotoManager(lobby, generateComportementMoto(), m);
 
         // create new player
-        Player newPlayer = new Player(motoManager, playerId, joinGame.getName(), UDPsender);
+        Player newPlayer = new Player(motoManager, playerId, joinGame.getName(), handler);
+        motoManager.setPlayer(newPlayer);
 
         // add new player to list
         playerList.add(newPlayer);
-
-        motoManager.setPlayer(newPlayer);
         lobby.addPlayableManager(motoManager);
 
         System.out.println("A new player has connected : " + newPlayer.getName() + " (" + playerId + ")");
@@ -153,18 +155,18 @@ public class HyperMediator {
      *
      * @return
      */
-    public LinkedList<Comportement> generateComportementMoto()
+    public LinkedList<Behaviour> generateComportementMoto()
     {
-        LinkedList<Comportement> rtn = new LinkedList<>();
+        LinkedList<Behaviour> rtn = new LinkedList<>();
 
-        rtn.add(new Comportement(new ICollision() {
+        rtn.add(new Behaviour(new ICollision() {
             @Override
             public void solveCollision(ActorManager a, ActorManager b) {
 
             }
         }, "theLobby.tmx"));
 
-        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
+        rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
 
         return rtn;
     }
@@ -174,12 +176,12 @@ public class HyperMediator {
      *
      * @return
      */
-    public LinkedList<Comportement> generateComportementTeleporter()
+    public LinkedList<Behaviour> generateComportementTeleporter()
     {
-        LinkedList<Comportement> rtn = new LinkedList<>();
+        LinkedList<Behaviour> rtn = new LinkedList<>();
 
-        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theLobby.tmx"));
-        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theMap.tmx"));
+        rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theLobby.tmx"));
+        rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()), "theMap.tmx"));
 
         return rtn;
     }
@@ -189,17 +191,17 @@ public class HyperMediator {
      *
      * @return
      */
-    public LinkedList<Comportement> generateComportementWorld() {
-        LinkedList<Comportement> rtn = new LinkedList<>();
+    public LinkedList<Behaviour> generateComportementWorld() {
+        LinkedList<Behaviour> rtn = new LinkedList<>();
 
-        rtn.add(new Comportement(new ICollision() {
+        rtn.add(new Behaviour(new ICollision() {
             @Override
             public void solveCollision(ActorManager a, ActorManager b) {
                 a.getActor().setLocation(new Point2D(a.getMediator().getMaxX()/2, a.getMediator().getMaxY()/2));
                 a.reset();
             }
         }, "theLobby.tmx"));
-        rtn.add(new Comportement((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
+        rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
 
         return rtn;
     }

@@ -11,10 +11,18 @@ public class PlayerIdentity implements Serializable {
      */
     private int id;
 
+    /**
+     * Constructor
+     * @param id The id of the player
+     */
     public PlayerIdentity(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets the id of the player
+     * @return
+     */
     public int getId() {
         return id;
     }

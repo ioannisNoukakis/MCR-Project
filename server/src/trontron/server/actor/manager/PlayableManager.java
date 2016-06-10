@@ -1,6 +1,6 @@
 package trontron.server.actor.manager;
 
-import trontron.server.comportement.Comportement;
+import trontron.server.behaviour.Behaviour;
 import trontron.server.mediator.MediatorMap;
 import trontron.server.player.Player;
 
@@ -13,7 +13,7 @@ public abstract class PlayableManager extends ActorManager {
 
     private Player player;
 
-    public PlayableManager(MediatorMap mediator, LinkedList<Comportement> listComportement) {
+    public PlayableManager(MediatorMap mediator, LinkedList<Behaviour> listComportement) {
         super(mediator, listComportement);
     }
 

@@ -3,7 +3,7 @@ package trontron.server.actor.manager;
 import trontron.model.actor.Actor;
 import trontron.model.actor.bonus.Bonus;
 import trontron.model.world.Rectangle2D;
-import trontron.server.comportement.Comportement;
+import trontron.server.behaviour.Behaviour;
 import trontron.server.mediator.MediatorMap;
 
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class BonusManager extends NonPlayableManager {
     private Bonus bonus;
 
-    public BonusManager(MediatorMap mediator, LinkedList<Comportement> listComportement, Bonus bonus) {
+    public BonusManager(MediatorMap mediator, LinkedList<Behaviour> listComportement, Bonus bonus) {
         super(mediator, listComportement);
         this.bonus = bonus;
     }

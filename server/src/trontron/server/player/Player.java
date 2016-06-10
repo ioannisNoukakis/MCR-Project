@@ -6,7 +6,7 @@
 package trontron.server.player;
 
 import trontron.server.actor.manager.ActorManager;
-import trontron.protocol.Sender;
+import trontron.server.thread.ClientHandler;
 
 /**
  * @author durza9390
@@ -15,14 +15,14 @@ public class Player {
     private ActorManager a;
     private int id;
     private String name;
-    private Sender UDPsender;
     private int nbKills;
+    private ClientHandler handler;
 
-    public Player(ActorManager a, int id, String name, Sender UDPsender) {
+    public Player(ActorManager a, int id, String name, ClientHandler handler) {
         this.a = a;
         this.id = id;
         this.name = name;
-        this.UDPsender = UDPsender;
+        this.handler = handler;
     }
 
     public void addKill() {
@@ -32,8 +32,9 @@ public class Player {
     public int getNbKills() {
         return nbKills;
     }
-    public Sender getUDPsender() {
-        return UDPsender;
+
+    public void send(Object o) {
+        handler.send(o);
     }
 
     public ActorManager getActorManager() {

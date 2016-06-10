@@ -1,8 +1,7 @@
 package trontron.server.mediator;
 
 import trontron.server.actor.manager.*;
-import trontron.model.world.Point2D;
-import trontron.server.comportement.Comportement;
+import trontron.server.behaviour.Behaviour;
 
 import java.util.LinkedList;
 
@@ -11,7 +10,7 @@ import java.util.LinkedList;
  */
 public class MediatorLobby extends MediatorMap {
 
-    public MediatorLobby(String mapName, int maxX, int maxY, LinkedList<Comportement> listComp, int frequecySpawn, int maxSpawn) {
+    public MediatorLobby(String mapName, int maxX, int maxY, LinkedList<Behaviour> listComp, int frequecySpawn, int maxSpawn) {
         super(mapName, maxX, maxY, listComp, frequecySpawn, maxSpawn);
     }
 

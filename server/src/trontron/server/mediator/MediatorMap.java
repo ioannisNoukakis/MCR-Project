@@ -1,18 +1,17 @@
 package trontron.server.mediator;
 
-import trontron.model.actor.Playable;
 import trontron.model.actor.bonus.Bonus;
 import trontron.model.actor.bonus.SlowAndSpeedBonus;
 import trontron.model.actor.bonus.SuperSizeMe;
+import trontron.protocol.message.UpdateWorld;
 import trontron.server.actor.manager.*;
 import trontron.model.actor.Actor;
 import trontron.model.actor.World;
-import trontron.protocol.sync.GetWorldContents;
 import trontron.model.world.Direction;
 import trontron.model.world.Point2D;
 import trontron.model.world.Rectangle2D;
-import trontron.server.comportement.Comportement;
-import trontron.server.comportement.ICollision;
+import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.ICollision;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +33,7 @@ public abstract class MediatorMap extends Thread {
     private int maxSpawn;
     private int nbOfBonusSpawned;
     
-    public MediatorMap(String mapName, int maxX, int maxY, LinkedList<Comportement> listComp, int frequecySpawn, int maxSpawn) {
+    public MediatorMap(String mapName, int maxX, int maxY, LinkedList<Behaviour> listComp, int frequecySpawn, int maxSpawn) {
         listPlayableManager = new CopyOnWriteArrayList<>();
         listNonPlayableManager = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
@@ -139,8 +138,8 @@ public abstract class MediatorMap extends Thread {
                 }
 
                 for (PlayableManager playableManager : listPlayableManager) {
-                    GetWorldContents get = new GetWorldContents(listActor, mapName);
-                    playableManager.getPlayer().getUDPsender().sendTo(get);
+                    UpdateWorld get = new UpdateWorld(listActor, mapName);
+                    playableManager.getPlayer().send(get);
                 }
 
             }
@@ -159,8 +158,8 @@ public abstract class MediatorMap extends Thread {
 
     public BonusManager generateRandomBonus(LinkedList<Actor> listActors)
     {
-        LinkedList<Comportement> comportement = new LinkedList<>();
-        comportement.add(new Comportement(new ICollision() {
+        LinkedList<Behaviour> comportement = new LinkedList<>();
+        comportement.add(new Behaviour(new ICollision() {
             @Override
             public void solveCollision(ActorManager a, ActorManager b) {
                 ((Bonus)b.getActor()).activate(a.getActor());
