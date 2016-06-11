@@ -1,4 +1,4 @@
-package trontron.server.mediator;
+package trontron.server.mediator.map;
 
 import trontron.model.actor.bonus.Bonus;
 import trontron.model.actor.bonus.SlowAndSpeedBonus;
@@ -11,7 +11,7 @@ import trontron.model.world.Direction;
 import trontron.model.world.Point2D;
 import trontron.model.world.Rectangle2D;
 import trontron.server.behaviour.Behaviour;
-import trontron.server.behaviour.ICollision;
+import trontron.server.behaviour.ICollisionBehaviour;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,37 +19,62 @@ import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * @author durza9390
+ * Base class for map mediators
  */
-public abstract class MediatorMap extends Thread {
+public abstract class MapMediator extends Thread {
+    /**
+     * The list of playable managers
+     */
+    private List<PlayableManager> playableManagers;
 
-    private List<PlayableManager> listPlayableManager;
-    private List<NonPlayableManager> listNonPlayableManager;
-    private String mapName;
-    private int maxX;
-    private int maxY;
+    /**
+     * The list of non playable managers
+     */
+    private List<NonPlayableManager> nonPlayableManagers;
+
+    private final String mapName;
+    private final int maxX;
+    private final int maxY;
     private final Random random = new Random();
-    private int frequecySpawn;
-    private int maxSpawn;
+    private final int spawnFrequency;
+    private final int maxSpawn;
     private int nbOfBonusSpawned;
     
-    public MediatorMap(String mapName, int maxX, int maxY, LinkedList<Behaviour> listComp, int frequecySpawn, int maxSpawn) {
-        listPlayableManager = new CopyOnWriteArrayList<>();
-        listNonPlayableManager = new CopyOnWriteArrayList<>();
+    public MapMediator(String mapName, int maxX, int maxY, List<Behaviour> listComp, int spawnFrequency, int maxSpawn) {
+        playableManagers = new CopyOnWriteArrayList<>();
+        nonPlayableManagers = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
         this.maxX = maxX;
         this.maxY = maxY;
-        this.frequecySpawn = frequecySpawn;
+        this.spawnFrequency = spawnFrequency;
         this.maxSpawn = maxSpawn;
-        listNonPlayableManager.add(new WorldManager(this, listComp, new World(-1, mapName, new Point2D(0, 0),0, Direction.noWhere, maxX, maxY)));
+        nonPlayableManagers.add(new WorldManager(this, listComp, new World(-1, mapName, new Point2D(0, 0),0, Direction.none, maxX, maxY)));
     }
 
-    public synchronized void addPlayableManager(PlayableManager a) {
-        listPlayableManager.add(a);
+    public List<PlayableManager> getPlayableManagers() {
+        return playableManagers;
     }
-    
-    public synchronized void addNonPlayableManager(NonPlayableManager a) {
-        listNonPlayableManager.add(a);
+
+    public List<NonPlayableManager> getNonPlayableManagers() {
+        return nonPlayableManagers;
+    }
+
+    public synchronized void addManager(ActorManager manager) {
+        if (manager instanceof PlayableManager) {
+            playableManagers.add((PlayableManager)manager);
+        }
+        else {
+            nonPlayableManagers.add((NonPlayableManager)manager);
+        }
+    }
+
+    public synchronized void removeManager(ActorManager manager) {
+        if (manager instanceof PlayableManager) {
+            playableManagers.remove(manager);
+        }
+        else {
+            nonPlayableManagers.remove(manager);
+        }
     }
 
     public abstract void verifyMove(PlayableManager a);
@@ -74,6 +99,10 @@ public abstract class MediatorMap extends Thread {
         return false;
     }
 
+    public String getMapName() {
+        return mapName;
+    }
+
     public int getMaxX() {
         return maxX;
     }
@@ -86,25 +115,13 @@ public abstract class MediatorMap extends Thread {
         return (float)random.nextDouble() * (max - min) + min;
     }
 
-    public synchronized void ChangePlayableMap(PlayableManager playable, MediatorMap m) {
-        listPlayableManager.remove(playable);
+    public synchronized void ChangePlayableMap(PlayableManager playable, MapMediator m) {
+        playableManagers.remove(playable);
         playable.setMediator(m);
-        m.addPlayableManager(playable);
+        m.playableManagers.add(playable);
         playable.reset();
         playable.getActor().getLocation().setX(getRandomValue(playable.getActor().getWidth(), m.getMaxX() - playable.getActor().getWidth()));
         playable.getActor().getLocation().setY(getRandomValue(playable.getActor().getWidth(), m.getMaxY() - playable.getActor().getHeight()));
-    }
-
-    public List<PlayableManager> getListPlayableManager() {
-        return listPlayableManager;
-    }
-
-    public List<NonPlayableManager> getListNonPlayableManager() {
-        return listNonPlayableManager;
-    }
-
-    public String getMapName() {
-        return mapName;
     }
 
     @Override
@@ -117,27 +134,27 @@ public abstract class MediatorMap extends Thread {
                 Thread.sleep(10);
                 LinkedList<Actor> listActor = new LinkedList<>();
                 
-                for (ActorManager actorManager : listPlayableManager) {
+                for (ActorManager actorManager : playableManagers) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
                     listActor.add(actorManager.getActor());
                 }
                 
-                for (ActorManager actorManager : listNonPlayableManager) {
+                for (ActorManager actorManager : nonPlayableManagers) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
                     listActor.add(actorManager.getActor());
                 }
 
                 //génération des bonus de manière aléatoire
                 spawnCounter += System.currentTimeMillis() - time;
-                if(frequecySpawn != 0 && spawnCounter > frequecySpawn && nbOfBonusSpawned < maxSpawn)
+                if(spawnFrequency != 0 && spawnCounter > spawnFrequency && nbOfBonusSpawned < maxSpawn)
                 {
                     nbOfBonusSpawned++;
                     spawnCounter = 0;
                     BonusManager bonusManager = generateRandomBonus(listActor);
-                    listNonPlayableManager.add(bonusManager);
+                    nonPlayableManagers.add(bonusManager);
                 }
 
-                for (PlayableManager playableManager : listPlayableManager) {
+                for (PlayableManager playableManager : playableManagers) {
                     UpdateWorld get = new UpdateWorld(listActor, mapName);
                     playableManager.getPlayer().send(get);
                 }
@@ -159,21 +176,21 @@ public abstract class MediatorMap extends Thread {
     public BonusManager generateRandomBonus(LinkedList<Actor> listActors)
     {
         LinkedList<Behaviour> comportement = new LinkedList<>();
-        comportement.add(new Behaviour(new ICollision() {
+        comportement.add(new Behaviour(new ICollisionBehaviour() {
             @Override
             public void solveCollision(ActorManager a, ActorManager b) {
                 ((Bonus)b.getActor()).activate(a.getActor());
             }
-        },getMapName()));
+        }, mapName));
 
         switch(random.nextInt(2))
         {
             case 0:
                 return new BonusManager(this, comportement,
-                        new SuperSizeMe(10000, -1, "supersize me", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.noWhere, 30, 30));
+                        new SuperSizeMe(10000, -1, "supersize me", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.none, 30, 30));
             case 1:
                 return new BonusManager(this, comportement,
-                        new SlowAndSpeedBonus(10000, -1, "speed", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.noWhere, 30, 30, listActors, 3));
+                        new SlowAndSpeedBonus(10000, -1, "speed", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.none, 30, 30, listActors, 3));
 
             default:
                 return null;

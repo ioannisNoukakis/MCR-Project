@@ -1,4 +1,4 @@
-package trontron.client.player.manager;
+package trontron.client.player;
 
 import trontron.client.thread.ServerHandler;
 import trontron.protocol.message.ChangeDirection;

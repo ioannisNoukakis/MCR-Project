@@ -1,19 +1,23 @@
 package trontron.server.behaviour;
 
+import trontron.server.actor.manager.ActorManager;
+
 /**
  * Created by durza9390 on 09.06.16.
  */
-public class Behaviour {
-    private ICollision comportement;
+public class Behaviour implements ICollisionBehaviour {
+
+    private ICollisionBehaviour behaviour;
     private String mapName;
 
-    public Behaviour(ICollision comportement, String mapName) {
-        this.comportement = comportement;
+    public Behaviour(ICollisionBehaviour behaviour, String mapName) {
+        this.behaviour = behaviour;
         this.mapName = mapName;
     }
 
-    public ICollision getComportement() {
-        return comportement;
+    @Override
+    public void solveCollision(ActorManager a, ActorManager b) {
+        behaviour.solveCollision(a, b);
     }
 
     public String getMapName() {

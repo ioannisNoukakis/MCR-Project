@@ -33,7 +33,7 @@ public class Moto extends Playable implements Serializable {
     private float tailSize;
         
     public Moto(int id, String name, Point2D location, float speed, int height, int width, int tailSize) {
-        super(id, name, location, speed, Direction.noWhere, height, width);
+        super(id, name, location, speed, Direction.none, height, width);
         this.maxTailSize = tailSize;
         tail = new LinkedList<>();
     }

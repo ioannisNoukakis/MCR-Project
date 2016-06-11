@@ -1,4 +1,4 @@
-package trontron.client.player.manager;
+package trontron.client.player;
 
 import trontron.model.actor.Actor;
 import trontron.model.world.Direction;

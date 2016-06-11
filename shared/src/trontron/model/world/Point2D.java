@@ -19,10 +19,10 @@ package trontron.model.world;
 import java.io.Serializable;
 
 /**
- *
- * @author durza9390
+ * A 2D point
  */
 public class Point2D implements Serializable {
+
     private float x, y;
 
     public Point2D(float x, float y) {

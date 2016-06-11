@@ -1,15 +1,20 @@
 package trontron.server.actor.manager;
 
 import trontron.server.behaviour.Behaviour;
-import trontron.server.mediator.MediatorMap;
+import trontron.server.mediator.map.MapMediator;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Created by durza9390 on 09.06.16.
+ * Manager for non playable actors
  */
 public abstract class NonPlayableManager extends ActorManager {
-    public NonPlayableManager(MediatorMap mediator, LinkedList<Behaviour> listComportement) {
-        super(mediator, listComportement);
+    /**
+     * Constructor
+     * @param mediator The map mediator
+     * @param behaviours The list of behaviours for the manager
+     */
+    public NonPlayableManager(MapMediator mediator, List<Behaviour> behaviours) {
+        super(mediator, behaviours);
     }
 }

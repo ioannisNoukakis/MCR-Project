@@ -1,37 +1,21 @@
-/*
- * Copyright (C) 2016 durza9390
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package trontron.server.actor.manager;
 
 import trontron.model.actor.Actor;
 import trontron.model.world.Rectangle2D;
 import trontron.server.behaviour.Behaviour;
-import trontron.server.mediator.MediatorMap;
+import trontron.server.mediator.map.MapMediator;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Classe représentant les acteurs du jeu, c'est à dire les différentes entitées qui le composent
  * et qui peuvent intéragire entre elles.
  */
 public abstract class ActorManager {
-    private MediatorMap mediator;
-    private LinkedList<Behaviour> listComportement;
+    private MapMediator mediator;
+    private List<Behaviour> listComportement;
 
-    public ActorManager(MediatorMap mediator, LinkedList<Behaviour> listComportement) {
+    public ActorManager(MapMediator mediator, List<Behaviour> listComportement) {
         this.mediator = mediator;
         this.listComportement = listComportement;
     }
@@ -74,7 +58,7 @@ public abstract class ActorManager {
      *
      * @return
      */
-    public MediatorMap getMediator() {
+    public MapMediator getMediator() {
         return mediator;
     }
 
@@ -83,7 +67,7 @@ public abstract class ActorManager {
      *
      * @param mediator
      */
-    public void setMediator(MediatorMap mediator) {
+    public void setMediator(MapMediator mediator) {
         this.mediator = mediator;
     }
 
@@ -93,11 +77,10 @@ public abstract class ActorManager {
      * @param b
      */
     public void handleCollision(PlayableManager b) {
-        for(Behaviour comp : listComportement)
-        {
-            if(comp.getMapName().equals(mediator.getMapName()))
+        for(Behaviour behaviour : listComportement) {
+            if(behaviour.getMapName().equals(mediator.getMapName()))
             {
-                comp.getComportement().solveCollision(b, this);
+                behaviour.solveCollision(b, this);
             }
         }
     }

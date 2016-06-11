@@ -9,7 +9,7 @@ import trontron.model.actor.Actor;
 import trontron.model.actor.Teleporter;
 import trontron.model.world.Rectangle2D;
 import trontron.server.behaviour.Behaviour;
-import trontron.server.mediator.MediatorMap;
+import trontron.server.mediator.map.MapMediator;
 
 import java.util.LinkedList;
 
@@ -19,9 +19,9 @@ import java.util.LinkedList;
 public class TeleporterManager extends NonPlayableManager {
 
     private Teleporter teleporter;
-    private MediatorMap mediatorDeDestination;
+    private MapMediator mediatorDeDestination;
 
-    public TeleporterManager(MediatorMap mediator, LinkedList<Behaviour> listComportement, Teleporter teleporter, MediatorMap mediatorDeDestination) {
+    public TeleporterManager(MapMediator mediator, LinkedList<Behaviour> listComportement, Teleporter teleporter, MapMediator mediatorDeDestination) {
         super(mediator, listComportement);
         this.teleporter = teleporter;
         this.mediatorDeDestination = mediatorDeDestination;
@@ -44,7 +44,7 @@ public class TeleporterManager extends NonPlayableManager {
         return rect; 
     }
 
-    public MediatorMap getMediatorDeDestination() {
+    public MapMediator getMediatorDeDestination() {
         return mediatorDeDestination;
     }
 

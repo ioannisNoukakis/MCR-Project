@@ -1,7 +1,6 @@
 package trontron.client.camera;
 
 import trontron.model.world.Direction;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 /**
@@ -29,7 +28,7 @@ public class CameraManager {
         this.worldBoundariesY = worldBoundariesY;
         this.width = width;
         this.height = height;
-        this.d = Direction.noWhere;
+        this.d = Direction.none;
     }
 
     public void setX(float x) {

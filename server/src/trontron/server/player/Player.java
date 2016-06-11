@@ -6,20 +6,21 @@
 package trontron.server.player;
 
 import trontron.server.actor.manager.ActorManager;
+import trontron.server.actor.manager.PlayableManager;
 import trontron.server.thread.ClientHandler;
 
 /**
  * @author durza9390
  */
 public class Player {
-    private ActorManager a;
+    private PlayableManager manager;
     private int id;
     private String name;
     private int nbKills;
     private ClientHandler handler;
 
-    public Player(ActorManager a, int id, String name, ClientHandler handler) {
-        this.a = a;
+    public Player(PlayableManager manager, int id, String name, ClientHandler handler) {
+        this.manager = manager;
         this.id = id;
         this.name = name;
         this.handler = handler;
@@ -37,8 +38,8 @@ public class Player {
         handler.send(o);
     }
 
-    public ActorManager getActorManager() {
-        return a;
+    public PlayableManager getActorManager() {
+        return manager;
     }
 
     public int getId() {

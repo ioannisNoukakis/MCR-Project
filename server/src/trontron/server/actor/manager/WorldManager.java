@@ -10,9 +10,9 @@ import trontron.model.actor.World;
 import trontron.model.world.Point2D;
 import trontron.model.world.Rectangle2D;
 import trontron.server.behaviour.Behaviour;
-import trontron.server.mediator.MediatorMap;
+import trontron.server.mediator.map.MapMediator;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -21,7 +21,7 @@ import java.util.LinkedList;
 public class WorldManager extends NonPlayableManager{
     private World world;
 
-    public WorldManager(MediatorMap mediator, LinkedList<Behaviour> listComportement, World world) {
+    public WorldManager(MapMediator mediator, List<Behaviour> listComportement, World world) {
         super(mediator, listComportement);
         this.world = world;
     }

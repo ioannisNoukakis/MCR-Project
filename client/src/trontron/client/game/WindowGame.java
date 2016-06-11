@@ -10,8 +10,8 @@ import trontron.model.actor.Moto;
 import trontron.model.actor.Teleporter;
 import trontron.model.actor.bonus.Bonus;
 import trontron.client.camera.CameraManager;
-import trontron.client.player.manager.Player;
-import trontron.client.player.manager.InputManager;
+import trontron.client.player.Player;
+import trontron.client.player.InputManager;
 import trontron.protocol.message.UpdateWorld;
 
 import org.newdawn.slick.AppGameContainer;
