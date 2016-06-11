@@ -36,6 +36,8 @@ public class MotoManager extends PlayableManager {
      * The Moto of this MotoManager
      */
     private Moto moto;
+    private int originalWidth, originalHeight;
+    private float originalSpeed;
 
     /**
      * Constructor
@@ -46,6 +48,9 @@ public class MotoManager extends PlayableManager {
     public MotoManager(MapMediator mediator, List<MapBehaviour> listBehaviour, Moto moto) {
         super(mediator, listBehaviour);
         this.moto = moto;
+        originalWidth = moto.getWidth();
+        originalHeight = moto.getHeight();
+        originalSpeed = moto.getSpeed();
     }
 
     /**
@@ -138,5 +143,8 @@ public class MotoManager extends PlayableManager {
     public void reset() {
         moto.getTail().clear();
         moto.setDirection(Direction.none);
+        moto.setWidth(originalWidth);
+        moto.setHeight(originalHeight);
+        moto.setSpeed(originalSpeed);
     }
 }

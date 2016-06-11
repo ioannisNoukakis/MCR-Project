@@ -3,6 +3,7 @@ package trontron.client.actor.manager;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
+import trontron.model.actor.Actor;
 
 /**
  * How an actor should be displayed.

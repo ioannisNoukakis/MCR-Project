@@ -1,5 +1,6 @@
 package trontron.client.actor.manager;
 
+import trontron.model.actor.Actor;
 import trontron.model.actor.Moto;
 import trontron.model.world.Point2D;
 

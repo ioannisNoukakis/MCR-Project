@@ -1,5 +1,6 @@
 package trontron.client.actor.manager;
 
+import trontron.model.actor.Actor;
 import trontron.model.actor.Teleporter;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

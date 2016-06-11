@@ -20,8 +20,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -34,17 +33,18 @@ public class WindowGame extends BasicGame {
     private CameraManager camera;
     private Player player;
     private List<ActorManager> listActorManager = new CopyOnWriteArrayList<>();
+    private LinkedList<Actor> scoreBoardList;
     private InputManager inputManager;
     private ServerHandler serverHandler;
     private String mapName;
     private TrueTypeFont font;
     private boolean mapHasChanged = false;
 
-    public WindowGame(String playerName, String hostname, int port) throws Exception {
+    public WindowGame(String playerName, String hostname, int port, int recieverPort) throws Exception {
         super("MCR projet - prototype");
 
         // create server handler
-        serverHandler = new ServerHandler(hostname, port, this, playerName);
+        serverHandler = new ServerHandler(hostname, port, recieverPort, this, playerName);
 
         // create player
         player = new Player('w', 'd', 's', 'a');
@@ -88,10 +88,11 @@ public class WindowGame extends BasicGame {
     public void updateWorldContents(UpdateWorld updateWorld) {
 
         // update the actors list
-        // todo : thread safe modification
-        listActorManager = new ArrayList();
+        listActorManager = new CopyOnWriteArrayList<>();
+        scoreBoardList = new LinkedList<>();
         for (Actor a : updateWorld.getActorList()) {
             if (a.getClass() == Moto.class) {
+                scoreBoardList.add(a);
                 listActorManager.add(new MotoManager((Moto) a, Color.green));
                 if (a.getId() == player.getId()) {
                     player.setActor(a);
@@ -124,6 +125,12 @@ public class WindowGame extends BasicGame {
         try {
             camera.onRender(g);
 
+            Object o = serverHandler.getRecieved();
+            if (o.getClass() == UpdateWorld.class) {
+                // update world
+                updateWorldContents((UpdateWorld)o);
+            }
+
             // render current map
             if (map != null)
                 this.map.render(0, 0);
@@ -147,6 +154,8 @@ public class WindowGame extends BasicGame {
         for (ActorManager am : listActorManager) {
             am.onRender(container, g, font);
         }
+
+        renderScoreboard(container, g, scoreBoardList);
     }
 
     /**
@@ -186,5 +195,35 @@ public class WindowGame extends BasicGame {
     @Override
     public void keyReleased(int key, char c) {
 
+    }
+
+    /**
+     * Render a scoreboard that displays the bests players by their number of kills.
+     *
+     * @param container
+     * @param g
+     * @param scoreBoardList
+     */
+    public void renderScoreboard(GameContainer container, Graphics g, LinkedList<Actor> scoreBoardList)
+    {
+        Collections.sort(scoreBoardList, new Comparator<Actor>() {
+            @Override
+            public int compare(Actor a, Actor b) {
+                if(a.getKills() >= b.getKills())
+                    return 1;
+                else
+                    return  -1;
+            }
+        });
+        g.setColor(Color.black);
+        g.fillRect(player.getActor().getLocation().getX()+container.getScreenWidth()/2-200, player.getActor().getLocation().getY()-container.getScreenHeight()/2-50, 250, 350);
+        for(int i = 0; i < Math.min(10, scoreBoardList.size()); i++)
+        {
+            Actor tmp = scoreBoardList.get(i);
+            font.drawString(player.getActor().getLocation().getX()+container.getScreenWidth()/2-180,
+                    player.getActor().getLocation().getY()-container.getScreenHeight()/2+20 + i * 50,
+                    tmp.getKills() + " : " + tmp.getName(),
+                    Color.white);
+        }
     }
 }

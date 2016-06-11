@@ -49,6 +49,11 @@ public class Player {
         handler.send(message);
     }
 
+    public void sendUDP(Object message)
+    {
+        handler.sendUDPdatagram(message);
+    }
+
     /**
      * Gets the manager of the player
      * @return The manager

@@ -223,7 +223,7 @@ public abstract class MapMediator extends Thread {
 
                 for (PlayableManager playableManager : playableManagers) {
                     UpdateWorld get = new UpdateWorld(listActor, mapName);
-                    playableManager.getPlayer().send(get);
+                    playableManager.getPlayer().sendUDP(get);
                 }
 
             }

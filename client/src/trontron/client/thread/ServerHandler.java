@@ -1,5 +1,6 @@
 package trontron.client.thread;
 
+import trontron.UDP.Reciever;
 import trontron.client.game.WindowGame;
 import trontron.protocol.message.JoinGame;
 import trontron.protocol.message.PlayerIdentity;
@@ -31,6 +32,11 @@ public class ServerHandler extends Thread {
     private ObjectInputStream in;
 
     /**
+     * The UDP reciever.
+     */
+    private Reciever reciever;
+
+    /**
      * The main window to update
      */
     private WindowGame mainWindow;
@@ -40,6 +46,8 @@ public class ServerHandler extends Thread {
      */
     private int playerId;
 
+    private Object recieved;
+
     /**
      * Constructor
      * @param hostname The name of the server
@@ -48,11 +56,12 @@ public class ServerHandler extends Thread {
      * @param playerName The name of the player to inscribe on the server
      * @throws Exception If the server is unreachable or does not respond
      */
-    public ServerHandler(String hostname, int port, WindowGame mainWindow, String playerName) throws Exception {
+    public ServerHandler(String hostname, int port, int recieverPort, WindowGame mainWindow, String playerName) throws Exception {
         // connect to the server
         socket = new Socket(hostname, port);
         out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
+        reciever = new Reciever(recieverPort);
 
         this.mainWindow = mainWindow;
 
@@ -76,17 +85,16 @@ public class ServerHandler extends Thread {
         while (true) {
             try {
                 // read message
-                Object message = in.readObject();
-
-                // handle message
-                if (message.getClass() == UpdateWorld.class) {
-                    // update world
-                    mainWindow.updateWorldContents((UpdateWorld)message);
-                }
+                recieved = reciever.recvObjFrom();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public synchronized Object getRecieved()
+    {
+        return recieved;
     }
 
     /**
