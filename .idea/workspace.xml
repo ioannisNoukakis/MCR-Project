@@ -29,16 +29,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BonusManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/BonusManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="27" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TeleporterManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/TeleporterManager.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/trontron/client/game/WindowGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+            <state relative-caret-position="392">
+              <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -112,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImagePanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImagePanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/trontron/client/game/ImagePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="391">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -191,8 +181,8 @@
         <option value="$PROJECT_DIR$/client/src/trontron/client/actor/manager/BonusManager.java" />
         <option value="$PROJECT_DIR$/client/src/trontron/client/actor/manager/TeleporterManager.java" />
         <option value="$PROJECT_DIR$/client/src/trontron/client/camera/CameraManager.java" />
-        <option value="$PROJECT_DIR$/client/src/trontron/client/game/WindowGame.java" />
         <option value="$PROJECT_DIR$/client/src/trontron/client/player/Player.java" />
+        <option value="$PROJECT_DIR$/client/src/trontron/client/game/WindowGame.java" />
       </list>
     </option>
   </component>
@@ -902,8 +892,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.ServerLauncher" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ClientLauncher" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ClientLauncher" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ServerLauncher" />
       </list>
     </recent_temporary>
   </component>
@@ -926,12 +916,12 @@
       <workItem from="1465484112092" duration="19411000" />
       <workItem from="1465514549543" duration="93000" />
       <workItem from="1465643292663" duration="3083000" />
-      <workItem from="1465648969365" duration="6853000" />
+      <workItem from="1465648969365" duration="7566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45396000" />
+    <option name="totallyTimeSpent" value="46109000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -987,14 +977,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/player/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/jdk1.8.0_60/src.zip!/java/lang/Runnable.java" />
     <entry file="jar://$USER_HOME$/jdk1.8.0_60/jre/lib/rt.jar!/sun/misc/Launcher.class" />
     <entry file="jar://$USER_HOME$/jdk1.8.0_60/src.zip!/java/util/Properties.java" />
     <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/PlayableManager.java">
@@ -1072,9 +1054,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,9 +1076,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1120,7 +1098,7 @@
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1465643912424" expanded="true" signature="7402:7429" placeholder="{...}" />
+            <marker date="1465657837698" expanded="true" signature="8229:8236" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1744,14 +1722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/game/WindowGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/trontron/client/player/InputManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1">
@@ -1786,8 +1756,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/trontron/client/game/ImagePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="391">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/Client/lib/slick.jar!/org/newdawn/slick/GameContainer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="208" column="24" selection-start-line="208" selection-start-column="24" selection-end-line="208" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/jre/lib/rt.jar!/java/awt/image/BufferedImage.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/game/WindowGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="13" />
           <folding />
         </state>
       </provider>

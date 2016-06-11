@@ -1,5 +1,7 @@
 package trontron.client.game;
 
+import org.newdawn.slick.*;
+import org.newdawn.slick.util.BufferedImageUtil;
 import trontron.client.actor.manager.ActorManager;
 import trontron.client.actor.manager.BonusManager;
 import trontron.client.actor.manager.MotoManager;
@@ -14,16 +16,10 @@ import trontron.client.player.Player;
 import trontron.client.player.InputManager;
 import trontron.protocol.message.UpdateWorld;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -148,6 +144,7 @@ public class WindowGame extends BasicGame {
         }
 
         // render actors
+
         for (ActorManager am : listActorManager) {
             am.onRender(container, g, font);
         }
