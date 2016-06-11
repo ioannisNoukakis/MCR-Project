@@ -21,7 +21,7 @@ public class BonusManager extends NonPlayableManager {
     public void onUpdate(int delta) {
         if(bonus.isActivated() && bonus.isOver(delta))
         {
-            bonus.desactivate();
+            bonus.deactivate();
 
             // remove bonus from map
             getMediator().removeManager(this);

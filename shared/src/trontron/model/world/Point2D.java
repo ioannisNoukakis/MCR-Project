@@ -23,25 +23,54 @@ import java.io.Serializable;
  */
 public class Point2D implements Serializable {
 
-    private float x, y;
+    /**
+     * The x coordinate
+     */
+    private float x;
 
+    /**
+     * The y coordinate
+     */
+    private float y;
+
+    /**
+     * Constructor
+     * @param x The x coordinate of the point
+     * @param y The y coordinate of the point
+     */
     public Point2D(float x, float y) {
         this.x = x;
         this.y = y;
     }
-    
+
+    /**
+     * Gets the x coordinate of the point
+     * @return
+     */
     public float getX() {
         return x;
     }
 
+    /**
+     * Gets the y coordinate of the point
+     * @return
+     */
     public float getY() {
         return y;
     }
 
+    /**
+     * Sets the value of the x coordinate
+     * @param x The new value
+     */
     public void setX(float x) {
         this.x = x;
     }
 
+    /**
+     * Sets the value of the y coordinate
+     * @param y The new value
+     */
     public void setY(float y) {
         this.y = y;
     }

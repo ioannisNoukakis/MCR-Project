@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2016 durza9390
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package trontron.model.actor;
 
 import trontron.model.world.Direction;
@@ -22,19 +6,58 @@ import trontron.model.world.Point2D;
 import java.io.Serializable;
 
 /**
- *
- * @author durza9390
+ * The base class for an actor
  */
-public abstract class Actor implements Serializable{
-    private int id;
-    private String name;
+public abstract class Actor implements Serializable {
+    /**
+     * The id of the actor
+     */
+    private final int id;
+
+    /**
+     * The name of the actor
+     */
+    private final String name;
+
+    /**
+     * The actors current location
+     */
     private Point2D location;
+
+    /**
+     * The actors current speed
+     */
     private float speed;
+
+    /**
+     * The actors base speed
+     */
     private final float BaseSpeed;
+
+    /**
+     * The actors current direction
+     */
     private Direction direction;
+
+    /**
+     * The actors current height
+     */
     private int height;
+
+    /**
+     * The actors current width
+     */
     private int width;
 
+    /**
+     * Constructor
+     * @param id The id of the actor
+     * @param name The name of the actor
+     * @param location The initial location
+     * @param speed The initial speed
+     * @param width The width
+     * @param height The height
+     */
     public Actor(int id, String name, Point2D location, float speed, Direction direction, int height, int width) {
         this.id = id;
         this.name = name;
@@ -46,58 +69,106 @@ public abstract class Actor implements Serializable{
         BaseSpeed = speed;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
+    /**
+     * Gets the id of the actor
+     * @return The id
+     */
     public int getId() {
         return id;
     }
-            
-    public void setName(String name) {
-        this.name = name;
-    }
 
+    /**
+     * Gets the name of the actor
+     * @return The name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the height of the actor
+     * @param height The new value
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    /**
+     * Sets the width of the actor
+     * @param width The new value
+     */
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     * Sets the location of the actor
+     * @param location The new value
+     */
     public void setLocation(Point2D location) {
         this.location = location;
     }
 
+    /**
+     * Gets the current location of the actor
+     * @return The location
+     */
     public Point2D getLocation() {
         return location;
     }
 
+    /**
+     * Gets the current speed of the actor
+     * @return The speed
+     */
     public float getSpeed() {
         return speed;
     }
 
+    /**
+     * Sets the speed of the actor
+     * @param speed The new value
+     */
     public void setSpeed(float speed) {
         this.speed = speed;
     }
 
+    /**
+     * Gets the current direction of the actor
+     * @return The direction
+     */
     public Direction getDirection() {
         return direction;
     }
 
+    /**
+     * Sets the direction of the actor
+     * @param direction The new value
+     */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
+    /**
+     * Gets the current height of the actor
+     * @return The height
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Gets the current width of the actor
+     * @return The width
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Gets the base speed of the actor
+     * @return The speed
+     */
     public float getBaseSpeed() {
         return BaseSpeed;
     }
