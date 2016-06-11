@@ -29,503 +29,77 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JAVA/trontron.client" pinned="false" current-in-tab="false">
-        <entry file="uml://JAVA/trontron.client">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>trontron.client</OriginalElement>
-              <nodes>
-                <node x="1101.9285714285716" y="99.0">trontron.client.actor.manager.ActorManager</node>
-                <node x="357.66666666666674" y="506.0">trontron.client.game.WindowGame</node>
-                <node x="1384.0" y="332.0">trontron.client.actor.manager.MotoManager</node>
-                <node x="161.78482758620686" y="722.0344827586207">trontron.client.game.SpringUtilities</node>
-                <node x="664.6666666666667" y="561.0">trontron.client.game.ImagePanel</node>
-                <node x="31.75" y="0.0">trontron.client.player.Player</node>
-                <node x="0.0" y="332.0">trontron.client.player.InputManager</node>
-                <node x="642.0" y="332.0">trontron.client.actor.manager.BonusManager</node>
-                <node x="1013.0" y="332.0">trontron.client.actor.manager.TeleporterManager</node>
-                <node x="477.0" y="310.0">trontron.client.thread.ServerHandler</node>
-                <node x="264.0" y="299.0">trontron.client.camera.CameraManager</node>
-                <node x="453.91666666666674" y="717.0">ClientLauncher</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="trontron.client.actor.manager.TeleporterManager" target="trontron.client.actor.manager.ActorManager">
-                  <point x="0.0" y="-25.5" />
-                  <point x="1188.5" y="279.0" />
-                  <point x="1233.5535714285716" y="279.0" />
-                  <point x="-43.875" y="25.5" />
-                </edge>
-                <edge source="trontron.client.actor.manager.MotoManager" target="trontron.client.actor.manager.ActorManager">
-                  <point x="0.0" y="-25.5" />
-                  <point x="1559.5" y="279.0" />
-                  <point x="1321.3035714285716" y="279.0" />
-                  <point x="43.875" y="25.5" />
-                </edge>
-                <edge source="trontron.client.actor.manager.BonusManager" target="trontron.client.actor.manager.ActorManager">
-                  <point x="0.0" y="-25.5" />
-                  <point x="817.5" y="279.0" />
-                  <point x="1145.8035714285716" y="279.0" />
-                  <point x="-131.625" y="25.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.actor.manager.MotoManager">
-                  <point x="110.38461538461536" y="-80.5" />
-                  <point x="611.5512820512821" y="476.0" />
-                  <point x="1559.5" y="476.0" />
-                  <point x="0.0" y="25.5" />
-                </edge>
-                <edge source="ClientLauncher" target="trontron.client.game.ImagePanel">
-                  <point x="92.5" y="-69.5" />
-                  <point x="731.4166666666667" y="692.0" />
-                  <point x="776.6666666666667" y="692.0" />
-                  <point x="0.0" y="25.5" />
-                </edge>
-                <edge source="trontron.client.player.InputManager" target="trontron.client.player.Player">
-                  <point x="0.0" y="-25.5" />
-                  <point x="116.0" y="279.0" />
-                  <point x="82.75" y="279.0" />
-                  <point x="-102.0" y="124.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.thread.ServerHandler">
-                  <point x="22.076923076923094" y="-80.5" />
-                  <point x="523.2435897435898" y="436.0" />
-                  <point x="549.5" y="436.0" />
-                  <point x="0.0" y="47.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.actor.manager.ActorManager">
-                  <point x="132.46153846153845" y="-80.5" />
-                  <point x="633.6282051282052" y="486.0" />
-                  <point x="1745.5" y="486.0" />
-                  <point x="1745.5" y="269.0" />
-                  <point x="1409.0535714285716" y="269.0" />
-                  <point x="131.625" y="25.5" />
-                </edge>
-                <edge source="trontron.client.thread.ServerHandler" target="trontron.client.game.WindowGame">
-                  <point x="48.33333333333337" y="47.5" />
-                  <point x="597.8333333333334" y="446.0" />
-                  <point x="545.3205128205129" y="446.0" />
-                  <point x="44.15384615384619" y="-80.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.actor.manager.TeleporterManager">
-                  <point x="88.30769230769226" y="-80.5" />
-                  <point x="589.474358974359" y="466.0" />
-                  <point x="1188.5" y="466.0" />
-                  <point x="0.0" y="25.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.actor.manager.BonusManager">
-                  <point x="66.23076923076917" y="-80.5" />
-                  <point x="567.3974358974359" y="456.0" />
-                  <point x="817.5" y="456.0" />
-                  <point x="0.0" y="25.5" />
-                </edge>
-                <edge source="ClientLauncher" target="trontron.client.game.WindowGame">
-                  <point x="-92.5" y="-69.5" />
-                  <point x="546.4166666666667" y="692.0" />
-                  <point x="501.16666666666674" y="692.0" />
-                  <point x="0.0" y="80.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.player.Player">
-                  <point x="-66.23076923076923" y="-80.5" />
-                  <point x="434.9358974358975" y="456.0" />
-                  <point x="253.5" y="456.0" />
-                  <point x="253.5" y="279.0" />
-                  <point x="286.75" y="279.0" />
-                  <point x="102.0" y="124.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.player.InputManager">
-                  <point x="-132.46153846153845" y="-80.5" />
-                  <point x="368.7051282051283" y="486.0" />
-                  <point x="58.0" y="486.0" />
-                  <point x="-58.0" y="25.5" />
-                </edge>
-                <edge source="trontron.client.game.WindowGame" target="trontron.client.camera.CameraManager">
-                  <point x="-22.076923076923094" y="-80.5" />
-                  <point x="479.08974358974365" y="436.0" />
-                  <point x="408.75" y="436.0" />
-                  <point x="48.25" y="58.5" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.6984585741811176" x="120.61379310344824" y="273.61379310344824" />
-              <SelectedNodes>
-                <node>trontron.client.camera.CameraManager</node>
-              </SelectedNodes>
-              <Categories>
-                <Category>Methods</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="ActorManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/ActorManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1088">
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding>
+                <element signature="e#1741#1742#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JAVA/trontron.server" pinned="false" current-in-tab="false">
-        <entry file="uml://JAVA/trontron.server">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>trontron.server</OriginalElement>
-              <nodes>
-                <node x="372.8307291666667" y="694.0">trontron.server.actor.manager.WorldManager</node>
-                <node x="94.33072916666663" y="961.0">trontron.server.actor.manager.MotoManager</node>
-                <node x="805.0807291666667" y="1283.0">trontron.server.mediator.map.LobbyMediator</node>
-                <node x="1064.0807291666667" y="1283.0">trontron.server.mediator.map.InvertedMapMediator</node>
-                <node x="815.8723958333333" y="548.0">trontron.server.actor.manager.NonPlayableManager</node>
-                <node x="724.9722222222221" y="1480.0">trontron.server.mediator.HyperMediator</node>
-                <node x="1323.0807291666665" y="1283.0">trontron.server.mediator.map.MainMapMediator</node>
-                <node x="1012.7473958333333" y="0.0">trontron.server.behaviour.ICollisionBehaviour</node>
-                <node x="742.3723958333333" y="226.0">trontron.server.actor.manager.ActorManager</node>
-                <node x="823.0316840277779" y="884.0">trontron.server.mediator.map.MapMediator</node>
-                <node x="544.0807291666667" y="1228.0">trontron.server.actor.manager.TeleporterManager</node>
-                <node x="22.351562500000114" y="1714.0">trontron.server.thread.ClientHandler</node>
-                <node x="864.5833333333334" y="694.0">trontron.server.actor.manager.BonusManager</node>
-                <node x="1002.7473958333333" y="102.0">trontron.server.behaviour.MapBehaviour</node>
-                <node x="493.24305555555526" y="1838.0">trontron.server.ServerLauncher</node>
-                <node x="0.0" y="482.0">trontron.server.player.Player</node>
-                <node x="164.83072916666663" y="727.0">trontron.server.actor.manager.PlayableManager</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="trontron.server.actor.manager.PlayableManager" target="trontron.server.actor.manager.ActorManager">
-                  <point x="62.66666666666663" y="-37.0" />
-                  <point x="321.49739583333326" y="674.0" />
-                  <point x="393.1150173611112" y="674.0" />
-                  <point x="393.1150173611112" y="457.0" />
-                  <point x="791.5390625" y="457.0" />
-                  <point x="-98.33333333333331" y="103.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.ActorManager" target="trontron.server.mediator.map.MapMediator">
-                  <point x="98.33333333333326" y="103.0" />
-                  <point x="988.2057291666665" y="457.0" />
-                  <point x="1130.0833333333335" y="457.0" />
-                  <point x="1130.0833333333335" y="864.0" />
-                  <point x="1128.6983506944448" y="864.0" />
-                  <point x="43.66666666666674" y="-147.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.PlayableManager" target="trontron.server.player.Player">
-                  <point x="-62.66666666666666" y="-37.0" />
-                  <point x="196.1640625" y="674.0" />
-                  <point x="157.5" y="674.0" />
-                  <point x="45.0" y="81.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.NonPlayableManager" target="trontron.server.actor.manager.ActorManager">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="103.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.MainMapMediator" target="trontron.server.mediator.map.MapMediator">
-                  <point x="0.0" y="-26.0" />
-                  <point x="1442.5807291666665" y="1203.0" />
-                  <point x="1281.5316840277778" y="1203.0" />
-                  <point x="196.5" y="147.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.behaviour.MapBehaviour">
-                  <point x="175.54166666666654" y="-92.0" />
-                  <point x="1092.0138888888887" y="1460.0" />
-                  <point x="1572.5807291666665" y="1460.0" />
-                  <point x="1572.5807291666665" y="201.0" />
-                  <point x="1300.2473958333335" y="201.0" />
-                  <point x="127.50000000000006" y="37.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.MotoManager" target="trontron.server.actor.manager.PlayableManager">
-                  <point x="0.0" y="-70.0" />
-                  <point x="-47.0" y="37.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.BonusManager" target="trontron.server.actor.manager.NonPlayableManager">
-                  <point x="0.0" y="-70.0" />
-                  <point x="982.0833333333334" y="674.0" />
-                  <point x="908.3723958333333" y="674.0" />
-                  <point x="18.5" y="15.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.actor.manager.MotoManager">
-                  <point x="-111.70833333333348" y="-92.0" />
-                  <point x="804.7638888888886" y="1440.0" />
-                  <point x="211.83072916666663" y="1440.0" />
-                  <point x="0.0" y="70.0" />
-                </edge>
-                <edge source="trontron.server.behaviour.MapBehaviour" target="trontron.server.mediator.map.MapMediator">
-                  <point x="-42.5" y="37.0" />
-                  <point x="1130.2473958333333" y="201.0" />
-                  <point x="1167.2473958333333" y="201.0" />
-                  <point x="1167.2473958333333" y="864.0" />
-                  <point x="1216.0316840277778" y="864.0" />
-                  <point x="131.0" y="-147.0" />
-                </edge>
-                <edge source="trontron.server.player.Player" target="trontron.server.actor.manager.PlayableManager">
-                  <point x="90.0" y="81.0" />
-                  <point x="202.5" y="674.0" />
-                  <point x="258.83072916666663" y="674.0" />
-                  <point x="0.0" y="-37.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.WorldManager" target="trontron.server.actor.manager.NonPlayableManager">
-                  <point x="0.0" y="-70.0" />
-                  <point x="483.3307291666667" y="664.0" />
-                  <point x="834.3723958333333" y="664.0" />
-                  <point x="-55.5" y="15.0" />
-                </edge>
-                <edge source="trontron.server.behaviour.MapBehaviour" target="trontron.server.behaviour.ICollisionBehaviour">
-                  <point x="-85.0" y="-37.0" />
-                  <point x="1087.7473958333333" y="77.0" />
-                  <point x="1092.7473958333333" y="77.0" />
-                  <point x="-80.0" y="26.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.MapMediator" target="trontron.server.actor.manager.NonPlayableManager">
-                  <point x="-43.66666666666663" y="-147.0" />
-                  <point x="1041.3650173611113" y="864.0" />
-                  <point x="1110.0833333333335" y="864.0" />
-                  <point x="1110.0833333333335" y="664.0" />
-                  <point x="945.3723958333333" y="664.0" />
-                  <point x="55.5" y="15.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.actor.manager.TeleporterManager">
-                  <point x="-47.875" y="-92.0" />
-                  <point x="868.5972222222221" y="1420.0" />
-                  <point x="664.5807291666667" y="1420.0" />
-                  <point x="0.0" y="81.0" />
-                </edge>
-                <edge source="trontron.server.ServerLauncher" target="trontron.server.thread.ClientHandler">
-                  <point x="-38.75" y="-26.0" />
-                  <point x="531.9930555555552" y="1813.0" />
-                  <point x="85.85156250000011" y="1813.0" />
-                  <point x="0.0" y="37.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.mediator.map.LobbyMediator">
-                  <point x="15.958333333333485" y="-92.0" />
-                  <point x="932.4305555555555" y="1410.0" />
-                  <point x="984.3307291666667" y="1410.0" />
-                  <point x="59.75" y="26.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.mediator.map.MainMapMediator">
-                  <point x="143.625" y="-92.0" />
-                  <point x="1060.0972222222222" y="1450.0" />
-                  <point x="1502.3307291666665" y="1450.0" />
-                  <point x="59.75" y="26.0" />
-                </edge>
-                <edge source="trontron.server.thread.ClientHandler" target="trontron.server.mediator.HyperMediator">
-                  <point x="31.75" y="-37.0" />
-                  <point x="117.60156250000011" y="1689.0" />
-                  <point x="820.7222222222221" y="1689.0" />
-                  <point x="-95.75" y="92.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.player.Player">
-                  <point x="-143.625" y="-92.0" />
-                  <point x="772.8472222222221" y="1450.0" />
-                  <point x="83.83072916666663" y="1450.0" />
-                  <point x="83.83072916666663" y="674.0" />
-                  <point x="112.5" y="674.0" />
-                  <point x="0.0" y="81.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.LobbyMediator" target="trontron.server.mediator.map.MapMediator">
-                  <point x="0.0" y="-26.0" />
-                  <point x="924.5807291666667" y="1203.0" />
-                  <point x="1019.5316840277779" y="1203.0" />
-                  <point x="-65.5" y="147.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.MapMediator" target="trontron.server.actor.manager.BonusManager">
-                  <point x="-131.0" y="-147.0" />
-                  <point x="954.0316840277779" y="864.0" />
-                  <point x="982.0833333333334" y="864.0" />
-                  <point x="0.0" y="70.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.actor.manager.WorldManager">
-                  <point x="-79.79166666666697" y="-92.0" />
-                  <point x="836.6805555555551" y="1430.0" />
-                  <point x="483.3307291666667" y="1430.0" />
-                  <point x="0.0" y="70.0" />
-                </edge>
-                <edge source="trontron.server.ServerLauncher" target="trontron.server.mediator.HyperMediator">
-                  <point x="38.75" y="-26.0" />
-                  <point x="609.4930555555552" y="1813.0" />
-                  <point x="1012.2222222222221" y="1813.0" />
-                  <point x="95.75000000000003" y="92.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.MapMediator" target="trontron.server.actor.manager.PlayableManager">
-                  <point x="-218.33333333333326" y="-147.0" />
-                  <point x="866.6983506944447" y="864.0" />
-                  <point x="305.83072916666663" y="864.0" />
-                  <point x="47.0" y="37.0" />
-                </edge>
-                <edge source="trontron.server.player.Player" target="trontron.server.thread.ClientHandler">
-                  <point x="-90.0" y="81.0" />
-                  <point x="22.5" y="674.0" />
-                  <point x="54.101562500000114" y="674.0" />
-                  <point x="-31.75" y="-37.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.TeleporterManager" target="trontron.server.mediator.map.MapMediator">
-                  <point x="60.25" y="-81.0" />
-                  <point x="724.8307291666667" y="1203.0" />
-                  <point x="888.5316840277779" y="1203.0" />
-                  <point x="-196.5" y="147.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.InvertedMapMediator" target="trontron.server.mediator.map.MapMediator">
-                  <point x="0.0" y="-26.0" />
-                  <point x="1183.5807291666667" y="1203.0" />
-                  <point x="1150.5316840277778" y="1203.0" />
-                  <point x="65.5" y="147.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.TeleporterManager" target="trontron.server.actor.manager.NonPlayableManager">
-                  <point x="-60.25" y="-81.0" />
-                  <point x="604.3307291666667" y="674.0" />
-                  <point x="871.3723958333333" y="674.0" />
-                  <point x="-18.5" y="15.0" />
-                </edge>
-                <edge source="trontron.server.mediator.HyperMediator" target="trontron.server.mediator.map.InvertedMapMediator">
-                  <point x="79.79166666666652" y="-92.0" />
-                  <point x="996.2638888888886" y="1430.0" />
-                  <point x="1243.3307291666667" y="1430.0" />
-                  <point x="59.75" y="26.0" />
-                </edge>
-                <edge source="trontron.server.actor.manager.ActorManager" target="trontron.server.behaviour.MapBehaviour">
-                  <point x="0.0" y="-103.0" />
-                  <point x="889.8723958333333" y="201.0" />
-                  <point x="1045.2473958333333" y="201.0" />
-                  <point x="-127.5" y="37.0" />
-                </edge>
-                <edge source="trontron.server.mediator.map.MapMediator" target="trontron.server.behaviour.MapBehaviour">
-                  <point x="218.33333333333326" y="-147.0" />
-                  <point x="1303.3650173611113" y="854.0" />
-                  <point x="1178.2473958333333" y="854.0" />
-                  <point x="1178.2473958333333" y="201.0" />
-                  <point x="1215.2473958333333" y="201.0" />
-                  <point x="42.5" y="37.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.5795811518324605" x="394.0921409214094" y="284.0921409214094" />
-              <SelectedNodes>
-                <node>trontron.server.actor.manager.WorldManager</node>
-              </SelectedNodes>
-              <Categories>
-                <Category>Methods</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="BonusManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/BonusManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JAVA/trontron" pinned="false" current-in-tab="true">
-        <entry file="uml://JAVA/trontron">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>trontron</OriginalElement>
-              <nodes>
-                <node x="546.5" y="588.0">trontron.protocol.message.UpdateWorld</node>
-                <node x="844.2289915966387" y="0.0">trontron.model.world.Point2D</node>
-                <node x="0.0" y="919.0">trontron.protocol.message.JoinGame</node>
-                <node x="89.00000000000006" y="610.0">trontron.model.actor.Teleporter</node>
-                <node x="210.25000000000006" y="566.0">trontron.model.actor.bonus.Bonus</node>
-                <node x="779.5" y="577.0">trontron.model.actor.Playable</node>
-                <node x="746.75" y="734.0">trontron.model.actor.Moto</node>
-                <node x="944.5" y="278.0">trontron.model.world.Rectangle2D</node>
-                <node x="191.0" y="919.0">trontron.protocol.message.PlayerIdentity</node>
-                <node x="188.00000000000006" y="44.0">trontron.model.world.Direction</node>
-                <node x="343.0" y="919.0">trontron.protocol.Common</node>
-                <node x="328.25000000000006" y="767.0">trontron.model.actor.bonus.SuperSizeMe</node>
-                <node x="460.50000000000006" y="610.0">trontron.model.actor.World</node>
-                <node x="129.25000000000006" y="767.0">trontron.model.actor.bonus.SlowAndSpeedBonus</node>
-                <node x="243.00000000000006" y="168.0">trontron.model.actor.Actor</node>
-                <node x="0.0" y="300.0">trontron.protocol.message.ChangeDirection</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="trontron.model.actor.Moto" target="trontron.model.world.Point2D">
-                  <point x="73.0" y="-70.0" />
-                  <point x="965.75" y="709.0" />
-                  <point x="934.0" y="709.0" />
-                  <point x="934.0" y="143.0" />
-                  <point x="931.2289915966387" y="143.0" />
-                  <point x="0.0" y="59.0" />
-                </edge>
-                <edge source="trontron.model.actor.Playable" target="trontron.model.actor.Actor">
-                  <point x="0.0" y="-48.0" />
-                  <point x="851.5" y="536.0" />
-                  <point x="627.4285714285716" y="536.0" />
-                  <point x="177.42857142857144" y="169.0" />
-                </edge>
-                <edge source="trontron.model.world.Rectangle2D" target="trontron.model.world.Point2D">
-                  <point x="0.0" y="-59.0" />
-                  <point x="1031.5" y="143.0" />
-                  <point x="989.2289915966387" y="143.0" />
-                  <point x="58.0" y="59.0" />
-                </edge>
-                <edge source="trontron.model.actor.World" target="trontron.model.actor.Actor">
-                  <point x="0.0" y="-15.0" />
-                  <point x="493.50000000000006" y="546.0" />
-                  <point x="509.14285714285717" y="546.0" />
-                  <point x="59.14285714285711" y="169.0" />
-                </edge>
-                <edge source="trontron.protocol.message.ChangeDirection" target="trontron.model.world.Direction">
-                  <point x="0.0" y="-37.0" />
-                  <point x="111.5" y="143.0" />
-                  <point x="208.50000000000006" y="143.0" />
-                  <point x="-20.5" y="15.0" />
-                </edge>
-                <edge source="trontron.model.actor.Teleporter" target="trontron.model.actor.Actor">
-                  <point x="0.0" y="-15.0" />
-                  <point x="132.50000000000006" y="526.0" />
-                  <point x="272.5714285714286" y="526.0" />
-                  <point x="-177.42857142857144" y="169.0" />
-                </edge>
-                <edge source="trontron.model.actor.Moto" target="trontron.model.actor.Playable">
-                  <point x="-73.0" y="-70.0" />
-                  <point x="819.75" y="709.0" />
-                  <point x="851.5" y="709.0" />
-                  <point x="0.0" y="48.0" />
-                </edge>
-                <edge source="trontron.model.actor.Actor" target="trontron.model.world.Point2D">
-                  <point x="103.5" y="-169.0" />
-                  <point x="553.5" y="143.0" />
-                  <point x="873.2289915966387" y="143.0" />
-                  <point x="-58.0" y="59.0" />
-                </edge>
-                <edge source="trontron.model.actor.bonus.Bonus" target="trontron.model.actor.Actor">
-                  <point x="0.0" y="-59.0" />
-                  <point x="318.25000000000006" y="546.0" />
-                  <point x="390.8571428571429" y="546.0" />
-                  <point x="-59.14285714285717" y="169.0" />
-                </edge>
-                <edge source="trontron.model.actor.bonus.SuperSizeMe" target="trontron.model.actor.Actor">
-                  <point x="44.75" y="-37.0" />
-                  <point x="462.50000000000006" y="709.0" />
-                  <point x="450.00000000000006" y="709.0" />
-                  <point x="0.0" y="169.0" />
-                </edge>
-                <edge source="trontron.model.actor.bonus.SlowAndSpeedBonus" target="trontron.model.actor.bonus.Bonus">
-                  <point x="44.75" y="-37.0" />
-                  <point x="-54.0" y="59.0" />
-                </edge>
-                <edge source="trontron.model.actor.bonus.SlowAndSpeedBonus" target="trontron.model.actor.Actor">
-                  <point x="-44.75" y="-37.0" />
-                  <point x="174.00000000000006" y="709.0" />
-                  <point x="186.50000000000006" y="709.0" />
-                  <point x="186.50000000000006" y="536.0" />
-                  <point x="331.7142857142858" y="536.0" />
-                  <point x="-118.2857142857143" y="169.0" />
-                </edge>
-                <edge source="trontron.protocol.message.UpdateWorld" target="trontron.model.actor.Actor">
-                  <point x="0.0" y="-37.0" />
-                  <point x="653.0" y="546.0" />
-                  <point x="568.2857142857143" y="546.0" />
-                  <point x="118.28571428571428" y="169.0" />
-                </edge>
-                <edge source="trontron.model.actor.bonus.SuperSizeMe" target="trontron.model.actor.bonus.Bonus">
-                  <point x="-44.75" y="-37.0" />
-                  <point x="54.0" y="59.0" />
-                </edge>
-                <edge source="trontron.model.actor.Actor" target="trontron.model.world.Direction">
-                  <point x="-103.5" y="-169.0" />
-                  <point x="346.50000000000006" y="143.0" />
-                  <point x="249.50000000000006" y="143.0" />
-                  <point x="20.5" y="15.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.7315842583249244" x="560.0427586206897" y="405.5" />
-              <SelectedNodes />
-              <Categories>
-                <Category>Methods</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="MotoManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/MotoManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NonPlayableManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/NonPlayableManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayableManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/PlayableManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding>
+                <element signature="e#630#631#0" expanded="true" />
+                <element signature="e#666#667#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeleporterManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/TeleporterManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorldManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/WorldManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -701,6 +275,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="behaviour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TronTron" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TronTron" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -734,6 +352,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TronTron" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="camera" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TronTron" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1232,16 +894,16 @@
       <workItem from="1465484112092" duration="19411000" />
       <workItem from="1465514549543" duration="93000" />
       <workItem from="1465643292663" duration="3083000" />
-      <workItem from="1465648969365" duration="7905000" />
+      <workItem from="1465648969365" duration="9078000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46448000" />
+    <option name="totallyTimeSpent" value="47621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1251,7 +913,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.5030211" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17547569" sideWeight="0.49697885" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17547569" sideWeight="0.49697885" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1293,16 +955,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/jdk1.8.0_60/jre/lib/rt.jar!/sun/misc/Launcher.class" />
-    <entry file="jar://$USER_HOME$/jdk1.8.0_60/src.zip!/java/util/Properties.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/PlayableManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shared/src/trontron/model/actor/Wall.java" />
     <entry file="file://$PROJECT_DIR$/client/src/trontron/client/sync/SyncServer.java" />
     <entry file="file://$PROJECT_DIR$/client/src/trontron/client/player/manager/Player.java" />
     <entry file="file://$PROJECT_DIR$/client/src/trontron/client/player/manager/InputManager.java" />
@@ -1343,22 +995,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/trontron/server/mediator/MediatorMapNormale.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/MotoManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/trontron/server/mediator/MediatorLobby.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/ActorManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/trontron/server/mediator/MediatorMap.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/trontron/client/musicPlayer/SongPlayer.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/trontron/client/musicPlayer/GUIPlayer.form" />
@@ -1366,14 +1003,6 @@
     <entry file="file://$PROJECT_DIR$/Client/src/trontron/client/musicPlayer/AudioSpectrumEffects.java" />
     <entry file="file://$PROJECT_DIR$/Client/src/trontron/client/musicPlayer/GUIPlayer.java" />
     <entry file="file://$PROJECT_DIR$/server/src/trontron/server/mediator/map/MediatorMapInverted.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/BonusManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shared/src/trontron/model/actor/bonus/Bonus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1535,49 +1164,6 @@
           <Categories />
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/ActorManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/BonusManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="27" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/MotoManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/TeleporterManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/camera/CameraManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
-          <folding>
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2163,13 +1749,114 @@
               <point x="20.5" y="15.0" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.7315842583249244" x="560.0427586206897" y="405.5" />
+          <settings layout="Hierarchic Group" zoom="0.7315842583249244" x="-158.94482758620688" y="238.05517241379312" />
           <SelectedNodes />
           <Categories>
             <Category>Methods</Category>
           </Categories>
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/ActorManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/BonusManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="27" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/MotoManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/actor/manager/TeleporterManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/trontron/client/camera/CameraManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/ActorManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="e#1741#1742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/BonusManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/NonPlayableManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/PlayableManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/TeleporterManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/WorldManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/trontron/server/actor/manager/MotoManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
