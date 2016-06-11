@@ -2,17 +2,14 @@ package trontron.server.mediator.map;
 
 import trontron.server.actor.manager.NonPlayableManager;
 import trontron.server.actor.manager.PlayableManager;
-import trontron.server.behaviour.Behaviour;
-
-import java.util.LinkedList;
 
 /**
  * Created by durza9390 on 10.06.16.
  */
-public class MediatorMapInverted extends MapMediator {
+public class InvertedMapMediator extends MapMediator {
 
-    public MediatorMapInverted(String mapName, int maxX, int maxY, LinkedList<Behaviour> listComp, int frequecySpawn, int maxSpawn, LobbyMediator lobby) {
-        super(mapName, maxX, maxY, listComp, frequecySpawn, maxSpawn);
+    public InvertedMapMediator(String mapName, int maxX, int maxY, int frequecySpawn, int maxSpawn) {
+        super(mapName, maxX, maxY, frequecySpawn, maxSpawn);
     }
 
     @Override

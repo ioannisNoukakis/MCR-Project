@@ -10,8 +10,7 @@ import trontron.model.actor.World;
 import trontron.model.world.Direction;
 import trontron.model.world.Point2D;
 import trontron.model.world.Rectangle2D;
-import trontron.server.behaviour.Behaviour;
-import trontron.server.behaviour.ICollisionBehaviour;
+import trontron.server.behaviour.MapBehaviour;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,7 +39,7 @@ public abstract class MapMediator extends Thread {
     private final int maxSpawn;
     private int nbOfBonusSpawned;
     
-    public MapMediator(String mapName, int maxX, int maxY, List<Behaviour> listComp, int spawnFrequency, int maxSpawn) {
+    public MapMediator(String mapName, int maxX, int maxY, int spawnFrequency, int maxSpawn) {
         playableManagers = new CopyOnWriteArrayList<>();
         nonPlayableManagers = new CopyOnWriteArrayList<>();
         this.mapName = mapName;
@@ -48,7 +47,6 @@ public abstract class MapMediator extends Thread {
         this.maxY = maxY;
         this.spawnFrequency = spawnFrequency;
         this.maxSpawn = maxSpawn;
-        nonPlayableManagers.add(new WorldManager(this, listComp, new World(-1, mapName, new Point2D(0, 0),0, Direction.none, maxX, maxY)));
     }
 
     public List<PlayableManager> getPlayableManagers() {
@@ -65,6 +63,11 @@ public abstract class MapMediator extends Thread {
         }
         else {
             nonPlayableManagers.add((NonPlayableManager)manager);
+
+            // handle bonuses
+            if (manager instanceof BonusManager) {
+                nbOfBonusSpawned++;
+            }
         }
     }
 
@@ -74,6 +77,11 @@ public abstract class MapMediator extends Thread {
         }
         else {
             nonPlayableManagers.remove(manager);
+
+            // handle bonuses
+            if (manager instanceof BonusManager) {
+                nbOfBonusSpawned--;
+            }
         }
     }
 
@@ -97,10 +105,6 @@ public abstract class MapMediator extends Thread {
             }
         }
         return false;
-    }
-
-    public String getMapName() {
-        return mapName;
     }
 
     public int getMaxX() {
@@ -132,7 +136,7 @@ public abstract class MapMediator extends Thread {
             while (true) {
                 time = System.currentTimeMillis();
                 Thread.sleep(10);
-                LinkedList<Actor> listActor = new LinkedList<>();
+                List<Actor> listActor = new LinkedList<>();
                 
                 for (ActorManager actorManager : playableManagers) {
                     actorManager.onUpdate((int) (System.currentTimeMillis() - time));
@@ -165,23 +169,10 @@ public abstract class MapMediator extends Thread {
         }
     }
 
-    public void setNbOfBonusSpawned(int nbOfBonusSpawned) {
-        this.nbOfBonusSpawned = nbOfBonusSpawned;
-    }
-
-    public int getNbOfBonusSpawned() {
-        return nbOfBonusSpawned;
-    }
-
-    public BonusManager generateRandomBonus(LinkedList<Actor> listActors)
+    private BonusManager generateRandomBonus(List<Actor> listActors)
     {
-        LinkedList<Behaviour> comportement = new LinkedList<>();
-        comportement.add(new Behaviour(new ICollisionBehaviour() {
-            @Override
-            public void solveCollision(ActorManager a, ActorManager b) {
-                ((Bonus)b.getActor()).activate(a.getActor());
-            }
-        }, mapName));
+        List<MapBehaviour> comportement = new LinkedList<>();
+        comportement.add(new MapBehaviour(this, (a, b) -> ((Bonus)b.getActor()).activate(a.getActor())));
 
         switch(random.nextInt(2))
         {

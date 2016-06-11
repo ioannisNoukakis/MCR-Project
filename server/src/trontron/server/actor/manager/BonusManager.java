@@ -3,16 +3,16 @@ package trontron.server.actor.manager;
 import trontron.model.actor.Actor;
 import trontron.model.actor.bonus.Bonus;
 import trontron.model.world.Rectangle2D;
-import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.MapBehaviour;
 import trontron.server.mediator.map.MapMediator;
 
-import java.util.LinkedList;
+import java.util.List;
 
 
 public class BonusManager extends NonPlayableManager {
     private Bonus bonus;
 
-    public BonusManager(MapMediator mediator, LinkedList<Behaviour> listComportement, Bonus bonus) {
+    public BonusManager(MapMediator mediator, List<MapBehaviour> listComportement, Bonus bonus) {
         super(mediator, listComportement);
         this.bonus = bonus;
     }
@@ -22,8 +22,9 @@ public class BonusManager extends NonPlayableManager {
         if(bonus.isActivated() && bonus.isOver(delta))
         {
             bonus.desactivate();
+
+            // remove bonus from map
             getMediator().removeManager(this);
-            getMediator().setNbOfBonusSpawned(getMediator().getNbOfBonusSpawned()-1);
         }
     }
 
