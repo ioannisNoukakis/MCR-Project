@@ -80,4 +80,28 @@ public class Rectangle2D implements Serializable {
     public double getWidth() {
         return width;
     }
+
+    /**
+     * Checks if two rectangles are overlapping
+     * @param a The first rectangle
+     * @param b The second rectangle
+     * @return True if the rectangles are overlapping, false otherwise
+     */
+    public static boolean areOverlapping(Rectangle2D[] a, Rectangle2D[] b) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                if (a[i] == null || b[j] == null) {
+                    return false;
+                }
+
+                if (a[i].getX() < b[j].getX() + b[j].getWidth()
+                        && a[i].getX() + a[i].getWidth() > b[j].getX()
+                        && a[i].getY() < b[j].getY() + b[j].getHeight()
+                        && a[i].getY() + a[i].getHeight() > b[j].getY()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

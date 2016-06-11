@@ -1,24 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trontron.server.player;
 
-import trontron.server.actor.manager.ActorManager;
 import trontron.server.actor.manager.PlayableManager;
 import trontron.server.thread.ClientHandler;
 
 /**
- * @author durza9390
+ * A connected player
  */
 public class Player {
+    /**
+     * The manager for the player
+     */
     private PlayableManager manager;
-    private int id;
-    private String name;
-    private int nbKills;
+
+    /**
+     * The id of the player
+     */
+    private final int id;
+
+    /**
+     * The name of the player
+     */
+    private final String name;
+
+    /**
+     * The client handler used to communicate with the client
+     */
     private ClientHandler handler;
 
+    /**
+     * Constructor
+     * @param manager The manager for the player
+     * @param id The id of the player
+     * @param name The name of the player
+     * @param handler The client handler used to communicate with the client
+     */
     public Player(PlayableManager manager, int id, String name, ClientHandler handler) {
         this.manager = manager;
         this.id = id;
@@ -26,26 +41,34 @@ public class Player {
         this.handler = handler;
     }
 
-    public void addKill() {
-        nbKills++;
+    /**
+     * Sends a message to the client
+     * @param message The message object
+     */
+    public void send(Object message) {
+        handler.send(message);
     }
 
-    public int getNbKills() {
-        return nbKills;
-    }
-
-    public void send(Object o) {
-        handler.send(o);
-    }
-
-    public PlayableManager getActorManager() {
+    /**
+     * Gets the manager of the player
+     * @return The manager
+     */
+    public PlayableManager getManager() {
         return manager;
     }
 
+    /**
+     * Gets the id of the player
+     * @return The id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets the name of the player
+     * @return The name
+     */
     public String getName() {
         return name;
     }

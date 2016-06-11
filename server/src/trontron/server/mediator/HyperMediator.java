@@ -145,7 +145,7 @@ public class HyperMediator {
         Player player = findPlayer(directionInformations.getPlayerId());
 
         // update direction
-        player.getActorManager().getActor().setDirection(directionInformations.getNewDirection());
+        player.getManager().getActor().setDirection(directionInformations.getNewDirection());
     }
 
     /**
@@ -160,7 +160,7 @@ public class HyperMediator {
             playerList.remove(player);
 
             // remove player from mainMap
-            player.getActorManager().getMediator().removeManager(player.getActorManager());
+            player.getManager().getMediator().removeManager(player.getManager());
 
             System.out.println("A player has been removed : " + player.getName() + " (" + playerId + ")");
         }
