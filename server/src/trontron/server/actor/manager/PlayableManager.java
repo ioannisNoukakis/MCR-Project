@@ -11,10 +11,18 @@ import java.util.List;
  */
 public abstract class PlayableManager extends ActorManager {
 
+    /**
+     * The Player of this PlayableManager
+     */
     private Player player;
 
-    public PlayableManager(MapMediator mediator, List<MapBehaviour> listComportement) {
-        super(mediator, listComportement);
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     */
+    public PlayableManager(MapMediator mediator, List<MapBehaviour> listBehaviour) {
+        super(mediator, listBehaviour);
     }
 
     /**

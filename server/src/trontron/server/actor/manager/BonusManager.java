@@ -12,10 +12,19 @@ import java.util.List;
  * Manages a bonus.
  */
 public class BonusManager extends NonPlayableManager {
+    /**
+     * The Bonus of this BonusManager
+     */
     private Bonus bonus;
 
-    public BonusManager(MapMediator mediator, List<MapBehaviour> listComportement, Bonus bonus) {
-        super(mediator, listComportement);
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     * @param bonus: the bonus
+     */
+    public BonusManager(MapMediator mediator, List<MapBehaviour> listBehaviour, Bonus bonus) {
+        super(mediator, listBehaviour);
         this.bonus = bonus;
     }
 

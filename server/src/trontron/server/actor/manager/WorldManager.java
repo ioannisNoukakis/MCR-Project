@@ -18,8 +18,17 @@ import java.util.List;
  * Manages a map.
  */
 public class WorldManager extends NonPlayableManager {
+    /**
+     * The world to manage.
+     */
     private World world;
 
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listComportement: list of Behaviour of this actor.
+     * @param world: the world.
+     */
     public WorldManager(MapMediator mediator, List<MapBehaviour> listComportement, World world) {
         super(mediator, listComportement);
         this.world = world;

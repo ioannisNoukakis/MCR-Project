@@ -32,10 +32,19 @@ import java.util.List;
  */
 public class MotoManager extends PlayableManager {
 
+    /**
+     * The Moto of this MotoManager
+     */
     private Moto moto;
 
-    public MotoManager(MapMediator mediator, List<MapBehaviour> listComportement, Moto moto) {
-        super(mediator, listComportement);
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     * @param moto: the moto.
+     */
+    public MotoManager(MapMediator mediator, List<MapBehaviour> listBehaviour, Moto moto) {
+        super(mediator, listBehaviour);
         this.moto = moto;
     }
 

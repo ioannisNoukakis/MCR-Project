@@ -50,6 +50,11 @@ public abstract class Actor implements Serializable {
     private int width;
 
     /**
+     * The number of kills of this actor.
+     */
+    private int kills;
+
+    /**
      * Constructor
      * @param id The id of the actor
      * @param name The name of the actor
@@ -67,6 +72,7 @@ public abstract class Actor implements Serializable {
         this.height = height;
         this.width = width;
         BaseSpeed = speed;
+        kills = 0;
     }
 
     /**
@@ -171,5 +177,21 @@ public abstract class Actor implements Serializable {
      */
     public float getBaseSpeed() {
         return BaseSpeed;
+    }
+
+    /**
+     * Gets the number of kills of the actor
+     * @return The speed
+     */
+    public int getKills() {
+        return kills;
+    }
+
+    /**
+     * Set the number of kills of the actor
+     * @param kills: the number of kills
+     */
+    public void setKills(int kills) {
+        this.kills = kills;
     }
 }

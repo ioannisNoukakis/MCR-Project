@@ -18,11 +18,25 @@ import java.util.List;
  */
 public class TeleporterManager extends NonPlayableManager {
 
+    /**
+     * The Teleporter of this TeleporterManager
+     */
     private Teleporter teleporter;
+
+    /**
+     * The desitnation MapMediator of this teleporter.
+     */
     private MapMediator mediatorDeDestination;
 
-    public TeleporterManager(MapMediator mediator, List<MapBehaviour> listComportement, Teleporter teleporter, MapMediator mediatorDeDestination) {
-        super(mediator, listComportement);
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     * @param teleporter: the teleporter
+     * @param mediatorDeDestination: the MapMediator destination of this teleporter
+     */
+    public TeleporterManager(MapMediator mediator, List<MapBehaviour> listBehaviour, Teleporter teleporter, MapMediator mediatorDeDestination) {
+        super(mediator, listBehaviour);
         this.teleporter = teleporter;
         this.mediatorDeDestination = mediatorDeDestination;
     }

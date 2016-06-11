@@ -10,7 +10,12 @@ import java.util.List;
  */
 public abstract class NonPlayableManager extends ActorManager {
 
-    public NonPlayableManager(MapMediator mediator, List<MapBehaviour> behaviours) {
-        super(mediator, behaviours);
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     */
+    public NonPlayableManager(MapMediator mediator, List<MapBehaviour> listBehaviour) {
+        super(mediator, listBehaviour);
     }
 }

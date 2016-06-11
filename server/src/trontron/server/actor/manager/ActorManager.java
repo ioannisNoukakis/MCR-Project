@@ -11,9 +11,21 @@ import java.util.List;
  * Manages an actor.
  */
 public abstract class ActorManager {
+    /**
+     * The mediator where this actor is currently.
+     */
     private MapMediator mediator;
+
+    /**
+     * The list of behaviour that this actor has for each map.
+     */
     private List<MapBehaviour> listBehaviour;
 
+    /**
+     * Constructor
+     * @param mediator: the mediator in where this actor will be.
+     * @param listBehaviour: list of Behaviour of this actor.
+     */
     public ActorManager(MapMediator mediator, List<MapBehaviour> listBehaviour) {
         this.mediator = mediator;
         this.listBehaviour = listBehaviour;
