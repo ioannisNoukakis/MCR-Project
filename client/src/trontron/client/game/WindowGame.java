@@ -26,6 +26,7 @@ import org.newdawn.slick.TrueTypeFont;
 import java.awt.Font;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -37,7 +38,7 @@ public class WindowGame extends BasicGame {
     private TiledMap map;
     private CameraManager camera;
     private Player player;
-    private List<ActorManager> listActorManager = new ArrayList();
+    private List<ActorManager> listActorManager = new CopyOnWriteArrayList<>();;
     private InputManager inputManager;
     private ServerHandler serverHandler;
     private String mapName;
@@ -68,7 +69,7 @@ public class WindowGame extends BasicGame {
         AppGameContainer app = new AppGameContainer(this);
 
         //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
-        app.setDisplayMode(1920, 1080, false);
+        app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), false);
         app.setVSync(true);
         app.setTargetFrameRate(60);
         app.setMinimumLogicUpdateInterval(miniLogicSleep);

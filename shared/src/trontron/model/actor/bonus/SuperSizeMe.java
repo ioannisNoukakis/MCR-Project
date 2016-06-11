@@ -19,12 +19,14 @@ public class SuperSizeMe extends Bonus implements Serializable {
 
     @Override
     public void activate(Actor a) {
-        super.activate(a);
-        me = a;
-        originalWith = a.getWidth();
-        originalHeight = a.getHeight();
-        me.setWidth(me.getWidth()*2);
-        me.setHeight(me.getHeight()*2);
+        if(!isActivated()) {
+            super.activate(a);
+            me = a;
+            originalWith = a.getWidth();
+            originalHeight = a.getHeight();
+            me.setWidth(me.getWidth() * 2);
+            me.setHeight(me.getHeight() * 2);
+        }
     }
 
     @Override

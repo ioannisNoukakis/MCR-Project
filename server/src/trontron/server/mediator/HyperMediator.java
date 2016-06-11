@@ -8,6 +8,7 @@ import trontron.server.behaviour.Behaviour;
 import trontron.server.behaviour.ICollisionBehaviour;
 import trontron.server.mediator.map.LobbyMediator;
 import trontron.server.mediator.map.MainMapMediator;
+import trontron.server.mediator.map.MediatorMapInverted;
 import trontron.server.player.Player;
 import trontron.protocol.message.JoinGame;
 import trontron.protocol.message.ChangeDirection;
@@ -46,6 +47,12 @@ public class HyperMediator {
     private MainMapMediator map;
 
     /**
+     * The inverted map
+     *
+     */
+    private MediatorMapInverted invertedMap;
+
+    /**
      * Constructor
      * @throws Exception If the maps can not be loaded
      */
@@ -72,12 +79,25 @@ public class HyperMediator {
                 generateComportementWorld(), 10000, 10,
                 lobby);
 
+        // inverted map
+        InputStream invertedStream = this.getClass().getClassLoader().getResourceAsStream("resources/invertedMap.properties");
+        prop.load(invertedStream);
+        invertedMap = new MediatorMapInverted(prop.getProperty("name"),
+                Integer.parseInt(prop.getProperty("maxX")),
+                Integer.parseInt(prop.getProperty("maxY")),
+                generateComportementWorld(), 10000, 10,
+                lobby);
+
         // teleporter
         lobby.addManager(new TeleporterManager(lobby, generateComportementTeleporter(),
                 new Teleporter(-2, "Tp vers mapNormal", new Point2D(300, 300), 0, Direction.none, 40, 40), map));
+        lobby.addManager(new TeleporterManager(lobby, generateComportementTeleporter(),
+                new Teleporter(-2, "Tp vers map inverse", new Point2D(300, 600), 0, Direction.none, 40, 40), invertedMap));
+
 
         lobby.start();
         map.start();
+        invertedMap.start();
     }
 
     /**
@@ -201,6 +221,8 @@ public class HyperMediator {
             }
         }, "theLobby.tmx"));
         rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theMap.tmx"));
+        rtn.add(new Behaviour((a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby), "theInverted.tmx"));
+
 
         return rtn;
     }
