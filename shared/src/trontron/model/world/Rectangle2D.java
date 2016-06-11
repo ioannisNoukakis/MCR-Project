@@ -19,31 +19,64 @@ package trontron.model.world;
 import java.io.Serializable;
 
 /**
- *
- * @author durza9390
+ * A rectangle
  */
 public class Rectangle2D implements Serializable {
-    Point2D a;
-    double width, height;
+    /**
+     * The position of the rectangle
+     */
+    private Point2D position;
 
-    public Rectangle2D(Point2D a, double width, double height) {
-        this.a = a;
+    /**
+     * The width of the rectangle
+     */
+    private double width;
+
+    /**
+     * The height of the rectangle
+     */
+    private double height;
+
+    /**
+     * Constructor
+     * @param position The position of the rectangle
+     * @param width The width
+     * @param height The height
+     */
+    public Rectangle2D(Point2D position, double width, double height) {
+        this.position = position;
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * Gets the x position of the rectangle
+     * @return The value of x
+     */
     public float getX() {
-        return a.getX();
-    }
-    
-    public float getY() {
-        return a.getY();
+        return position.getX();
     }
 
+    /**
+     * Gets the y position of the rectangle
+     * @return The value of y
+     */
+    public float getY() {
+        return position.getY();
+    }
+
+    /**
+     * Gets the height of the rectangle
+     * @return The height
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Gets the width of the rectangle
+     * @return The width
+     */
     public double getWidth() {
         return width;
     }
