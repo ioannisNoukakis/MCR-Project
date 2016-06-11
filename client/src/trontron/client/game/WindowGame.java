@@ -1,5 +1,7 @@
 package trontron.client.game;
 
+import org.newdawn.slick.*;
+import org.newdawn.slick.util.BufferedImageUtil;
 import trontron.client.actor.manager.ActorManager;
 import trontron.client.actor.manager.BonusManager;
 import trontron.client.actor.manager.MotoManager;
@@ -14,27 +16,20 @@ import trontron.client.player.Player;
 import trontron.client.player.InputManager;
 import trontron.protocol.message.UpdateWorld;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
- * @author durza9390
+ * This is the main class of the game. This is where the logic and render of the game loop is running.
  */
 public class WindowGame extends BasicGame {
 
-    private AppGameContainer app;
     private TiledMap map;
     private CameraManager camera;
     private Player player;
@@ -43,10 +38,7 @@ public class WindowGame extends BasicGame {
     private ServerHandler serverHandler;
     private String mapName;
     private TrueTypeFont font;
-
     private boolean mapHasChanged = false;
-
-    private static final String GAME_VERSION = "1.0";
 
     public WindowGame(String playerName, String hostname, int port) throws Exception {
         super("MCR projet - prototype");
@@ -55,7 +47,7 @@ public class WindowGame extends BasicGame {
         serverHandler = new ServerHandler(hostname, port, this, playerName);
 
         // create player
-        player = new Player("", 'w', 'd', 's', 'a');
+        player = new Player('w', 'd', 's', 'a');
         player.setId(serverHandler.getPlayerId());
 
         // todo : do better
@@ -68,7 +60,6 @@ public class WindowGame extends BasicGame {
         int maxLogicSleep = 20;
         AppGameContainer app = new AppGameContainer(this);
 
-        //app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
         app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), false);
         app.setVSync(true);
         app.setTargetFrameRate(60);
@@ -77,29 +68,22 @@ public class WindowGame extends BasicGame {
         app.start();
     }
 
-    public void setAppContainer(AppGameContainer app) {
-        this.app = app;
-    }
-
-    public static String getVersion() {
-        return GAME_VERSION;
-    }
-
+    /**
+     * Initialize the game's components.
+     *
+     * @param container: the game container.
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer container) throws SlickException {
-
         font = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), true);
-
-        camera = new CameraManager(0, 0, 10,
-                container.getWidth(),
-                container.getHeight(),
-                container.getWidth(),
-                container.getHeight());
+        camera = new CameraManager(0, 0);
     }
 
     /**
-     * Updates the content of the current displayed world
-     * @param updateWorld
+     * Updates the content of the current displayed world.
+     *
+     * @param updateWorld: the world to be updated.
      */
     public void updateWorldContents(UpdateWorld updateWorld) {
 
@@ -128,6 +112,13 @@ public class WindowGame extends BasicGame {
         }
     }
 
+    /**
+     * This is where the rendering of the game is done. Any render logic should be do here.
+     *
+     * @param container: the game container.
+     * @param g: the game's graphics.
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         try {
@@ -143,9 +134,6 @@ public class WindowGame extends BasicGame {
                 String filePath = this.getClass().getClassLoader().getResource("resources/map/" + mapName).getPath();
                 this.map = new TiledMap(filePath);
                 mapHasChanged = false;
-
-                camera.setWorldBoundariesX(map.getWidth() - container.getWidth());
-                camera.setWorldBoundariesY(map.getHeight() - container.getHeight());
             }
 
             camera.setX(player.getActor().getLocation().getX() - container.getWidth() / 2);
@@ -153,20 +141,33 @@ public class WindowGame extends BasicGame {
 
         } catch (Exception e) {
             e.printStackTrace();
-            this.app.destroy();
         }
 
         // render actors
-        // todo : thread safe access
+
         for (ActorManager am : listActorManager) {
             am.onRender(container, g, font);
         }
     }
 
+    /**
+     * This is where the logic of the game is done. As it's done in the server any logic should
+     * be implemented in the server.
+     *
+     * @param container: the game container.
+     * @param delta: the time elapsed between two updates
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
     }
 
+    /**
+     * Callback when a key is beeing press.
+     *
+     * @param key: the key that is beeing press.
+     * @param c: the key's character code.
+     */
     @Override
     public void keyPressed(int key, char c) {
         try {
@@ -177,6 +178,12 @@ public class WindowGame extends BasicGame {
         }
     }
 
+    /**
+     * Callback when a key was released.
+     *
+     * @param key: the key that is beeing press.
+     * @param c: the key's character code.
+     */
     @Override
     public void keyReleased(int key, char c) {
 

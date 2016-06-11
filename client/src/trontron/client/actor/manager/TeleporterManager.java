@@ -7,8 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
 /**
- *
- * @author durza9390
+ * How a teleporter should be displayed.
  */
 public class TeleporterManager extends ActorManager{
 
@@ -19,7 +18,14 @@ public class TeleporterManager extends ActorManager{
         this.teleporter = teleporter;
         this.color = color;
     }
-    
+
+    /**
+     * Render this teleporter into the game.
+     *
+     * @param container: the game container.
+     * @param g: the graphics in which we will draw the teleporter.
+     * @param font: the font that will be used to write this teleporter's name.
+     */
     @Override
     public void onRender(GameContainer container, Graphics g, TrueTypeFont font) {
         g.setColor(color);
