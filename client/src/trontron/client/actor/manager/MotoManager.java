@@ -11,7 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
 /**
- * @author durza9390
+ * How a moto should be displayed.
  */
 public class MotoManager extends ActorManager {
 
@@ -23,6 +23,13 @@ public class MotoManager extends ActorManager {
         this.color = color;
     }
 
+    /**
+     * Render this moto into the game.
+     *
+     * @param container: the game container.
+     * @param g: the graphics in which we will draw the noto.
+     * @param font: the font that will be used to write this noto's name.
+     */
     @Override
     public void onRender(GameContainer container, Graphics g, TrueTypeFont font) {
         if (moto.isAlive()) {

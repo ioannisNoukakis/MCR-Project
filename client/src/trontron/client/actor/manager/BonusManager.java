@@ -7,7 +7,7 @@ import org.newdawn.slick.TrueTypeFont;
 import trontron.model.actor.bonus.Bonus;
 
 /**
- * Created by durza9390 on 09.06.2016.
+ * How a bonus should be displayed.
  */
 public class BonusManager extends ActorManager {
 
@@ -19,8 +19,14 @@ public class BonusManager extends ActorManager {
         this.color = color;
     }
 
+    /**
+     * Render this bonus into the game.
+     *
+     * @param container: the game container.
+     * @param g: the graphics in which we will draw the bonus.
+     * @param font: the font that will be used to write this bonus's name.
+     */
     @Override
-
     public void onRender(GameContainer container, Graphics g, TrueTypeFont font) {
         if(!bonus.isActivated()) {
             g.setColor(color);
