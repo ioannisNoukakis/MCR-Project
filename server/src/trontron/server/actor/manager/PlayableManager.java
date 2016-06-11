@@ -1,19 +1,26 @@
 package trontron.server.actor.manager;
 
-import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.MapBehaviour;
 import trontron.server.mediator.map.MapMediator;
 import trontron.server.player.Player;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Created by durza9390 on 09.06.16.
+ * Manager for a playable actor
  */
 public abstract class PlayableManager extends ActorManager {
-
+    /**
+     * The player
+     */
     private Player player;
 
-    public PlayableManager(MapMediator mediator, LinkedList<Behaviour> listComportement) {
+    /**
+     * Constructor
+     * @param mediator
+     * @param listComportement
+     */
+    public PlayableManager(MapMediator mediator, List<MapBehaviour> listComportement) {
         super(mediator, listComportement);
     }
 

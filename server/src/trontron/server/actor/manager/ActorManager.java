@@ -2,7 +2,7 @@ package trontron.server.actor.manager;
 
 import trontron.model.actor.Actor;
 import trontron.model.world.Rectangle2D;
-import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.MapBehaviour;
 import trontron.server.mediator.map.MapMediator;
 
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public abstract class ActorManager {
     private MapMediator mediator;
-    private List<Behaviour> listComportement;
+    private List<MapBehaviour> listComportement;
 
-    public ActorManager(MapMediator mediator, List<Behaviour> listComportement) {
+    public ActorManager(MapMediator mediator, List<MapBehaviour> listComportement) {
         this.mediator = mediator;
         this.listComportement = listComportement;
     }
@@ -77,9 +77,8 @@ public abstract class ActorManager {
      * @param b
      */
     public void handleCollision(PlayableManager b) {
-        for(Behaviour behaviour : listComportement) {
-            if(behaviour.getMapName().equals(mediator.getMapName()))
-            {
+        for(MapBehaviour behaviour : listComportement) {
+            if(behaviour.getMap().equals(mediator)) {
                 behaviour.solveCollision(b, this);
             }
         }

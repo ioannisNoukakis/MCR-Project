@@ -8,10 +8,10 @@ package trontron.server.actor.manager;
 import trontron.model.actor.Actor;
 import trontron.model.actor.Teleporter;
 import trontron.model.world.Rectangle2D;
-import trontron.server.behaviour.Behaviour;
+import trontron.server.behaviour.MapBehaviour;
 import trontron.server.mediator.map.MapMediator;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author durza9390
@@ -21,7 +21,7 @@ public class TeleporterManager extends NonPlayableManager {
     private Teleporter teleporter;
     private MapMediator mediatorDeDestination;
 
-    public TeleporterManager(MapMediator mediator, LinkedList<Behaviour> listComportement, Teleporter teleporter, MapMediator mediatorDeDestination) {
+    public TeleporterManager(MapMediator mediator, List<MapBehaviour> listComportement, Teleporter teleporter, MapMediator mediatorDeDestination) {
         super(mediator, listComportement);
         this.teleporter = teleporter;
         this.mediatorDeDestination = mediatorDeDestination;
