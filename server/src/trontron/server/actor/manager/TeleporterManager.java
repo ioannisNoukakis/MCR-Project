@@ -14,7 +14,7 @@ import trontron.server.mediator.map.MapMediator;
 import java.util.List;
 
 /**
- * @author durza9390
+ * Manager for a Teleporter.
  */
 public class TeleporterManager extends NonPlayableManager {
 
@@ -27,16 +27,32 @@ public class TeleporterManager extends NonPlayableManager {
         this.mediatorDeDestination = mediatorDeDestination;
     }
 
+    /**
+     * Returns this manager's actor.
+     *
+     * @return Actor
+     */
     @Override
     public Actor getActor() {
         return teleporter;
     }
 
+    /**
+     * Returns this manager's lethal hitbox. That means when this hitbox hits an killing hitbox
+     * it applies an effect on this manager's moto.
+     *
+     * @return Rectangle2D[]
+     */
     @Override
     public Rectangle2D[] getlethalHitbox() {
         return new Rectangle2D[1];
     }
 
+    /**
+     * Returns this teleporter activate hitbox.
+     *
+     * @return Rectangle2D[]
+     */
     @Override
     public Rectangle2D[] getKillingHitbox()  {
         Rectangle2D[] rect = new Rectangle2D[1];
@@ -44,15 +60,28 @@ public class TeleporterManager extends NonPlayableManager {
         return rect; 
     }
 
+    /**
+     * Returns the MapMediator where this teleporter teleports.
+     *
+     * @return MapMediator
+     */
     public MapMediator getMediatorDeDestination() {
         return mediatorDeDestination;
     }
 
+    /**
+     * Compute this actor's state after a given time.
+     *
+     * @param delta: the time elapsed between two updates
+     */
     @Override
     public void onUpdate(int delta) {
         //y'a rien à mettre à jour c'est un téléporteur
     }
 
+    /**
+     * Reset this actor.
+     */
     @Override
     public void reset() {
     }

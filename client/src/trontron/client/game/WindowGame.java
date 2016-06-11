@@ -33,7 +33,7 @@ public class WindowGame extends BasicGame {
     private TiledMap map;
     private CameraManager camera;
     private Player player;
-    private List<ActorManager> listActorManager = new CopyOnWriteArrayList<>();;
+    private List<ActorManager> listActorManager = new CopyOnWriteArrayList<>();
     private InputManager inputManager;
     private ServerHandler serverHandler;
     private String mapName;
@@ -144,7 +144,6 @@ public class WindowGame extends BasicGame {
         }
 
         // render actors
-
         for (ActorManager am : listActorManager) {
             am.onRender(container, g, font);
         }

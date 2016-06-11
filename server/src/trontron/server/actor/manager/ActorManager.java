@@ -8,76 +8,77 @@ import trontron.server.mediator.map.MapMediator;
 import java.util.List;
 
 /**
- * Classe représentant les acteurs du jeu, c'est à dire les différentes entitées qui le composent
- * et qui peuvent intéragire entre elles.
+ * Manages an actor.
  */
 public abstract class ActorManager {
     private MapMediator mediator;
-    private List<MapBehaviour> listComportement;
+    private List<MapBehaviour> listBehaviour;
 
-    public ActorManager(MapMediator mediator, List<MapBehaviour> listComportement) {
+    public ActorManager(MapMediator mediator, List<MapBehaviour> listBehaviour) {
         this.mediator = mediator;
-        this.listComportement = listComportement;
+        this.listBehaviour = listBehaviour;
     }
 
     /**
-     * Calcule l'état de l'acteur après un temps detla exprimé en millisecondes.
+     * Compute an actor's state after a given time.
      *
-     * @param delta: le nombre de millisecondes qui s'est écoulé entre deux updates
+     * @param delta: the time elapsed between two updates
      */
     public abstract void onUpdate(int delta);
 
     /**
-     * Retourne cet acteur.
+     * Returns this manager's actor.
      *
-     * @return
+     * @return Actor
      */
     public abstract Actor getActor();
 
     /**
-     * Retourne la hitbox qui tue les autres acteur
-     * 
-     * @return 
+     * Returns this manager's killing hitbox. That means when an other actor hits this
+     * hitbox it applies an effect on him.
+     *
+     * @return Rectangle2D[]
      */
     public abstract Rectangle2D[] getKillingHitbox();
 
     /**
-     * Retourne la hitbox qui tue cet acteur.
-     * 
-     * @return 
+     * Returns this manager's lethal hitbox. That means when this hitbox hits an killing hitbox
+     * it applies an effect on this manager's moto.
+     *
+     * @return Rectangle2D[]
      */
     public abstract Rectangle2D[] getlethalHitbox();
 
     /**
-     * Remet à zéro les paramètres de cet acteur.
+     * Reset this actor.
      */
     public abstract void reset();
 
     /**
-     * Retourne le médiateur dans le quel cet acteur se trouve.
+     * Returns the MapMediator where this actor is currently in.
      *
-     * @return
+     * @return MapMediator
      */
     public MapMediator getMediator() {
         return mediator;
     }
 
     /**
-     * Change le médiateur dans le quel cet acteur se trouve.
+     * Changes this actor location to an other map.
      *
-     * @param mediator
+     * @param mediator: the destination map.
      */
     public void setMediator(MapMediator mediator) {
         this.mediator = mediator;
     }
 
     /**
-     * Gère la collision entre deux acteurs.
+     * Handle the collision between this actor and a playable.
      *
-     * @param b
+     * @param b: the playable.
      */
     public void handleCollision(PlayableManager b) {
-        for(MapBehaviour behaviour : listComportement) {
+        for(MapBehaviour behaviour : listBehaviour) {
             if(behaviour.getMap().equals(mediator)) {
                 behaviour.solveCollision(b, this);
             }

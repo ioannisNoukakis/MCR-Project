@@ -28,7 +28,7 @@ import trontron.server.mediator.map.MapMediator;
 import java.util.List;
 
 /**
- * @author durza9390
+ * Manages a moto.
  */
 public class MotoManager extends PlayableManager {
 
@@ -39,6 +39,11 @@ public class MotoManager extends PlayableManager {
         this.moto = moto;
     }
 
+    /**
+     * Updates the location of the moto after a given time.
+     *
+     * @param delta: the time elapsed between two updates
+     */
     @Override
     public void onUpdate(int delta) {
 
@@ -71,11 +76,22 @@ public class MotoManager extends PlayableManager {
         super.getMediator().verifyMove(this);
     }
 
+    /**
+     * Returns this manager's actor.
+     *
+     * @return Actor
+     */
     @Override
     public Actor getActor() {
         return moto;
     }
 
+    /**
+     * Returns this manager's killing hitbox. That means when an other actor hits this
+     * hitbox it applies an effect on him.
+     *
+     * @return Rectangle2D[]
+     */
     @Override
     public Rectangle2D[] getlethalHitbox() {
         Rectangle2D[] hitbox = new Rectangle2D[1];
@@ -83,6 +99,12 @@ public class MotoManager extends PlayableManager {
         return hitbox;
     }
 
+    /**
+     * Returns this manager's lethal hitbox. That means when this hitbox hits an killing hitbox
+     * it applies an effect on this manager's moto.
+     *
+     * @return Rectangle2D[]
+     */
     @Override
     public Rectangle2D[] getKillingHitbox() {
         Rectangle2D[] hitbox = new Rectangle2D[moto.getTail().size()];
@@ -100,6 +122,9 @@ public class MotoManager extends PlayableManager {
         return hitbox;
     }
 
+    /**
+     * reset the tail and the Direction of this moto.
+     */
     @Override
     public void reset() {
         moto.getTail().clear();
