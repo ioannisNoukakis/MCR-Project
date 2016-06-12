@@ -1,7 +1,6 @@
 package trontron.client.game;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.util.BufferedImageUtil;
 import trontron.client.actor.manager.ActorManager;
 import trontron.client.actor.manager.BonusManager;
 import trontron.client.actor.manager.MotoManager;
@@ -19,7 +18,6 @@ import trontron.protocol.message.UpdateWorld;
 import org.newdawn.slick.tiled.TiledMap;
 
 import java.awt.Font;
-import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -41,7 +39,7 @@ public class WindowGame extends BasicGame {
     private boolean mapHasChanged = false;
 
     public WindowGame(String playerName, String hostname, int port, int recieverPort) throws Exception {
-        super("MCR projet - prototype");
+        super("Trontron");
 
         // create server handler
         serverHandler = new ServerHandler(hostname, port, recieverPort, this, playerName);
@@ -76,7 +74,7 @@ public class WindowGame extends BasicGame {
      */
     @Override
     public void init(GameContainer container) throws SlickException {
-        font = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), true);
+        font = new TrueTypeFont(new Font("Sans", Font.PLAIN, 22), true);
         camera = new CameraManager(0, 0);
     }
 
@@ -93,16 +91,16 @@ public class WindowGame extends BasicGame {
         for (Actor a : updateWorld.getActorList()) {
             if (a.getClass() == Moto.class) {
                 scoreBoardList.add(a);
-                listActorManager.add(new MotoManager((Moto) a, Color.green));
+                listActorManager.add(new MotoManager((Moto) a, Color.decode("#2ecc71")));
                 if (a.getId() == player.getId()) {
                     player.setActor(a);
                 }
             }
             if (a.getClass() == Teleporter.class) {
-                listActorManager.add(new TeleporterManager((Teleporter) a, Color.yellow));
+                listActorManager.add(new TeleporterManager((Teleporter) a, Color.decode("#f1c40f")));
             }
             if (a instanceof Bonus) {
-                listActorManager.add(new BonusManager((Bonus) a, Color.pink));
+                listActorManager.add(new BonusManager((Bonus) a, Color.decode("#e74c3c")));
             }
         }
 
@@ -204,24 +202,26 @@ public class WindowGame extends BasicGame {
      * @param g
      * @param scoreBoardList
      */
-    public void renderScoreboard(GameContainer container, Graphics g, LinkedList<Actor> scoreBoardList)
-    {
-        Collections.sort(scoreBoardList, new Comparator<Actor>() {
-            @Override
-            public int compare(Actor a, Actor b) {
-                if(a.getKills() >= b.getKills())
-                    return 1;
-                else
-                    return  -1;
-            }
+    public void renderScoreboard(GameContainer container, Graphics g, LinkedList<Actor> scoreBoardList) {
+        Collections.sort(scoreBoardList, (a, b) -> {
+            if(a.getKills() >= b.getKills())
+                return 1;
+            else
+                return  -1;
         });
-        g.setColor(Color.black);
-        g.fillRect(player.getActor().getLocation().getX()+container.getScreenWidth()/2-200, player.getActor().getLocation().getY()-container.getScreenHeight()/2-50, 250, 350);
-        for(int i = 0; i < Math.min(10, scoreBoardList.size()); i++)
-        {
+
+        g.setColor(new Color(0, 0, 0, 80));
+        g.fillRect(
+                player.getActor().getLocation().getX()+container.getScreenWidth() / 2 - 200,
+                player.getActor().getLocation().getY()-container.getScreenHeight() / 2 - 50,
+                250,
+                350
+        );
+
+        for(int i = 0; i < Math.min(10, scoreBoardList.size()); ++i) {
             Actor tmp = scoreBoardList.get(i);
-            font.drawString(player.getActor().getLocation().getX()+container.getScreenWidth()/2-180,
-                    player.getActor().getLocation().getY()-container.getScreenHeight()/2+20 + i * 50,
+            font.drawString(player.getActor().getLocation().getX() + container.getScreenWidth() / 2 - 180,
+                    player.getActor().getLocation().getY() - container.getScreenHeight() / 2 + 20 + i * 50,
                     tmp.getKills() + " : " + tmp.getName(),
                     Color.white);
         }

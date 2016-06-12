@@ -36,7 +36,7 @@ public class ClientLauncher extends JFrame {
         launchBtn.addActionListener((ActionEvent e) -> {
             try {
                 status.setText("Connected");
-                new WindowGame(playerName.getText(), hostname.getText(), Integer.parseInt(port.getText()), Integer.parseInt(port.getText())+1);
+                new WindowGame(playerName.getText(), hostname.getText(), Integer.parseInt(port.getText()), Integer.parseInt(port.getText()) + 1);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 status.setText("Error: " + ex.getMessage());
