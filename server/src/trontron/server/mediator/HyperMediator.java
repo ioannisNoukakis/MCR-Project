@@ -190,7 +190,18 @@ public class HyperMediator {
     {
         return Arrays.asList(
                 new MapBehaviour(lobby, (a, b) -> { }),
-                new MapBehaviour(mainMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby))
+                new MapBehaviour(mainMap, (a, b) -> {
+                    a.getMediator().ChangePlayableMap((PlayableManager)a, lobby);
+                    a.reset();
+                    a.getActor().setKills(0);
+                    b.getActor().setKills(b.getActor().getKills()+1);
+                }),
+                new MapBehaviour(invertedMap, (a, b) -> {
+                    a.getMediator().ChangePlayableMap((PlayableManager)a, lobby);
+                    a.reset();
+                    a.getActor().setKills(0);
+                    b.getActor().setKills(b.getActor().getKills()-1);
+                })
         );
     }
 
@@ -202,7 +213,8 @@ public class HyperMediator {
     {
         return Arrays.asList(
             new MapBehaviour(lobby, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination())),
-            new MapBehaviour(mainMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()))
+            new MapBehaviour(mainMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination())),
+            new MapBehaviour(invertedMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, ((TeleporterManager)b).getMediatorDeDestination()))
         );
     }
 
@@ -215,11 +227,12 @@ public class HyperMediator {
             new MapBehaviour(lobby, (a, b) -> {
                 a.getActor().setLocation(new Point2D(a.getMediator().getMaxX()/2, a.getMediator().getMaxY()/2));
                 a.reset();
-                a.getActor().setKills(0);
-                b.getActor().setKills(b.getActor().getKills()+1);
             }),
             new MapBehaviour(mainMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby)),
             new MapBehaviour(invertedMap, (a, b) -> a.getMediator().ChangePlayableMap((PlayableManager)a, lobby))
         );
     }
 }
+/**a.getActor().setKills(0);
+ b.getActor().setKills(b.getActor().getKills()+1);
+ */

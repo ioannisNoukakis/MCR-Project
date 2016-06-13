@@ -26,11 +26,9 @@ public class InvertedMapMediator extends MapMediator {
     @Override
     public void verifyMove(PlayableManager a) {
         super.verifyMove(a);
-
-        // detect collisions with non playable objects
         for (PlayableManager b : getPlayableManagers()) {
             if (a != b && Rectangle2D.areOverlapping(a.getlethalHitbox(), b.getKillingHitbox())) {
-                b.handleCollision(a);
+                a.handleCollision(b);
             }
         }
     }

@@ -30,7 +30,7 @@ public class MainMapMediator extends MapMediator {
         // detect collisions with non playable objects
         for (PlayableManager b : getPlayableManagers()) {
             if (a != b && Rectangle2D.areOverlapping(a.getlethalHitbox(), b.getKillingHitbox())) {
-                a.handleCollision(b);
+                b.handleCollision(a);
             }
         }
     }
