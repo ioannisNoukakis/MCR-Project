@@ -10,20 +10,6 @@ import java.io.Serializable;
  * A bonus which changes the size of an actor
  */
 public class SuperSizeMe extends Bonus implements Serializable {
-    /**
-     * The concerned actor
-     */
-    private Actor actor;
-
-    /**
-     * The actors original width
-     */
-    private int originalWidth;
-
-    /**
-     * The actors original height
-     */
-    private int originalHeight;
 
     /**
      * Constructor
@@ -47,11 +33,8 @@ public class SuperSizeMe extends Bonus implements Serializable {
     public void activate(Actor actor) {
         if(!isActivated()) {
             super.activate(actor);
-            this.actor = actor;
-            originalWidth = actor.getWidth();
-            originalHeight = actor.getHeight();
-            actor.setWidth(actor.getWidth() * 2);
-            actor.setHeight(actor.getHeight() * 2);
+            getActor().setWidth(getActor().getWidth() * 2);
+            getActor().setHeight(getActor().getHeight() * 2);
         }
     }
 
@@ -61,7 +44,7 @@ public class SuperSizeMe extends Bonus implements Serializable {
     @Override
     public void deactivate() {
         super.deactivate();
-        actor.setWidth(originalWidth);
-        actor.setHeight(originalHeight);
+        getActor().setWidth(getActor().getOriginalWidth());
+        getActor().setHeight(getActor().getOriginalHeight());
     }
 }

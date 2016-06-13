@@ -1,20 +1,20 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/client/lib/tinylinepp.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/jinput.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/lwjgl_util.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/natives-mac.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/ibxm.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/jnlp.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/natives-linux.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/lwjgl.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/natives-windows.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/slick.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/slick-examples.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/jogg-0.0.7.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/jorbis-0.0.15.jar!/" />
-      <root url="jar://$PROJECT_DIR$/client/lib/lwjgl_util_applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/tinylinepp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jinput.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/lwjgl_util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/natives-mac.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/ibxm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jnlp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/natives-linux.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/slick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/slick-examples.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jogg-0.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/jorbis-0.0.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Client/lib/lwjgl_util_applet.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

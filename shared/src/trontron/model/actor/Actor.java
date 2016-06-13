@@ -55,6 +55,16 @@ public abstract class Actor implements Serializable {
     private int kills;
 
     /**
+     * The actors original width
+     */
+    private int originalWidth;
+
+    /**
+     * The actors original height
+     */
+    private int originalHeight;
+
+    /**
      * Constructor
      * @param id The id of the actor
      * @param name The name of the actor
@@ -73,6 +83,8 @@ public abstract class Actor implements Serializable {
         this.width = width;
         BaseSpeed = speed;
         kills = 0;
+        originalWidth = width;
+        originalHeight = height;
     }
 
     /**
@@ -193,5 +205,23 @@ public abstract class Actor implements Serializable {
      */
     public void setKills(int kills) {
         this.kills = kills;
+    }
+
+    /**
+     * Gets this actor's original height
+     *
+     * @return the original height
+     */
+    public int getOriginalHeight() {
+        return originalHeight;
+    }
+
+    /**
+     * Gets this actor's original width
+     *
+     * @return the original width
+     */
+    public int getOriginalWidth() {
+        return originalWidth;
     }
 }

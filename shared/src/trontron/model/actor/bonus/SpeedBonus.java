@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * A bonus which changes the speed of an actor
  */
-public class SlowAndSpeedBonus extends Bonus implements Serializable {
+public class SpeedBonus extends Bonus implements Serializable {
     /**
      * The list of actors
      */
@@ -33,7 +33,7 @@ public class SlowAndSpeedBonus extends Bonus implements Serializable {
      * @param list
      * @param modifier
      */
-    public SlowAndSpeedBonus(int timeToLive, int id, String name, Point2D location, float speed, Direction direction, int height, int width, List<Actor> list, int modifier) {
+    public SpeedBonus(int timeToLive, int id, String name, Point2D location, float speed, Direction direction, int height, int width, List<Actor> list, int modifier) {
         super(timeToLive, id, name, location, speed, direction, height, width);
         this.list = list;
         this.modifier = modifier;
@@ -47,15 +47,8 @@ public class SlowAndSpeedBonus extends Bonus implements Serializable {
     public void activate(Actor actor)
     {
         super.activate(actor);
-        for(Actor a : list)
-        {
-            if(a == actor)
-            {
-                a.setSpeed(a.getSpeed()+modifier);
-            }
-            else
-                a.setSpeed(a.getSpeed()-modifier);
-        }
+
+        actor.setSpeed(actor.getSpeed()+modifier);
     }
 
     /**
@@ -65,9 +58,6 @@ public class SlowAndSpeedBonus extends Bonus implements Serializable {
     public void deactivate()
     {
         super.deactivate();
-        for(Actor a : list)
-        {
-            a.setSpeed(a.getBaseSpeed());
-        }
+        getActor().setSpeed(getActor().getBaseSpeed());
     }
 }

@@ -21,6 +21,11 @@ public abstract class Bonus extends Actor implements Serializable {
     private boolean isActivated;
 
     /**
+     * The concerned actor
+     */
+    private Actor actor;
+
+    /**
      * Constructor
      * @param timeToLive The lifetime of the bonus in milliseconds
      * @param id The id of the actor
@@ -34,6 +39,13 @@ public abstract class Bonus extends Actor implements Serializable {
         super(id, name, location, speed, direction, height, width);
         this.timeToLive = timeToLive;
         isActivated = false;
+    }
+
+    /**
+     * Gets the actor for this bonus.
+     */
+    public Actor getActor() {
+        return actor;
     }
 
     /**
@@ -59,6 +71,7 @@ public abstract class Bonus extends Actor implements Serializable {
      */
     public void activate(Actor actor) {
         isActivated = true;
+        this.actor = actor;
     }
 
     /**
