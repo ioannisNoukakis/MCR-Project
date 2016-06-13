@@ -120,7 +120,7 @@ public class MotoManager extends PlayableManager {
      * @return Rectangle2D[]
      */
     @Override
-    public Rectangle2D[] getKillingHitbox() {
+    public synchronized Rectangle2D[] getKillingHitbox() {
         Rectangle2D[] hitbox = new Rectangle2D[moto.getTail().size()];
 
         for (int i = 0; i < moto.getTail().size() - 1; i++) {
