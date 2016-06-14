@@ -1,7 +1,7 @@
 package trontron.server.mediator.map;
 
 import trontron.model.actor.bonus.Bonus;
-import trontron.model.actor.bonus.SlowAndSpeedBonus;
+import trontron.model.actor.bonus.SpeedBonus;
 import trontron.model.actor.bonus.SuperSizeMe;
 import trontron.protocol.message.UpdateWorld;
 import trontron.server.actor.manager.*;
@@ -249,7 +249,7 @@ public abstract class MapMediator extends Thread {
                         new SuperSizeMe(10000, -1, "Supersize", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.none, 30, 30));
             case 1:
                 return new BonusManager(this, behaviours,
-                        new SlowAndSpeedBonus(10000, -1, "Speed", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.none, 30, 30, listActors, 3));
+                        new SpeedBonus(10000, -1, "Speed", new Point2D(random.nextInt(getMaxX()), random.nextInt(getMaxY())), 0, Direction.none, 30, 30, listActors, 3));
 
             default:
                 return null;
