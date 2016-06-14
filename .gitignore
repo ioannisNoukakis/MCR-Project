@@ -1,7 +1,2 @@
-private/
-build/
-dist/
-out
-
 *~
 .DS_Store

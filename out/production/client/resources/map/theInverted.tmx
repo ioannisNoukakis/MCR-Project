@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="InvertedTileSet" tilewidth="32" tileheight="32">
+  <image source="../tileSet/InvertedTileSet.png" width="128" height="96"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3UMQ6AMAwEQSfh/2+moaFBFEQ5hSmmP3klt6pqAAAAAMAnRsAGtEikxz60BAAAAAAAAHg2Xli98S/cGmA+vxYAAAAA9tQvq3egRYJeOiTQIIcOd0fABl0BAAAAAAAAAAAAAAAAAAAAYK4T87p1M0CcAAA=
+  </data>
+ </layer>
+</map>

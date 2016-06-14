@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="TronShared">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/TronShared.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
